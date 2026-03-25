@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
 import { ArrowRight, CheckCircle2, TrendingUp, Users, Target, ShieldCheck, PlayCircle, Pause, Star, Instagram, Linkedin, Mail, MapPin, ChevronRight, Phone, Volume2, VolumeX } from "lucide-react";
-import VaporizeTextCycle, { Tag } from "./ui/vapour-text-effect";
-
 export function Button({ children, className = "", onClick, type = "button", disabled = false }: { children: React.ReactNode, className?: string, onClick?: () => void, type?: "button" | "submit", disabled?: boolean }) {
   return (
     <button 
@@ -155,10 +153,11 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-dark-900 border-b border-white/5 bg-[radial-gradient(circle_at_top_right,_rgba(243,192,18,0.08),_transparent_50%),radial-gradient(circle_at_bottom_left,_rgba(38,100,200,0.08),_transparent_50%)]">
-      {/* Zero GPU Cost CSS Grid Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+    <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-dark-900 border-b border-white/5">
+      {/* Safe Edge-Compatible Background Orbs */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-[20%] -right-[10%] w-[800px] h-[800px] bg-gold-400/5 blur-[120px] rounded-full" />
+        <div className="absolute -bottom-[20%] -left-[10%] w-[600px] h-[600px] bg-blue-500/5 blur-[120px] rounded-full" />
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-dark-900 to-transparent opacity-90" />
       </div>
       
@@ -279,10 +278,11 @@ export function Problem() {
   ];
 
   return (
-    <section id="recursos" className="py-32 bg-dark-900 relative overflow-hidden bg-[radial-gradient(circle_at_top_right,_rgba(243,192,18,0.05),_transparent_40%),radial-gradient(circle_at_bottom_left,_rgba(38,100,200,0.05),_transparent_40%)]">
-      {/* Zero GPU Cost CSS Grid Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+    <section id="recursos" className="py-32 bg-dark-900 relative overflow-hidden">
+      {/* Safe Edge-Compatible Background Orbs */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-dark-900 opacity-95" />
+        <div className="absolute top-[10%] right-[5%] w-[500px] h-[500px] bg-gold-500/5 blur-[100px] rounded-full" />
       </div>
       
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent" />
