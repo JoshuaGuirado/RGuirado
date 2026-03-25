@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
-import { ArrowRight, CheckCircle2, TrendingUp, Users, Target, ShieldCheck, PlayCircle, Pause, Star, Instagram, Linkedin, Mail, MapPin, ChevronRight, Phone } from "lucide-react";
+import { ArrowRight, CheckCircle2, TrendingUp, Users, Target, ShieldCheck, PlayCircle, Pause, Star, Instagram, Linkedin, Mail, MapPin, ChevronRight, Phone, Volume2, VolumeX } from "lucide-react";
 import VaporizeTextCycle, { Tag } from "./ui/vapour-text-effect";
 
 export function Button({ children, className = "", onClick, type = "button", disabled = false }: { children: React.ReactNode, className?: string, onClick?: () => void, type?: "button" | "submit", disabled?: boolean }) {
@@ -132,22 +132,24 @@ export function Navbar() {
 export function Hero() {
   const scrollToForm = () => document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
   const videoRef = React.useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+      videoRef.current.play().catch(() => {});
     }
   }, []);
 
-  const toggleVideo = () => {
+  const toggleVolume = () => {
     if (videoRef.current) {
-      if (videoRef.current.paused) {
+      const newMutedState = !videoRef.current.muted;
+      videoRef.current.muted = newMutedState;
+      setIsMuted(newMutedState);
+      
+      if (!newMutedState) {
+        // Restart video softly to hear the core message
+        videoRef.current.currentTime = 0;
         videoRef.current.play();
-        setIsPlaying(true);
-      } else {
-        videoRef.current.pause();
-        setIsPlaying(false);
       }
     }
   };
@@ -221,16 +223,16 @@ export function Hero() {
              </div>
 
              <motion.div 
-              onClick={toggleVideo}
+              onClick={toggleVolume}
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -bottom-6 -left-6 md:-left-12 max-w-[200px] bg-dark-900/95 backdrop-blur-xl p-4 md:p-5 rounded-2xl border border-gold-500/30 flex items-center gap-4 z-30 cursor-pointer shadow-2xl hover:border-gold-500 transition-colors"
             >
               <div className="w-10 h-10 md:w-12 md:h-12 shrink-0 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full flex items-center justify-center shadow-lg shadow-gold-500/30">
-                {isPlaying ? <Pause fill="currentColor" className="w-4 h-4 md:w-5 md:h-5 text-dark-900" /> : <PlayCircle className="w-5 h-5 md:w-6 md:h-6 text-dark-900" />}
+                {isMuted ? <VolumeX className="w-5 h-5 md:w-6 md:h-6 text-dark-900" /> : <Volume2 className="w-5 h-5 md:w-6 md:h-6 text-dark-900" />}
               </div>
               <div>
-                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-tight mb-1">{isPlaying ? "Pausar" : "Reproduzir"}</p>
+                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-tight mb-1">{isMuted ? "Ativar Som" : "Silenciar"}</p>
                 <p className="font-heading font-black text-sm md:text-md leading-tight text-white">Na Prática</p>
               </div>
             </motion.div>
