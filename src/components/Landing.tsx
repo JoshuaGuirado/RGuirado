@@ -101,18 +101,10 @@ export function Navbar() {
               <img src="/logo.png" alt="RGuirado" className="h-full w-full object-contain drop-shadow-md" />
             </div>
             
-            <div className="relative h-12 w-[220px] hidden sm:block -ml-1">
-              <VaporizeTextCycle
-                texts={["RGuirado."]}
-                font={{ fontFamily: "ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'", fontSize: "32px", fontWeight: 900 }}
-                color="rgb(255, 255, 255)"
-                spread={1.5}
-                density={10}
-                animation={{ vaporizeDuration: 2, fadeInDuration: 1.5, waitDuration: 8 }}
-                direction="left-to-right"
-                alignment="left"
-                tag={Tag.H1}
-               />
+            <div className="relative h-12 w-[220px] hidden sm:flex items-center -ml-1">
+              <span className="font-heading font-black text-[32px] tracking-tighter text-white">
+                RGuirado<span className="text-gold-500">.</span>
+              </span>
             </div>
           </motion.div>
           
@@ -208,7 +200,7 @@ export function Hero() {
              <div className="absolute inset-0 bg-gold-500/10 blur-[90px] rounded-full pointer-events-none" />
              
              {/* Direct Looping Video File */}
-             <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden bg-dark-900 border border-white/5 group bg-black" onClick={toggleVideo} style={{ cursor: 'pointer' }}>
+             <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden bg-dark-900 border border-white/5 group bg-black" onClick={toggleVolume} style={{ cursor: 'pointer' }}>
                <video 
                  ref={videoRef}
                  src="/reel.mp4" 
