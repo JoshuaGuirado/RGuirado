@@ -94,7 +94,7 @@ export function Hero() {
                  loop 
                  muted 
                  playsInline 
-                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                 className="w-full h-full object-cover" 
                  aria-label="Vídeo demonstrativo na prática"
                />
                <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-dark-900/90 to-transparent pointer-events-none" />
@@ -104,7 +104,7 @@ export function Hero() {
               onClick={toggleVolume}
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-6 -left-6 md:-left-12 max-w-[200px] bg-dark-900/95 backdrop-blur-xl p-4 md:p-5 rounded-2xl border border-gold-500/30 flex items-center gap-4 z-30 cursor-pointer shadow-2xl hover:border-gold-500 transition-colors"
+              className="absolute -bottom-6 -left-6 md:-left-12 max-w-[200px] bg-dark-900 p-4 md:p-5 rounded-2xl border border-gold-500/30 flex items-center gap-4 z-30 cursor-pointer shadow-2xl hover:border-gold-500 transition-colors will-change-transform"
               role="button"
               aria-label={isMuted ? "Ativar som do vídeo" : "Silenciar vídeo"}
             >
