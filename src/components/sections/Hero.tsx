@@ -55,7 +55,8 @@ export function Hero() {
           </motion.div>
           
           <h1 id="hero-title" className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.15] mb-6 tracking-tight">
-            Talento fundou. <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">Método escala.</span>
+            Talento funda e constrói. <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">Método organiza e escala!</span>
           </h1>
           
           <p className="text-base text-gray-400 leading-relaxed font-light mb-4">

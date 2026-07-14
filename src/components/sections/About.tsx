@@ -10,7 +10,7 @@ export function About() {
     { 
       name: "Ricardo Guirado", 
       role: "Dono e Consultor Principal", 
-      image: "/ricardo.jpg",
+      image: "/ricardo-new.jpg",
       position: "object-[center_15%]",
       linkedin: "https://www.linkedin.com/in/ricardoguiradofranquias/",
       instagram: "https://www.instagram.com/ricardoguirado_/"
