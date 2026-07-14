@@ -11,7 +11,7 @@ export function About() {
       name: "Ricardo Guirado", 
       role: "Dono e Consultor Principal", 
       image: "/ricardo.jpg",
-      position: "object-center",
+      position: "object-[center_15%]",
       linkedin: "https://www.linkedin.com/in/ricardoguiradofranquias/",
       instagram: "https://www.instagram.com/ricardoguirado_/"
     },
@@ -27,7 +27,7 @@ export function About() {
       name: "Joshua Guirado", 
       role: "Consultor de Processos", 
       image: "/joshua.png",
-      position: "object-center",
+      position: "object-[center_15%]",
       linkedin: "https://www.linkedin.com/in/joshua-guirado-681108353/",
       instagram: "https://www.instagram.com/joshuafguirado/"
     }
@@ -100,7 +100,7 @@ export function About() {
                 <motion.div 
                   key={idx}
                   whileHover={{ y: -5 }}
-                  className="bg-dark-800 rounded-2xl overflow-hidden border border-white/5 shadow-lg group flex flex-col"
+                  className="bg-dark-800 rounded-2xl overflow-hidden border border-gold-500/10 hover:border-gold-500/30 transition-colors shadow-lg group flex flex-col"
                 >
                   <div className="aspect-[4/5] overflow-hidden relative w-full bg-dark-900">
                     <img 

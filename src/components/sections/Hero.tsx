@@ -58,8 +58,11 @@ export function Hero() {
             Talento fundou. <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">Método escala.</span>
           </h1>
           
-          <p className="text-lg text-gray-400 mb-10 leading-relaxed font-light">
+          <p className="text-lg text-gray-400 leading-relaxed font-light mb-6">
             Se o instinto e o esforço trouxeram sua empresa até aqui, o próximo salto pede estrutura, processo e uma direção clara. É exatamente esse caminho que percorremos com você.
+          </p>
+          <p className="text-sm text-gray-500 leading-relaxed font-light mb-10">
+            A R.Guirado ajuda empreendedores de pequenas e médias empresas a organizar a casa, estruturar a gestão e escalar com método — via franchising, gestão estratégica e performance comportamental. Sem fórmula pronta. Sem descaracterizar o que você construiu.
           </p>
           
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
@@ -85,7 +88,7 @@ export function Hero() {
              <div className="absolute inset-0 bg-gold-500/10 blur-[90px] rounded-full pointer-events-none" />
              
              {/* Direct Looping Video File */}
-             <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden bg-dark-900 border border-white/5 group bg-black" onClick={toggleVolume} style={{ cursor: 'pointer' }} role="button" aria-label="Alternar som do vídeo">
+             <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden bg-dark-900 border border-gold-500/20 group bg-black" onClick={toggleVolume} style={{ cursor: 'pointer' }} role="button" aria-label="Alternar som do vídeo">
                <video 
                  ref={videoRef}
                  src="/reel.mp4" 

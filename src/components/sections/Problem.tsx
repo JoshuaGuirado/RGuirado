@@ -30,7 +30,7 @@ export function Problem() {
         <div className="grid lg:grid-cols-2 gap-16 items-stretch">
           
           {/* Left Block: Pain Points (O Momento) */}
-          <div className="bg-gradient-to-br from-dark-800 to-dark-900 border border-white/5 rounded-[2rem] p-8 md:p-10 shadow-xl flex flex-col justify-between">
+          <div className="bg-gradient-to-br from-dark-800 to-dark-900 border border-gold-500/10 rounded-[2rem] p-8 md:p-10 shadow-xl flex flex-col justify-between">
             <div className="space-y-6">
               <div>
                 <span className="text-xs font-bold text-red-400 uppercase tracking-widest block mb-2">O Desafio</span>
@@ -61,7 +61,7 @@ export function Problem() {
           </div>
           
           {/* Right Block: Target (Para quem é) */}
-          <div className="bg-gradient-to-br from-dark-800 to-dark-900 border border-white/5 rounded-[2rem] p-8 md:p-10 shadow-xl flex flex-col justify-between">
+          <div className="bg-gradient-to-br from-dark-800 to-dark-900 border border-gold-500/10 rounded-[2rem] p-8 md:p-10 shadow-xl flex flex-col justify-between">
             <div className="space-y-6">
               <div>
                 <span className="text-xs font-bold text-gold-500 uppercase tracking-widest block mb-2">Público-Alvo</span>
