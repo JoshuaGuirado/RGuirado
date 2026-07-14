@@ -6,13 +6,9 @@ import { Hero } from "./sections/Hero";
 const Services = React.lazy(() => import("./sections/Services").then(module => ({ default: module.Services })));
 const PartnersMarquee = React.lazy(() => import("./sections/PartnersMarquee").then(module => ({ default: module.PartnersMarquee })));
 const Problem = React.lazy(() => import("./sections/Problem").then(module => ({ default: module.Problem })));
-const Quote = React.lazy(() => import("./sections/Quote").then(module => ({ default: module.Quote })));
 const About = React.lazy(() => import("./sections/About").then(module => ({ default: module.About })));
-const Team = React.lazy(() => import("./sections/Team").then(module => ({ default: module.Team })));
-const TargetAudience = React.lazy(() => import("./sections/TargetAudience").then(module => ({ default: module.TargetAudience })));
 const Solution = React.lazy(() => import("./sections/Solution").then(module => ({ default: module.Solution })));
 const Offer = React.lazy(() => import("./sections/Offer").then(module => ({ default: module.Offer })));
-const SocialProof = React.lazy(() => import("./sections/SocialProof").then(module => ({ default: module.SocialProof })));
 const FAQ = React.lazy(() => import("./sections/FAQ").then(module => ({ default: module.FAQ })));
 const LeadForm = React.lazy(() => import("./sections/LeadForm").then(module => ({ default: module.LeadForm })));
 const Footer = React.lazy(() => import("./sections/Footer").then(module => ({ default: module.Footer })));
@@ -34,13 +30,9 @@ export default function Landing() {
         
         <Suspense fallback={<div className="h-96 bg-dark-900 animate-pulse" />}>
           <Problem />
-          <Quote />
           <About />
-          <Team />
-          <TargetAudience />
           <Solution />
           <Offer />
-          <SocialProof />
           <FAQ />
           <LeadForm />
         </Suspense>
