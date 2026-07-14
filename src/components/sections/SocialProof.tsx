@@ -9,7 +9,7 @@ export function SocialProof() {
   const scrollToForm = () => document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
 
   const stats = [
-    { number: "250+", label: "Empresas estruturadas", icon: <Target className="w-8 h-8 text-gold-500" aria-hidden="true" /> },
+    { number: "750+", label: "Empresas estruturadas", icon: <Target className="w-8 h-8 text-gold-500" aria-hidden="true" /> },
     { number: "1000+", label: "Unidades abertas", icon: <TrendingUp className="w-8 h-8 text-gold-500" aria-hidden="true" /> }
   ];
 
