@@ -1,15 +1,33 @@
 import React from "react";
 import { motion } from "motion/react";
-import { Shield, Cpu } from "lucide-react";
+import { Shield, Cpu, Linkedin, Instagram } from "lucide-react";
 import { Button } from "../ui/Button";
 
 export function About() {
   const scrollToForm = () => document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
 
   const team = [
-    { name: "Ricardo Guirado", role: "Dono e Consultor Principal", image: "/ricardo.jpg" },
-    { name: "Gabriel Krüger", role: "Gestor de Projetos", image: "/gabriel.png" },
-    { name: "Joshua Guirado", role: "Consultor de Processos", image: "/joshua.png" }
+    { 
+      name: "Ricardo Guirado", 
+      role: "Dono e Consultor Principal", 
+      image: "/ricardo.jpg",
+      linkedin: "https://www.linkedin.com/in/ricardoguiradofranquias/",
+      instagram: "https://www.instagram.com/ricardoguirado_/"
+    },
+    { 
+      name: "Gabriel Krüger", 
+      role: "Gestor de Projetos", 
+      image: "/gabriel.png",
+      linkedin: "https://www.linkedin.com/in/gabriel-kruger/",
+      instagram: "https://www.instagram.com/g.kruger97/"
+    },
+    { 
+      name: "Joshua Guirado", 
+      role: "Consultor de Processos", 
+      image: "/joshua.png",
+      linkedin: "https://www.linkedin.com/in/joshua-guirado-681108353/",
+      instagram: "https://www.instagram.com/joshuafguirado/"
+    }
   ];
 
   return (
@@ -19,7 +37,7 @@ export function About() {
       </div>
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-16 items-start">
+        <div className="grid lg:grid-cols-12 gap-16 items-center">
           
           {/* Left Column: Story */}
           <div className="lg:col-span-6 space-y-8">
@@ -89,9 +107,30 @@ export function About() {
                       loading="lazy"
                     />
                   </div>
-                  <div className="p-4 text-center bg-dark-800 border-t border-white/5 flex-grow flex flex-col justify-center">
+                  <div className="p-4 text-center bg-dark-800 border-t border-white/5 flex-grow flex flex-col justify-center items-center">
                     <h5 className="font-bold text-sm text-white leading-tight">{member.name}</h5>
                     <p className="text-[10px] text-gold-500 font-bold uppercase tracking-wider mt-1">{member.role}</p>
+                    
+                    <div className="flex items-center gap-3 mt-3 border-t border-white/5 pt-3 w-full justify-center">
+                      <a 
+                        href={member.linkedin} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-gray-400 hover:text-gold-500 transition-colors p-1"
+                        aria-label={`LinkedIn de ${member.name}`}
+                      >
+                        <Linkedin className="w-4 h-4" />
+                      </a>
+                      <a 
+                        href={member.instagram} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-gray-400 hover:text-gold-500 transition-colors p-1"
+                        aria-label={`Instagram de ${member.name}`}
+                      >
+                        <Instagram className="w-4 h-4" />
+                      </a>
+                    </div>
                   </div>
                 </motion.div>
               ))}
