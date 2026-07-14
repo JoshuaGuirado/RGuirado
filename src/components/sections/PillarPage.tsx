@@ -111,7 +111,7 @@ export function PillarPage({ pillarId }: PillarPageProps) {
 
       {/* Main Content Area */}
       <main className="max-w-7xl mx-auto px-6 pt-20 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-16 items-start">
+        <div className="grid lg:grid-cols-12 gap-16 items-center">
           
           {/* Left Column: Heading and Tagline */}
           <div className="lg:col-span-6 space-y-8">
@@ -163,16 +163,16 @@ export function PillarPage({ pillarId }: PillarPageProps) {
             </motion.div>
           </div>
 
-          {/* Right Column: Features and Deliverables */}
-          <div className="lg:col-span-6 space-y-8">
-            {pillarId === "franchising" && (
+          {/* Right Column: Video or Original Card */}
+          <div className="lg:col-span-6 space-y-8 flex justify-center w-full">
+            {pillarId === "franchising" ? (
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="relative w-full max-w-[320px] h-[550px] mx-auto group mb-8"
+                className="relative w-full max-w-[420px] h-[600px] lg:h-[650px] mx-auto group"
               >
-                <div className="absolute inset-0 bg-gold-500/10 blur-[60px] rounded-full pointer-events-none" />
+                <div className="absolute inset-0 bg-gold-500/10 blur-[80px] rounded-full pointer-events-none" />
                 
                 <div 
                   className="relative z-10 w-full h-full rounded-2xl overflow-hidden bg-dark-900 border border-gold-500/20 group bg-black cursor-pointer" 
@@ -200,57 +200,104 @@ export function PillarPage({ pillarId }: PillarPageProps) {
                   </div>
                 </div>
               </motion.div>
-            )}
+            ) : (
+              <div className="w-full space-y-8">
+                <motion.div 
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="bg-gradient-to-br from-dark-800 to-dark-900 border border-white/5 rounded-[2.5rem] p-10 md:p-12 shadow-2xl relative overflow-hidden w-full"
+                >
+                  {/* Decorative Subtle Corner Gradient */}
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-gold-500/5 rounded-full blur-[40px] pointer-events-none" />
 
-            <motion.div 
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="bg-gradient-to-br from-dark-800 to-dark-900 border border-white/5 rounded-[2.5rem] p-10 md:p-12 shadow-2xl relative overflow-hidden"
-            >
-              {/* Decorative Subtle Corner Gradient */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gold-500/5 rounded-full blur-[40px] pointer-events-none" />
-
-              <div className="flex items-center gap-6 mb-10 relative z-10">
-                <div className="w-20 h-20 bg-dark-900 rounded-2xl flex items-center justify-center border border-white/5 shadow-inner">
-                  {detail.icon}
-                </div>
-                <div>
-                  <h2 className="text-2xl font-black tracking-tight">O que entregamos</h2>
-                  <p className="text-gray-400 text-sm">Escopo detalhado de atuação</p>
-                </div>
-              </div>
-
-              <div className="space-y-8 relative z-10">
-                {detail.features.map((feature, index) => (
-                  <div key={index} className="flex gap-5 items-start">
-                    <CheckCircle2 className="w-6 h-6 text-gold-500 shrink-0 mt-0.5" />
+                  <div className="flex items-center gap-6 mb-10 relative z-10">
+                    <div className="w-20 h-20 bg-dark-900 rounded-2xl flex items-center justify-center border border-white/5 shadow-inner">
+                      {detail.icon}
+                    </div>
                     <div>
-                      <h4 className="text-lg font-bold text-white tracking-tight mb-1">{feature.title}</h4>
-                      <p className="text-gray-400 text-md leading-relaxed">{feature.desc}</p>
+                      <h2 className="text-2xl font-black tracking-tight">O que entregamos</h2>
+                      <p className="text-gray-400 text-sm">Escopo detalhado de atuação</p>
                     </div>
                   </div>
-                ))}
-              </div>
-            </motion.div>
 
-            {/* Small Premium Highlight Box */}
+                  <div className="space-y-8 relative z-10">
+                    {detail.features.map((feature, index) => (
+                      <div key={index} className="flex gap-5 items-start">
+                        <CheckCircle2 className="w-6 h-6 text-gold-500 shrink-0 mt-0.5" />
+                        <div>
+                          <h4 className="text-lg font-bold text-white tracking-tight mb-1">{feature.title}</h4>
+                          <p className="text-gray-400 text-md leading-relaxed">{feature.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* Small Premium Highlight Box */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.6 }}
+                  className="p-6 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-5 w-full"
+                >
+                  <div className="w-12 h-12 bg-gold-500/10 rounded-full flex items-center justify-center shrink-0">
+                    <Star className="w-6 h-6 text-gold-400" />
+                  </div>
+                  <p className="text-gray-300 text-sm font-medium">
+                    Metodologia testada e comprovada em dezenas de empresas em todo o território nacional.
+                  </p>
+                </motion.div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Row 2: For Franchising, show Features horizontal grid at the bottom */}
+        {pillarId === "franchising" && (
+          <div className="mt-24 pt-20 border-t border-white/5 space-y-16">
+            <div className="text-center space-y-4">
+              <span className="text-xs font-bold text-gold-500 uppercase tracking-widest block">O que entregamos</span>
+              <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white">Escopo detalhado de atuação</h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {detail.features.map((feature, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  whileHover={{ y: -5 }}
+                  className="bg-dark-900 border border-gold-500/10 hover:border-gold-500/30 rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden transition-all duration-300 flex flex-col justify-between min-h-[220px]"
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-gold-500 shrink-0" />
+                      <h4 className="text-md font-bold text-white tracking-tight leading-snug">{feature.title}</h4>
+                    </div>
+                    <p className="text-gray-400 text-xs leading-relaxed">{feature.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Centered Highlight Box */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="p-6 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-5"
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="max-w-2xl mx-auto p-6 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-5 justify-center"
             >
-              <div className="w-12 h-12 bg-gold-500/10 rounded-full flex items-center justify-center shrink-0">
-                <Star className="w-6 h-6 text-gold-400" />
-              </div>
-              <p className="text-gray-300 text-sm font-medium">
+              <Star className="w-6 h-6 text-gold-400 shrink-0" />
+              <p className="text-gray-300 text-sm font-medium text-center">
                 Metodologia testada e comprovada em dezenas de empresas em todo o território nacional.
               </p>
             </motion.div>
           </div>
-
-        </div>
+        )}
       </main>
     </div>
   );
