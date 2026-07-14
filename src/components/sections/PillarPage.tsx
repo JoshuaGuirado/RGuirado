@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion } from "motion/react";
-import { ArrowLeft, CheckCircle2, Star, Zap, Users, BarChart3, Settings2 } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Star, Zap, Users, BarChart3, Settings2, Volume2, VolumeX } from "lucide-react";
 import { Button } from "../ui/Button";
 
 interface PillarPageProps {
@@ -60,6 +60,15 @@ const pillarDetails = {
 
 export function PillarPage({ pillarId }: PillarPageProps) {
   const detail = pillarDetails[pillarId];
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const toggleVolume = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
 
   // Scroll to top on mount
   useEffect(() => {
@@ -156,6 +165,43 @@ export function PillarPage({ pillarId }: PillarPageProps) {
 
           {/* Right Column: Features and Deliverables */}
           <div className="lg:col-span-6 space-y-8">
+            {pillarId === "franchising" && (
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="relative w-full max-w-[320px] h-[550px] mx-auto group mb-8"
+              >
+                <div className="absolute inset-0 bg-gold-500/10 blur-[60px] rounded-full pointer-events-none" />
+                
+                <div 
+                  className="relative z-10 w-full h-full rounded-2xl overflow-hidden bg-dark-900 border border-gold-500/20 group bg-black cursor-pointer" 
+                  onClick={toggleVolume}
+                  role="button" 
+                  aria-label="Alternar som do vídeo de franchising"
+                >
+                  <video 
+                    ref={videoRef}
+                    src="/reel.mp4" 
+                    className="w-full h-full object-cover aspect-[9/16]"
+                    loop
+                    muted={isMuted}
+                    playsInline
+                    autoPlay
+                  />
+                  
+                  {/* Mute Overlay Control */}
+                  <div className="absolute bottom-4 right-4 z-20 bg-dark-950/80 backdrop-blur-md border border-white/10 p-3 rounded-full text-white hover:bg-gold-500 hover:text-dark-900 transition-all duration-300">
+                    {isMuted ? (
+                      <VolumeX className="w-5 h-5" aria-hidden="true" />
+                    ) : (
+                      <Volume2 className="w-5 h-5" aria-hidden="true" />
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
             <motion.div 
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}

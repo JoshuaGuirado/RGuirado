@@ -91,7 +91,7 @@ export function Hero() {
              <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden bg-dark-900 border border-gold-500/20 group bg-black" onClick={toggleVolume} style={{ cursor: 'pointer' }} role="button" aria-label="Alternar som do vídeo">
                <video 
                  ref={videoRef}
-                 src="/reel.mp4" 
+                 src="/hero_video.mp4" 
                  poster="/logo.png"
                  autoPlay 
                  loop 
