@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
 import { GlassButton } from "../ui/GlassButton";
+import { Logo } from "../ui/BrandLogo";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -33,15 +34,7 @@ export function Navbar() {
             onClick={(e) => { e.preventDefault(); window.scrollTo(0,0); }}
             aria-label="Voltar para o topo"
           >
-            <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 p-2 shadow-[inset_0_1px_rgba(255,255,255,0.2)] backdrop-blur-md">
-              <img src="/logo.png" alt="RGuirado Logo" className="h-full w-full object-contain drop-shadow-md" />
-            </div>
-            
-            <div className="relative h-12 w-[220px] hidden sm:flex items-center -ml-1">
-              <span className="font-heading font-black text-[32px] tracking-tighter text-white">
-                R.Guirado<span className="text-gold-500">.</span>
-              </span>
-            </div>
+            <Logo />
           </motion.a>
           
           {/* Menu Superior de Navegação */}

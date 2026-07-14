@@ -117,7 +117,7 @@ export function AnimatedBackground() {
 
     const render = () => {
       // Clean background
-      ctx.fillStyle = "#050507";
+      ctx.fillStyle = "#0b121f";
       ctx.fillRect(0, 0, width, height);
 
       // Smooth mouse easing

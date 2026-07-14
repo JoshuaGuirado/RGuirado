@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-gold-400: #F6D35E;
-  --color-gold-500: #F3C012;
-  --color-gold-600: #9C8640;
-  --color-gold-700: #6E5D2A;
+  --color-gold-400: #f6d341;
+  --color-gold-500: #f3c611;
+  --color-gold-600: #bfa11c;
+  --color-gold-700: #8c7614;
   
-  --color-dark-900: #1C2534;
-  --color-dark-800: #263246;
-  --color-dark-700: #313F57;
+  --color-dark-900: #121c2c;
+  --color-dark-800: #1a2840;
+  --color-dark-700: #1f4761;
+  --color-off-white: #f8f0e3;
 
-
-  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Montserrat", ui-sans-serif, system-ui, sans-serif;
 }
 
 html {

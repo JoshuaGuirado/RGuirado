@@ -1,15 +1,13 @@
 import React from "react";
 import { Instagram, Linkedin, MapPin } from "lucide-react";
+import { Logo } from "../ui/BrandLogo";
 
 export function Footer() {
   return (
     <footer className="bg-dark-900 pt-16 pb-12 border-t border-white/5 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
         <div className="flex items-center gap-3 mb-8 cursor-pointer" onClick={(e) => { e.preventDefault(); window.scrollTo(0,0); }} role="button" aria-label="Voltar para o topo">
-          <img src="/logo.png" alt="RGuirado Consultoria Logo" className="h-10 w-auto object-contain drop-shadow-md" loading="lazy" />
-          <span className="font-heading font-black text-2xl tracking-tighter hover:text-gold-500 transition-colors">
-            RGuirado<span className="text-gold-500">.</span>
-          </span>
+          <Logo />
         </div>
         
         <nav className="flex flex-wrap justify-center gap-6 text-gray-400 font-medium mb-10" aria-label="Links do rodapé">

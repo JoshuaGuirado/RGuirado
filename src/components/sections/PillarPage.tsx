@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion } from "motion/react";
 import { ArrowLeft, CheckCircle2, Star, Zap, Users, BarChart3, Settings2, Volume2, VolumeX } from "lucide-react";
 import { Button } from "../ui/Button";
+import { LogoFranchising, LogoGestao, LogoPerformance } from "../ui/BrandLogo";
 
 interface PillarPageProps {
   pillarId: "franchising" | "gestao" | "performance";
@@ -103,9 +104,11 @@ export function PillarPage({ pillarId }: PillarPageProps) {
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
           <span className="font-semibold text-sm">Voltar para Início</span>
         </button>
-        <span className="font-heading font-black text-2xl tracking-tighter cursor-pointer" onClick={handleBack}>
-          RGuirado<span className="text-gold-500">.</span>
-        </span>
+        <div className="cursor-pointer" onClick={handleBack}>
+          {pillarId === "franchising" && <LogoFranchising />}
+          {pillarId === "gestao" && <LogoGestao />}
+          {pillarId === "performance" && <LogoPerformance />}
+        </div>
       </header>
 
       {/* Main Content Area */}
