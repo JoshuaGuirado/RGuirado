@@ -12,7 +12,7 @@ export function LeadForm() {
     setStatus("loading");
     
     try {
-      const response = await fetch("https://formsubmit.co/ajax/91e1fe9c6f7c21b8746e1f0ea8c4fbf3", {
+      const response = await fetch("https://formsubmit.co/ajax/joshuafguirado@gmail.com", {
         method: "POST",
         headers: { 
             "Content-Type": "application/json",
