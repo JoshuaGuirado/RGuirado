@@ -11,6 +11,7 @@ export function About() {
       name: "Ricardo Guirado", 
       role: "Dono e Consultor Principal", 
       image: "/ricardo.jpg",
+      position: "object-center",
       linkedin: "https://www.linkedin.com/in/ricardoguiradofranquias/",
       instagram: "https://www.instagram.com/ricardoguirado_/"
     },
@@ -18,6 +19,7 @@ export function About() {
       name: "Gabriel Krüger", 
       role: "Gestor de Projetos", 
       image: "/gabriel.png",
+      position: "object-[center_15%]",
       linkedin: "https://www.linkedin.com/in/gabriel-kruger/",
       instagram: "https://www.instagram.com/g.kruger97/"
     },
@@ -25,6 +27,7 @@ export function About() {
       name: "Joshua Guirado", 
       role: "Consultor de Processos", 
       image: "/joshua.png",
+      position: "object-center",
       linkedin: "https://www.linkedin.com/in/joshua-guirado-681108353/",
       instagram: "https://www.instagram.com/joshuafguirado/"
     }
@@ -103,7 +106,7 @@ export function About() {
                     <img 
                       src={member.image} 
                       alt={`Foto de ${member.name}`} 
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                      className={`w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 ${member.position || "object-center"}`}
                       loading="lazy"
                     />
                   </div>
