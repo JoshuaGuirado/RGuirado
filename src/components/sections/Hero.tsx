@@ -50,7 +50,7 @@ export function Hero() {
             className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-sm cursor-default shadow-xl"
           >
             <span className="text-xs font-bold text-gold-400 uppercase tracking-widest">
-              Consultoria empresarial desde 2001 · Curitiba/PR · Atuação em todo o Brasil
+              Consultoria empresarial desde 2001 · Atuação em todo o Brasil
             </span>
           </motion.div>
           
