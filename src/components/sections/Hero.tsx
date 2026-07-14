@@ -125,21 +125,37 @@ export function Hero() {
       </div>
 
       {/* Prova Social em Barra (Proof Bar) */}
-      <div className="max-w-7xl mx-auto px-6 mt-20 pt-10 border-t border-white/5 relative z-10 w-full">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
-          {[
-            { value: "+25 anos", label: "de mercado real" },
-            { value: "+350", label: "planejamentos estratégicos conduzidos" },
-            { value: "Redes", label: "de franquias formatadas e em expansão" },
-            { value: "IA aplicada", label: "metodologia própria na gestão" }
-          ].map((item, idx) => (
-            <div key={idx} className="space-y-1">
-              <p className="text-2xl font-black text-gold-400 tracking-tight">{item.value}</p>
-              <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">{item.label}</p>
-            </div>
-          ))}
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        className="max-w-7xl mx-auto px-6 mt-32 relative z-10 w-full"
+      >
+        <div className="bg-dark-800/40 backdrop-blur-md border border-gold-500/10 rounded-[2.5rem] p-8 md:p-10 shadow-2xl relative overflow-hidden">
+          {/* Subtle Glow inside the container */}
+          <div className="absolute top-0 left-[20%] w-[300px] h-[100px] bg-gold-500/5 blur-[50px] rounded-full pointer-events-none" />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { value: "+25 anos", label: "de mercado real" },
+              { value: "+350", label: "planejamentos estratégicos conduzidos" },
+              { value: "Redes", label: "de franquias formatadas e em expansão" },
+              { value: "IA aplicada", label: "metodologia própria na gestão" }
+            ].map((item, idx) => (
+              <motion.div 
+                key={idx} 
+                whileHover={{ y: -5, scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="space-y-3 p-6 rounded-2xl bg-dark-900/30 border border-white/5 hover:border-gold-500/20 hover:bg-dark-900/50 transition-all duration-300 flex flex-col justify-center min-h-[120px]"
+              >
+                <p className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 tracking-tight leading-none">{item.value}</p>
+                <p className="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest leading-normal">{item.label}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
