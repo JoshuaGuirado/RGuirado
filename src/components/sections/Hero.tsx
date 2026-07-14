@@ -58,18 +58,18 @@ export function Hero() {
             Talento fundou. <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">Método escala.</span>
           </h1>
           
-          <p className="text-lg text-gray-400 leading-relaxed font-light mb-6">
+          <p className="text-base text-gray-400 leading-relaxed font-light mb-4">
             Se o instinto e o esforço trouxeram sua empresa até aqui, o próximo salto pede estrutura, processo e uma direção clara. É exatamente esse caminho que percorremos com você.
           </p>
-          <p className="text-sm text-gray-500 leading-relaxed font-light mb-10">
+          <p className="text-base text-gray-400 leading-relaxed font-light mb-10">
             A R.Guirado ajuda empreendedores de pequenas e médias empresas a organizar a casa, estruturar a gestão e escalar com método — via franchising, gestão estratégica e performance comportamental. Sem fórmula pronta. Sem descaracterizar o que você construiu.
           </p>
           
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-            <Button onClick={scrollToForm} className="text-md py-4 px-8" aria-label="Quero um diagnóstico do meu negócio - rolar para o formulário">
+            <Button onClick={scrollToForm} className="text-xs py-4 px-8 border-2 border-blue-500/80 hover:border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]" aria-label="Quero um diagnóstico do meu negócio - rolar para o formulário">
               Quero um diagnóstico do meu negócio
             </Button>
-            <GlassButton onClick={() => document.getElementById("pilares")?.scrollIntoView({ behavior: "smooth" })} className="text-md py-4 px-8" aria-label="Conheça os 3 pilares - rolar para seção pilares">
+            <GlassButton onClick={() => document.getElementById("pilares")?.scrollIntoView({ behavior: "smooth" })} className="text-xs py-4 px-8" aria-label="Conheça os 3 pilares - rolar para seção pilares">
               Conheça os 3 pilares
             </GlassButton>
           </div>

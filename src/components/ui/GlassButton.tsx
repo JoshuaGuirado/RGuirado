@@ -22,7 +22,7 @@ export function GlassButton({
       aria-label={ariaLabel}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-      className={`relative inline-flex items-center justify-center px-8 py-4 font-heading font-semibold text-white overflow-hidden rounded-full transition-all group ${className}`}
+      className={`relative inline-flex items-center justify-center px-8 py-4 font-sans font-black uppercase tracking-wider text-xs text-white overflow-hidden rounded-full transition-all group ${className}`}
     >
       {/* Outer Glow Background */}
       <div className="absolute inset-0 bg-gold-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

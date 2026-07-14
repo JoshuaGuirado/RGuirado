@@ -27,7 +27,7 @@ export function Offer() {
   ];
 
   return (
-    <section className="py-24 relative bg-dark-900 overflow-hidden border-t border-white/5" aria-labelledby="offer-heading">
+    <section id="resultados" className="py-24 relative bg-dark-900 overflow-hidden border-t border-white/5" aria-labelledby="offer-heading">
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div className="absolute top-[30%] right-[10%] w-[400px] h-[400px] bg-gold-500/5 blur-[120px] rounded-full" />
       </div>

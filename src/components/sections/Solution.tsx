@@ -56,13 +56,13 @@ export function Solution() {
             </div>
 
             <p className="text-lg text-gray-400 leading-relaxed font-light">
-              Consultoria séria não é sobre entregar diagnóstico bonito. É sobre fazer a empresa andar — e continuar andando depois que a gente sai. Por isso todo projeto da R.Guirado percorre quatro etapas. Elas se chamam **ALTA**.
+              Consultoria séria não é sobre entregar diagnóstico bonito. É sobre fazer a empresa andar — e continuar andando depois que a gente sai. Por isso todo projeto da R.Guirado percorre quatro etapas. Elas se chamam ALTA.
             </p>
 
             {/* Frase Yves Doz Integrada */}
-            <div className="border-l-2 border-gold-500 pl-6 italic text-gray-400 text-sm leading-relaxed">
+            <div className="border-l-2 border-gold-500 pl-6 italic text-gray-300 text-lg leading-relaxed">
               "As empresas morrem hoje não por fazer as coisas erradas, mas por fazerem bem as mesmas coisas durante tempo demais."
-              <span className="block text-xs font-bold uppercase tracking-widest text-gold-500 mt-2 not-italic">— Yves Doz</span>
+              <span className="block text-sm font-black uppercase tracking-widest text-gold-500 mt-2 not-italic">— Yves Doz</span>
             </div>
           </div>
 

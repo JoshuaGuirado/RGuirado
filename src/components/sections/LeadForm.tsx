@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
 import { Button } from "../ui/Button";
+import { MessageCircle } from "lucide-react";
 
 export function LeadForm() {
   const [formData, setFormData] = useState({ name: "", phone: "", niche: "" });
@@ -66,8 +67,9 @@ export function LeadForm() {
                 href="https://wa.me/5544999665711?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20para%20o%20meu%20neg%C3%B3cio."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-green-500/30 hover:border-green-500 bg-green-500/10 hover:bg-green-500/20 text-green-400 font-bold transition-all text-center"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-gold-500/30 hover:border-gold-400 bg-gold-500/10 hover:bg-gold-500/20 text-gold-400 font-sans font-black uppercase tracking-wider text-xs transition-all text-center"
               >
+                <MessageCircle className="w-4 h-4" />
                 Falar agora no WhatsApp
               </a>
             </div>
