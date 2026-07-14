@@ -50,16 +50,26 @@ export function LeadForm() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-5xl md:text-6xl font-black mb-8 leading-tight tracking-tight"
+              className="text-4xl md:text-5xl font-black mb-8 leading-tight tracking-tight"
             >
-              É hora de dar o <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">verdadeiro passo.</span>
+              O próximo ano da sua empresa começa <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">com uma conversa.</span>
             </motion.h2>
-            <p className="text-2xl text-gray-400 mb-10 font-light leading-relaxed">
-              Vamos alinhar uma Sessão Rápida com um especialista para analisar sua franqueabilidade.
+            <p className="text-xl text-gray-400 mb-10 font-light leading-relaxed">
+              Agende um diagnóstico inicial com nosso time. Sem compromisso, sem apresentação institucional de uma hora. Você fala do seu negócio, nós apontamos onde estão os gargalos e o que pode ser feito.
             </p>
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-400 font-bold" aria-hidden="true">
-              <span className="flex h-3 w-3 rounded-full bg-gold-500 animate-pulse" />
-              Diagnóstico Estratégico Gratuito
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+              <div className="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-400 font-bold" aria-hidden="true">
+                <span className="flex h-3 w-3 rounded-full bg-gold-500 animate-pulse" />
+                Diagnóstico Inicial Gratuito
+              </div>
+              <a 
+                href="https://wa.me/5544999665711?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20para%20o%20meu%20neg%C3%B3cio."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-green-500/30 hover:border-green-500 bg-green-500/10 hover:bg-green-500/20 text-green-400 font-bold transition-all text-center"
+              >
+                Falar agora no WhatsApp
+              </a>
             </div>
           </div>
           
@@ -85,8 +95,8 @@ export function LeadForm() {
                 </div>
               </div>
               
-              <Button type="submit" disabled={status === "loading" || status === "success"} className="w-full py-5 text-lg relative overflow-hidden transition-all duration-300" aria-label="Enviar formulário de contato">
-                {status === "idle" && "Enviar Meus Dados"}
+              <Button type="submit" disabled={status === "loading" || status === "success"} className="w-full py-5 text-lg relative overflow-hidden transition-all duration-300" aria-label="Agendar diagnóstico">
+                {status === "idle" && "Agendar diagnóstico"}
                 {status === "loading" && "Enviando dados..."}
                 {status === "success" && "Tudo certo! Recebemos suas informações."}
                 {status === "error" && "Ocorreu um erro. Tente novamente."}

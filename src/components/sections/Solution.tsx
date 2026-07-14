@@ -4,10 +4,10 @@ import { SectionHeading } from "../ui/SectionHeading";
 
 export function Solution() {
   const solutions = [
-    { step: "01", title: "Diagnóstico Estratégico", desc: "Analisamos a viabilidade e estrutura do seu negócio, identificando gargalos financeiros, operacionais e de gestão a fundo." },
-    { step: "02", title: "Estruturação do Modelo", desc: "Desenhamos o formato ideal e lucrativo de processos internos, metas claras e DRE projetado." },
-    { step: "03", title: "Padronização de Processos", desc: "Criamos manuais de treinamento e diretrizes operacionais de ponta, permitindo que a empresa opere sem depender do dono." },
-    { step: "04", title: "Crescimento Escalonado", desc: "Aceleração estruturada de mercado através de estratégias de posicionamento comercial premium." }
+    { step: "01", title: "Diagnóstico", desc: "Conversamos, olhamos os números, ouvimos o time. Entendemos onde dói de verdade — que raramente é onde parece doer." },
+    { step: "02", title: "Desenho da solução", desc: "Definimos juntos qual pilar (ou combinação deles) resolve o seu problema, com escopo, prazo e entregas claras. Sem pacote genérico." },
+    { step: "03", title: "Execução lado a lado", desc: "Não entregamos relatório e vamos embora. Estamos junto na implantação, ajustando o que a realidade exigir." },
+    { step: "04", title: "Autonomia", desc: "O sucesso do trabalho se mede por uma coisa: sua empresa funcionando bem sem nós. E sem você em cima de tudo." }
   ];
 
   return (
@@ -15,8 +15,11 @@ export function Solution() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-20 items-stretch">
           <div className="flex flex-col justify-center">
-            <div id="solution-heading">
-              <SectionHeading align="left" subtitle="O Método RGuirado" title="Como nós entregamos a sua liberdade executiva" />
+            <div id="solution-heading" className="mb-12">
+              <span className="text-xs font-bold text-gold-500 uppercase tracking-widest block mb-4">Como Trabalhamos</span>
+              <h2 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
+                Um método. Nenhuma fórmula pronta.
+              </h2>
             </div>
             
             <div className="space-y-6">

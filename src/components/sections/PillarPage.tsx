@@ -9,47 +9,50 @@ interface PillarPageProps {
 
 const pillarDetails = {
   franchising: {
-    title: "RGuirado Franchising",
+    title: "R.Guirado Franchising",
     subtitle: "Formatação, Estruturação e Expansão de Franquias",
-    tagline: "Transforme o seu modelo de negócio em uma rede de expansão nacional altamente lucrativa.",
-    description: "Criamos a engenharia necessária para que sua marca cresça de forma padronizada, segura e previsível. Nosso trabalho cobre desde a análise de franqueabilidade até a criação de manuais operacionais e estratégias de venda de cotas de franquia.",
+    tagline: "Transforme seu negócio em uma rede de franquias de sucesso.",
+    description: "Franquear não é vender uma marca. É empacotar um modelo que funciona, de forma que outra pessoa consiga reproduzi-lo com o mesmo resultado. Nós fazemos esse empacotamento — do teste de viabilidade à rede em operação.",
     color: "from-gold-400 to-gold-600",
     glowColor: "bg-gold-500/10",
+    ctaText: "Quero avaliar o potencial de expansão da minha marca",
     features: [
-      { title: "Análise de Franqueabilidade", desc: "Estudo financeiro e operacional profundo para provar a viabilidade de replicação." },
-      { title: "Manuais e Padronização", desc: "Documentação completa de processos para que cada franqueado opere com a qualidade da matriz." },
-      { title: "COF e Jurídico Completo", desc: "Segurança total através da Circular de Oferta de Franquia e contratos robustos." },
-      { title: "Funil de Vendas de Expansão", desc: "Desenho da máquina de captação e venda de franquias para investidores qualificados." }
+      { title: "Análise de Franqueabilidade", desc: "Antes de investir em expansão, a pergunta certa é: seu negócio está pronto para ser replicado? Fazemos uma avaliação criteriosa dos aspectos jurídicos, financeiros, econômicos e de mercado." },
+      { title: "Modelagem de Negócio para Franqueamento", desc: "Nenhum modelo se prova no papel. Estruturamos com você a unidade piloto — no formato exato em que a franquia será vendida — e testamos na prática." },
+      { title: "Formatação de Franquia", desc: "O pacote completo que transforma sua empresa em franqueadora: manuais operacionais, documentos jurídicos (COF, contratos), plataformas, softwares e suporte de expansão." },
+      { title: "Mentoria para Franqueadoras", desc: "Sua rede já existe, mas a expansão travou ou os resultados são desiguais. Nossa mentoria resolve gargalos operacionais e fortalece a liderança à frente da rede." }
     ],
     icon: <BarChart3 className="w-12 h-12 text-gold-400" />
   },
   gestao: {
     title: "Gestão Estratégica",
     subtitle: "Otimização de Processos, Finanças e Governança",
-    tagline: "Estruture sua empresa para crescer sem depender da presença física do fundador.",
-    description: "Organizamos os pilares de governança, finanças e processos internos. Mapeamos gargalos, implementamos indicadores de performance (KPIs) claros e desenhamos um fluxo de trabalho que traga previsibilidade de caixa e autonomia operacional.",
+    tagline: "Maximize sua eficiência e transforme crescimento em plano, não em sorte.",
+    description: "Estratégia não é um documento bonito na gaveta. É saber onde você quer chegar, o que precisa ser feito nesta semana e quem é o responsável. É isso que construímos com você.",
     color: "from-blue-400 to-blue-600",
     glowColor: "bg-blue-500/10",
+    ctaText: "Quero estruturar minha gestão",
     features: [
-      { title: "Diagnóstico e DRE", desc: "Análise financeira cirúrgica para otimização de margens e controle de custos." },
-      { title: "Mapeamento de Processos", desc: "Desenho de fluxos eficientes que eliminam o retrabalho e aumentam a produtividade." },
-      { title: "Painel de Indicadores (KPIs)", desc: "Criação de dashboards práticos para tomadas de decisão rápidas baseadas em dados." },
-      { title: "Estrutura de Governança", desc: "Preparação societária e organizacional para captação de investimento ou sucessão." }
+      { title: "Plano de Negócio", desc: "Do modelo empresarial no papel à estruturação do negócio na prática. Definimos proposta de valor, modelo de receita, estrutura de custos, viabilidade e plano de implantação." },
+      { title: "Planejamento Estratégico", desc: "Construa o futuro da sua empresa com objetivos claros, metas mensuráveis e um caminho viável, acompanhado de rituais de execução prática. Mais de 350 projetos conduzidos." },
+      { title: "Gestão de Negócios com IA", desc: "Ajudamos você a escolher e implantar as ferramentas certas de Inteligência Artificial no seu negócio, criando agentes personalizados e automatizando processos operacionais." },
+      { title: "Mentoria para Empreendedores", desc: "Sessões curtas, práticas e de alto nível para o empresário que precisa decidir bem, levando experiência prática e visão externa aos seus desafios." }
     ],
     icon: <Settings2 className="w-12 h-12 text-blue-400" />
   },
   performance: {
     title: "Performance Comportamental",
     subtitle: "Treinamento de Lideranças e Alinhamento Cultural",
-    tagline: "Profissionalize suas equipes e forme líderes preparados para sustentar o crescimento.",
-    description: "Empresas são feitas de pessoas. Alinhamos a cultura da sua empresa com os objetivos de crescimento, desenhamos planos de carreira atrativos e treinamos seus gestores para operarem em alta performance com foco em resultados reais.",
+    tagline: "Eleve o potencial humano e a liderança da sua equipe.",
+    description: "Nenhuma estratégia sobrevive a um time desalinhado. Empresa nenhuma cresce mais do que a maturidade das pessoas que a conduzem — começando pelo dono.",
     color: "from-purple-400 to-purple-600",
     glowColor: "bg-purple-500/10",
+    ctaText: "Quero desenvolver minha liderança e meu time",
     features: [
-      { title: "Desenvolvimento de Líderes", desc: "Capacitação prática para que seus gerentes ajam como donos do negócio." },
-      { title: "Alinhamento Cultural", desc: "Definição clara de valores e rituais corporativos para reter os melhores talentos." },
-      { title: "Planos de Cargos e Salários", desc: "Estruturação de metas, bonificações e trilhas de carreira transparentes." },
-      { title: "Recrutamento Estratégico", desc: "Processo otimizado para contratar pessoas que combinam perfeitamente com a cultura." }
+      { title: "RH Estratégico — do recrutamento ao desenvolvimento", desc: "Com plataforma tecnológica integrada e IA, estruturamos recrutamento, seleção, integração, avaliação de desempenho e planos de desenvolvimento." },
+      { title: "Formação e Capacitação de Líderes", desc: "Desenvolvemos inteligência emocional, feedbacks construtivos, gestão de conflitos e mentalidade focada em resultados nos seus líderes e gestores." },
+      { title: "Assessment Comportamental do CEO", desc: "O trabalho começa no topo: padrões de decisão, liderança e gatilhos emocionais do dono para torná-lo um líder assertivo e maduro." },
+      { title: "Programa de Sucesso Empreendedor (PSE)", desc: "Percurso estruturado unindo desenvolvimento pessoal do fundador, maturidade da liderança e resultados financeiros do balanço do negócio." }
     ],
     icon: <Users className="w-12 h-12 text-purple-400" />
   }
@@ -146,7 +149,7 @@ export function PillarPage({ pillarId }: PillarPageProps) {
               className="pt-4"
             >
               <Button onClick={handleCTA} className="w-full sm:w-auto text-lg py-5 px-10 shadow-2xl shadow-gold-500/20">
-                Falar com um Especialista
+                {detail.ctaText}
               </Button>
             </motion.div>
           </div>

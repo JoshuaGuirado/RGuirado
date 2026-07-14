@@ -49,25 +49,25 @@ export function Hero() {
             whileHover={{ scale: 1.02 }}
             className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-sm cursor-default shadow-xl"
           >
-            <span className="text-sm font-bold text-gold-400 uppercase tracking-widest">
-              RGuirado Consultoria
+            <span className="text-xs font-bold text-gold-400 uppercase tracking-widest">
+              Consultoria empresarial desde 2001 · Curitiba/PR · Atuação em todo o Brasil
             </span>
           </motion.div>
           
-          <h1 id="hero-title" className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] mb-6 tracking-tight">
-            Consultoria e escala para <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">empresas de alto impacto.</span>
+          <h1 id="hero-title" className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.15] mb-6 tracking-tight">
+            Seu negócio parou de crescer no ponto em que você <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">parou de conseguir dar conta de tudo.</span>
           </h1>
           
-          <p className="text-xl text-gray-400 mb-10 leading-relaxed font-light">
-            Mapeamento estratégico, performance de equipes e estrutura organizacional. Prepare seu negócio para crescer com governança e liberdade executiva.
+          <p className="text-lg text-gray-400 mb-10 leading-relaxed font-light">
+            A R.Guirado ajuda empreendedores de pequenas e médias empresas a organizar a casa, estruturar a gestão e escalar com método — via franchising, gestão estratégica e performance comportamental. Sem fórmula pronta. Sem descaracterizar o que você construiu.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <Button onClick={scrollToForm} className="w-full sm:w-auto text-lg py-5 px-10" aria-label="Quero expandir agora - rolar para o formulário">
-              Quero expandir agora
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            <Button onClick={scrollToForm} className="text-md py-4 px-8" aria-label="Quero um diagnóstico do meu negócio - rolar para o formulário">
+              Quero um diagnóstico do meu negócio
             </Button>
-            <GlassButton onClick={() => document.getElementById("recursos")?.scrollIntoView({ behavior: "smooth" })} className="w-full sm:w-auto text-lg py-5 px-10" aria-label="Entender o método - rolar para a seção de recursos">
-              Entender o método
+            <GlassButton onClick={() => document.getElementById("pilares")?.scrollIntoView({ behavior: "smooth" })} className="text-md py-4 px-8" aria-label="Conheça os 3 pilares - rolar para seção pilares">
+              Conheça os 3 pilares
             </GlassButton>
           </div>
         </motion.div>
@@ -118,6 +118,23 @@ export function Hero() {
             </motion.div>
           </div>
         </motion.div>
+      </div>
+
+      {/* Prova Social em Barra (Proof Bar) */}
+      <div className="max-w-7xl mx-auto px-6 mt-20 pt-10 border-t border-white/5 relative z-10 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+          {[
+            { value: "+25 anos", label: "de mercado real" },
+            { value: "+350", label: "planejamentos estratégicos conduzidos" },
+            { value: "Redes", label: "de franquias formatadas e em expansão" },
+            { value: "IA aplicada", label: "metodologia própria na gestão" }
+          ].map((item, idx) => (
+            <div key={idx} className="space-y-1">
+              <p className="text-2xl font-black text-gold-400 tracking-tight">{item.value}</p>
+              <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">{item.label}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

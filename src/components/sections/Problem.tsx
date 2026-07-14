@@ -1,52 +1,82 @@
 import React from "react";
 import { motion } from "motion/react";
-import { Target, TrendingUp, Users, ShieldCheck } from "lucide-react";
-import { SectionHeading } from "../ui/SectionHeading";
+import { AlertCircle, ArrowRight } from "lucide-react";
+import { Button } from "../ui/Button";
 
 export function Problem() {
-  const problems = [
-    { icon: <Target className="w-8 h-8 text-gold-500" aria-hidden="true" />, title: "Falta de estrutura", desc: "Processos confusos que impedem a replicação exata do seu modelo atual." },
-    { icon: <TrendingUp className="w-8 h-8 text-gold-500" aria-hidden="true" />, title: "Crescimento desorganizado", desc: "Vender mais significa trabalhar o dobro, sem ganho de escala real ou margem." },
-    { icon: <Users className="w-8 h-8 text-gold-500" aria-hidden="true" />, title: "Dependência do dono", desc: "Se você tira férias, a empresa para de faturar e os problemas só acumulam." },
-    { icon: <ShieldCheck className="w-8 h-8 text-gold-500" aria-hidden="true" />, title: "Expansão sem padrão", desc: "Cada nova unidade montada perde a qualidade e a essência da marca matriz." }
+  const scrollToForm = () => document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+
+  const painPoints = [
+    "Tudo depende de você — e por isso nada anda quando você não está.",
+    "A equipe entrega, mas nunca do jeito que você faria.",
+    "Você sabe que dá pra crescer, só não sabe se é abrindo filial, franqueando, contratando ou reorganizando o que já existe.",
+    "O faturamento sobe, a margem não acompanha, e o motivo nunca fica claro.",
+    "Você trabalha mais do que qualquer funcionário e ganha a sensação de estar sempre correndo atrás."
   ];
 
   return (
     <section id="recursos" className="py-32 bg-dark-900 relative overflow-hidden" aria-labelledby="problem-heading">
-      {/* Safe Edge-Compatible Background Orbs */}
+      {/* Safe Background Orbs */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="absolute inset-0 bg-dark-900 opacity-95" />
-        <div className="absolute top-[10%] right-[5%] w-[500px] h-[500px] bg-gold-500/5 blur-[100px] rounded-full" />
+        <div className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-gold-500/5 blur-[120px] rounded-full" />
       </div>
       
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div id="problem-heading">
-          <SectionHeading subtitle="O Desafio" title="Por que a maioria não consegue escalar?" />
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {problems.map((prob, idx) => (
+        <div className="grid lg:grid-cols-12 gap-16 items-center">
+          
+          {/* Left Column: Heading and Context */}
+          <div className="lg:col-span-5 space-y-8">
+            <div className="space-y-4">
+              <span className="text-xs font-bold text-gold-500 uppercase tracking-widest block">O Desafio</span>
+              <h2 id="problem-heading" className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
+                Você não tem um problema de esforço.<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">Tem um problema de estrutura.</span>
+              </h2>
+            </div>
+            
+            <p className="text-lg text-gray-400 leading-relaxed font-light">
+              O negócio deu certo. Cresceu no boca a boca, na sua energia, no seu improviso competente. E agora chegou naquele ponto limitante.
+            </p>
+
+            <div className="space-y-4 border-l-2 border-gold-500/30 pl-6">
+              <p className="text-md text-gray-300 font-bold uppercase tracking-wider">
+                Se você se reconheceu em dois desses pontos, o problema não é falta de trabalho. É falta de método.
+              </p>
+            </div>
+
+            <div className="pt-4">
+              <Button onClick={scrollToForm} className="text-md py-4 px-8 w-full sm:w-auto" aria-label="Vamos conversar sobre o seu caso - rolar para contato">
+                Vamos conversar sobre o seu caso
+              </Button>
+            </div>
+          </div>
+          
+          {/* Right Column: Pain Points Card */}
+          <div className="lg:col-span-7">
             <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: idx * 0.15, duration: 0.7, type: "spring" }}
-              whileHover={{ y: -15, scale: 1.03 }}
-              className="group bg-gradient-to-br from-dark-800 to-dark-900 backdrop-blur-sm p-10 rounded-[2.5rem] border-t border-white/10 border-b-4 border-b-transparent hover:border-b-gold-500 transition-all hover:bg-dark-800 shadow-xl hover:shadow-[0_20px_50px_rgba(243,192,18,0.15)] relative overflow-hidden flex flex-col items-start"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="bg-gradient-to-br from-dark-800 to-dark-900 border border-white/5 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-48 h-48 bg-gold-500/5 rounded-full blur-[40px] -translate-y-1/2 translate-x-1/2 group-hover:bg-gold-500/20 transition-colors duration-500" />
-              <div className="relative z-10 w-full">
-                <div className="w-20 h-20 bg-dark-900 border border-gold-500/20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-inner">
-                  {React.cloneElement(prob.icon, { className: "w-10 h-10 text-gold-500" })}
-                </div>
-                <h3 className="text-2xl font-black mb-4 tracking-tight">{prob.title}</h3>
-                <p className="text-gray-400 text-lg leading-relaxed group-hover:text-gray-200 transition-colors">{prob.desc}</p>
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gold-500/5 rounded-full blur-[40px] pointer-events-none" />
+              
+              <div className="space-y-8 relative z-10">
+                {painPoints.map((point, idx) => (
+                  <div key={idx} className="flex gap-5 items-start">
+                    <div className="w-8 h-8 rounded-xl bg-gold-500/10 flex items-center justify-center shrink-0 mt-0.5 border border-gold-500/20">
+                      <AlertCircle className="w-4 h-4 text-gold-500" />
+                    </div>
+                    <p className="text-gray-300 text-lg leading-relaxed">{point}</p>
+                  </div>
+                ))}
               </div>
             </motion.div>
-          ))}
+          </div>
+
         </div>
       </div>
     </section>

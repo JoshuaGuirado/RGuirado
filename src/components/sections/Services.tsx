@@ -1,27 +1,26 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Briefcase, BarChart, Brain, ArrowRight } from "lucide-react";
-import { SectionHeading } from "../ui/SectionHeading";
 
 export function Services() {
   const pillars = [
     { 
       id: "franchising",
       icon: <Briefcase className="w-8 h-8 text-gold-500" aria-hidden="true" />, 
-      title: "RGuirado Franchising", 
-      desc: "Estruturação completa e expansão acelerada para marcas que desejam se tornar franquias de sucesso, com manuais, processos e estratégias de venda validadas." 
+      title: "R.Guirado Franchising", 
+      desc: "Transforme seu negócio em uma rede de franquias de sucesso. Empacotamos seu modelo de negócio para que seja replicado e expandido nacionalmente." 
     },
     { 
       id: "gestao",
       icon: <BarChart className="w-8 h-8 text-gold-500" aria-hidden="true" />, 
       title: "Gestão Estratégica", 
-      desc: "Otimização de processos, análise financeira e planejamento estratégico para empresas que buscam escalabilidade, maior margem de lucro e governança." 
+      desc: "Maximize sua eficiência e transforme crescimento em plano, não em sorte. Estabelecemos governança, metas mensuráveis e rotina de execução." 
     },
     { 
       id: "performance",
       icon: <Brain className="w-8 h-8 text-gold-500" aria-hidden="true" />, 
       title: "Performance Comportamental", 
-      desc: "Desenvolvimento de lideranças, alinhamento cultural e treinamento de equipes de alta performance para garantir que o seu time acompanhe o crescimento." 
+      desc: "Eleve o potencial humano e a liderança da sua equipe. Alinhamos sua cultura aos objetivos e desenvolvemos inteligência comportamental." 
     }
   ];
 
@@ -36,8 +35,14 @@ export function Services() {
       </div>
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div id="services-heading">
-          <SectionHeading subtitle="Nossas Frentes de Atuação" title="Os 3 Pilares da RGuirado Consultoria" />
+        <div id="services-heading" className="max-w-3xl mb-20">
+          <span className="text-xs font-bold text-gold-500 uppercase tracking-widest block mb-4">Os 3 Pilares</span>
+          <h2 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight mb-6">
+            Três frentes. Um objetivo: colocar sua empresa no próximo nível.
+          </h2>
+          <p className="text-lg text-gray-400 font-light leading-relaxed">
+            Você pode contratar um pilar isolado ou combiná-los em um plano integrado. O diagnóstico inicial define o caminho — e ele é sempre desenhado para o seu negócio.
+          </p>
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
@@ -50,11 +55,11 @@ export function Services() {
               transition={{ delay: idx * 0.15, duration: 0.7, type: "spring" }}
               whileHover={{ y: -10, scale: 1.02 }}
               onClick={() => handlePillarClick(pillar.id)}
-              className="group bg-dark-900 p-10 rounded-[2.5rem] border border-white/5 border-t-gold-500/30 hover:border-gold-500/60 transition-all shadow-xl hover:shadow-[0_20px_50px_rgba(243,192,18,0.1)] relative overflow-hidden flex flex-col items-start cursor-pointer role-button"
+              className="group bg-dark-900 p-10 rounded-[2.5rem] border border-white/5 border-t-gold-500/30 hover:border-gold-500/60 transition-all shadow-xl hover:shadow-[0_20px_50px_rgba(243,192,18,0.1)] relative overflow-hidden flex flex-col justify-between cursor-pointer"
               role="button"
               aria-label={`Ver mais sobre ${pillar.title}`}
             >
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-gold-500/10 rounded-full blur-[30px] group-hover:bg-gold-500/20 transition-colors duration-500" />
+              <div className="absolute -top-20 -right-20 w-40 h-40 bg-gold-500/10 rounded-full blur-[30px] group-hover:bg-gold-500/20 transition-colors duration-500 pointer-events-none" />
               
               <div className="relative z-10 w-full h-full flex flex-col justify-between">
                 <div>
@@ -66,7 +71,7 @@ export function Services() {
                 </div>
                 
                 <div className="flex items-center gap-2 text-gold-500 font-bold text-md group-hover:text-gold-400 transition-colors pt-2">
-                  <span>Saber mais</span>
+                  <span>Saiba mais</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
