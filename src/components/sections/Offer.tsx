@@ -54,7 +54,7 @@ export function Offer() {
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-gold-500">
                   <Target className="w-5 h-5" />
-                  <span className="text-3xl font-black text-white">250+</span>
+                  <span className="text-3xl font-black text-white">750+</span>
                 </div>
                 <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">Empresas estruturadas</p>
               </div>

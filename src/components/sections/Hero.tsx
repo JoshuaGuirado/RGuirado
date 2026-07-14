@@ -55,11 +55,11 @@ export function Hero() {
           </motion.div>
           
           <h1 id="hero-title" className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.15] mb-6 tracking-tight">
-            Seu negócio parou de crescer no ponto em que você <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">parou de conseguir dar conta de tudo.</span>
+            Talento fundou. <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">Método escala.</span>
           </h1>
           
           <p className="text-lg text-gray-400 mb-10 leading-relaxed font-light">
-            A R.Guirado ajuda empreendedores de pequenas e médias empresas a organizar a casa, estruturar a gestão e escalar com método — via franchising, gestão estratégica e performance comportamental. Sem fórmula pronta. Sem descaracterizar o que você construiu.
+            Se o instinto e o esforço trouxeram sua empresa até aqui, o próximo salto pede estrutura, processo e uma direção clara. É exatamente esse caminho que percorremos com você.
           </p>
           
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">

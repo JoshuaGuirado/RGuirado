@@ -58,7 +58,7 @@ export function About() {
                 Desde 2001, Ricardo Guirado e sua equipe acompanham empresários brasileiros exatamente no ponto de virada: quando o negócio pede um novo patamar e os métodos que trouxeram até aqui não levam adiante.
               </p>
               <p>
-                São mais de 25 anos estruturando gestão, formatando redes de franquias e desenvolvendo lideranças em empresas de pequeno e médio porte — operando em escala nacional a partir de Curitiba/PR.
+                São mais de 25 anos estruturando gestão, formatando redes de franquias e desenvolvendo lideranças em empresas de pequeno e médio porte — operando em escala nacional a partir de Maringá/PR.
               </p>
             </div>
 

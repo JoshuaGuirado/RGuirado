@@ -14,7 +14,7 @@ export function FAQ() {
     },
     {
       q: "Vocês atendem fora do Paraná?",
-      a: "Sim. Nossa base é Curitiba, mas conduzimos projetos remotos e híbridos em todo o Brasil."
+      a: "Sim. Nossa base é Maringá, mas conduzimos projetos remotos e híbridos em todo o Brasil."
     },
     {
       q: "Como funciona a parte de IA?",

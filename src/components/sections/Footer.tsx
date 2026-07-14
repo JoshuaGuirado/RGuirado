@@ -30,7 +30,7 @@ export function Footer() {
 
         <div className="flex items-center gap-2 mb-10 text-gray-400/80 font-medium text-sm bg-white/5 py-2 px-4 rounded-full border border-white/5 cursor-default hover:border-gold-500/30 hover:text-gray-300 transition-colors">
           <MapPin className="w-4 h-4 text-gold-500" aria-hidden="true" />
-          <span>Atendimento presencial em Curitiba e região metropolitana • Projetos remotos em todo o Brasil</span>
+          <span>Atendimento presencial em Maringá e região metropolitana • Projetos remotos em todo o Brasil</span>
         </div>
         
         <p className="text-center text-sm font-medium text-gray-600">
