@@ -18,9 +18,14 @@ export function PartnersMarquee() {
           aria-hidden="true"
         >
           {[...partners, ...partners, ...partners].map((partner, idx) => (
-             <span key={idx} className="mx-8 md:mx-14 text-lg md:text-2xl font-heading font-bold text-white/30 hover:text-white/90 transition-all uppercase tracking-widest cursor-default select-none">
+            <motion.div 
+              key={idx}
+              whileHover={{ scale: 1.05, y: -2 }}
+              className="mx-4 md:mx-6 px-6 py-3 rounded-xl bg-white/3 border border-white/5 hover:border-gold-500/30 hover:bg-white/5 transition-all text-sm md:text-md font-heading font-bold text-white/50 hover:text-gold-500 tracking-wider flex items-center gap-3 cursor-default select-none shadow-[0_8px_32px_rgba(0,0,0,0.2)] backdrop-blur-sm"
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-gold-500 animate-pulse shrink-0" />
               {partner}
-            </span>
+            </motion.div>
           ))}
         </motion.div>
       </div>
