@@ -49,17 +49,17 @@ export function Hero() {
             whileHover={{ scale: 1.02 }}
             className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-sm cursor-default shadow-xl"
           >
-            <span className="text-sm font-semibold text-gray-200 uppercase tracking-widest">
-              Método RGuirado.
+            <span className="text-sm font-bold text-gold-400 uppercase tracking-widest">
+              RGuirado Consultoria
             </span>
           </motion.div>
           
           <h1 id="hero-title" className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] mb-6 tracking-tight">
-            Engenharia estrutural para <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">franqueadoras de ponta.</span>
+            Consultoria e escala para <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">empresas de alto impacto.</span>
           </h1>
           
           <p className="text-xl text-gray-400 mb-10 leading-relaxed font-light">
-            Estratégia, estrutura e crescimento previsível para quem quer expandir de verdade. Construa um império e pare de depender apenas da sua operação.
+            Mapeamento estratégico, performance de equipes e estrutura organizacional. Prepare seu negócio para crescer com governança e liberdade executiva.
           </p>
           
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">

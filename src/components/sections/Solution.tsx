@@ -4,10 +4,10 @@ import { SectionHeading } from "../ui/SectionHeading";
 
 export function Solution() {
   const solutions = [
-    { step: "01", title: "Diagnóstico Estratégico", desc: "Analisamos a viabilidade do seu negócio para o modelo de franquias, identificando gargalos financeiros e operacionais a fundo." },
-    { step: "02", title: "Estruturação do Modelo", desc: "Desenhamos o formato ideal e lucrativo: taxas, royalties, modelo jurídico robusto e DRE projetado." },
-    { step: "03", title: "Padronização de Processos", desc: "Criamos tecnologia e manuais operacionais completos. Qualquer pessoa conseguirá replicar o seu sucesso de ponta a ponta." },
-    { step: "04", title: "Expansão Ativa", desc: "Aplicação de estratégia de marketing e vendas fechadas para captar, nutrir e converter os investidores perfeitos." }
+    { step: "01", title: "Diagnóstico Estratégico", desc: "Analisamos a viabilidade e estrutura do seu negócio, identificando gargalos financeiros, operacionais e de gestão a fundo." },
+    { step: "02", title: "Estruturação do Modelo", desc: "Desenhamos o formato ideal e lucrativo de processos internos, metas claras e DRE projetado." },
+    { step: "03", title: "Padronização de Processos", desc: "Criamos manuais de treinamento e diretrizes operacionais de ponta, permitindo que a empresa opere sem depender do dono." },
+    { step: "04", title: "Crescimento Escalonado", desc: "Aceleração estruturada de mercado através de estratégias de posicionamento comercial premium." }
   ];
 
   return (
