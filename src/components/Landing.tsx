@@ -3,6 +3,7 @@ import { Navbar } from "./sections/Navbar";
 import { Hero } from "./sections/Hero";
 
 // Lazy loading the components that are below the fold
+const Services = React.lazy(() => import("./sections/Services").then(module => ({ default: module.Services })));
 const PartnersMarquee = React.lazy(() => import("./sections/PartnersMarquee").then(module => ({ default: module.PartnersMarquee })));
 const Problem = React.lazy(() => import("./sections/Problem").then(module => ({ default: module.Problem })));
 const Solution = React.lazy(() => import("./sections/Solution").then(module => ({ default: module.Solution })));
@@ -23,6 +24,7 @@ export default function Landing() {
         
         {/* Below the fold - loaded lazily to improve performance */}
         <Suspense fallback={<div className="h-32 bg-dark-900 animate-pulse" />}>
+          <Services />
           <PartnersMarquee />
         </Suspense>
         

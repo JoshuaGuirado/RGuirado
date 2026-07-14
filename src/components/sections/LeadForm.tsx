@@ -18,7 +18,7 @@ export function LeadForm() {
             "Accept": "application/json"
         },
         body: JSON.stringify({
-            _subject: "Novo Lead - RGuirado Franquias",
+            _subject: "Novo Lead - RGuirado Consultoria",
             _template: "table",
             Nome: formData.name,
             WhatsApp: formData.phone,
