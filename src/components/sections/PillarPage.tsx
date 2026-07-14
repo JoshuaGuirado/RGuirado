@@ -9,7 +9,7 @@ interface PillarPageProps {
 
 const pillarDetails = {
   franchising: {
-    title: "R.Guirado Franchising",
+    title: "Franchising",
     subtitle: "Formatação, Estruturação e Expansão de Franquias",
     tagline: "Transforme seu negócio em uma rede de franquias de sucesso.",
     description: "Franquear não é vender uma marca. É empacotar um modelo que funciona, de forma que outra pessoa consiga reproduzi-lo com o mesmo resultado. Nós fazemos esse empacotamento — do teste de viabilidade à rede em operação.",
@@ -45,16 +45,15 @@ const pillarDetails = {
     subtitle: "Treinamento de Lideranças e Alinhamento Cultural",
     tagline: "Eleve o potencial humano e a liderança da sua equipe.",
     description: "Nenhuma estratégia sobrevive a um time desalinhado. Empresa nenhuma cresce mais do que a maturidade das pessoas que a conduzem — começando pelo dono.",
-    color: "from-purple-400 to-purple-600",
-    glowColor: "bg-purple-500/10",
+    color: "from-blue-400 to-blue-600",
+    glowColor: "bg-blue-500/10",
     ctaText: "Quero desenvolver minha liderança e meu time",
     features: [
       { title: "RH Estratégico — do recrutamento ao desenvolvimento", desc: "Com plataforma tecnológica integrada e IA, estruturamos recrutamento, seleção, integração, avaliação de desempenho e planos de desenvolvimento." },
       { title: "Formação e Capacitação de Líderes", desc: "Desenvolvemos inteligência emocional, feedbacks construtivos, gestão de conflitos e mentalidade focada em resultados nos seus líderes e gestores." },
-      { title: "Assessment Comportamental do CEO", desc: "O trabalho começa no topo: padrões de decisão, liderança e gatilhos emocionais do dono para torná-lo um líder assertivo e maduro." },
-      { title: "Programa de Sucesso Empreendedor (PSE)", desc: "Percurso estruturado unindo desenvolvimento pessoal do fundador, maturidade da liderança e resultados financeiros do balanço do negócio." }
+      { title: "Assessment Comportamental do CEO", desc: "O trabalho começa no topo: padrões de decisão, liderança e gatilhos emocionais do dono para torná-lo um líder assertivo e maduro." }
     ],
-    icon: <Users className="w-12 h-12 text-purple-400" />
+    icon: <Users className="w-12 h-12 text-blue-400" />
   }
 };
 
@@ -223,13 +222,13 @@ export function PillarPage({ pillarId }: PillarPageProps) {
 
                   <div className="space-y-8 relative z-10">
                     {detail.features.map((feature, index) => (
-                      <div key={index} className="flex gap-5 items-start">
-                        <CheckCircle2 className="w-6 h-6 text-gold-500 shrink-0 mt-0.5" />
-                        <div>
-                          <h4 className="text-lg font-bold text-white tracking-tight mb-1">{feature.title}</h4>
-                          <p className="text-gray-400 text-md leading-relaxed">{feature.desc}</p>
-                        </div>
-                      </div>
+                  <div key={index} className="flex gap-5 items-start">
+                    <CheckCircle2 className="w-6 h-6 text-gold-500 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xl font-bold text-white tracking-tight mb-1.5">{feature.title}</h4>
+                      <p className="text-gray-300 text-base leading-relaxed">{feature.desc}</p>
+                    </div>
+                  </div>
                     ))}
                   </div>
                 </motion.div>
@@ -270,14 +269,14 @@ export function PillarPage({ pillarId }: PillarPageProps) {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                   whileHover={{ y: -5 }}
-                  className="bg-dark-900 border border-gold-500/10 hover:border-gold-500/30 rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden transition-all duration-300 flex flex-col justify-between min-h-[220px]"
+                  className="bg-dark-900 border border-gold-500/10 hover:border-gold-500/30 rounded-3xl p-8 md:p-10 shadow-xl relative overflow-hidden transition-all duration-300 flex flex-col justify-between min-h-[280px]"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-gold-500 shrink-0" />
-                      <h4 className="text-md font-bold text-white tracking-tight leading-snug">{feature.title}</h4>
+                      <CheckCircle2 className="w-6 h-6 text-gold-500 shrink-0" />
+                      <h4 className="text-lg font-bold text-white tracking-tight leading-snug">{feature.title}</h4>
                     </div>
-                    <p className="text-gray-400 text-xs leading-relaxed">{feature.desc}</p>
+                    <p className="text-gray-400 text-sm leading-relaxed">{feature.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -289,10 +288,10 @@ export function PillarPage({ pillarId }: PillarPageProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="max-w-2xl mx-auto p-6 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-5 justify-center"
+              className="max-w-4xl mx-auto p-6 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-5 justify-center"
             >
               <Star className="w-6 h-6 text-gold-400 shrink-0" />
-              <p className="text-gray-300 text-sm font-medium text-center">
+              <p className="text-gray-300 text-sm sm:text-base font-medium text-center">
                 Metodologia testada e comprovada em dezenas de empresas em todo o território nacional.
               </p>
             </motion.div>

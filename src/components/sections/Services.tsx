@@ -7,7 +7,7 @@ export function Services() {
     { 
       id: "franchising",
       icon: <Briefcase className="w-8 h-8 text-gold-500" aria-hidden="true" />, 
-      title: "R.Guirado Franchising", 
+      title: "Franchising", 
       desc: "Transforme seu negócio em uma rede de franquias de sucesso. Empacotamos seu modelo de negócio para que seja replicado e expandido nacionalmente." 
     },
     { 
