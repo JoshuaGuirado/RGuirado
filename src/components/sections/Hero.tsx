@@ -30,7 +30,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-dark-900 border-b border-white/5" aria-labelledby="hero-title">
+    <section className="relative min-h-screen flex flex-col justify-center pt-32 pb-20 overflow-hidden bg-dark-900 border-b border-white/5" aria-labelledby="hero-title">
       {/* Safe Edge-Compatible Background Orbs */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div className="absolute -top-[20%] -right-[10%] w-[800px] h-[800px] bg-gold-400/5 blur-[120px] rounded-full" />

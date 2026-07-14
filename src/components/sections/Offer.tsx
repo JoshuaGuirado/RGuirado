@@ -45,7 +45,7 @@ export function Offer() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {differentiators.map((diff, idx) => (
             <motion.div 
               key={idx}
@@ -54,7 +54,7 @@ export function Offer() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.6 }}
               whileHover={{ y: -8 }}
-              className="p-8 rounded-[2rem] bg-dark-800 border border-white/5 hover:border-gold-500/30 transition-all shadow-xl flex flex-col justify-between"
+              className="p-8 rounded-[2rem] bg-dark-800 border border-white/5 hover:border-gold-500/30 transition-all shadow-xl flex flex-col justify-between w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] max-w-sm"
             >
               <div className="space-y-6">
                 <div className="w-16 h-16 bg-dark-900 border border-gold-500/10 rounded-2xl flex items-center justify-center shadow-inner">

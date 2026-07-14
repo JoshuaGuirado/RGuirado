@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from "react";
 import Landing from "./components/Landing";
 import { PillarPage } from "./components/sections/PillarPage";
+import { AnimatedBackground } from "./components/ui/AnimatedBackground";
 import { MessageCircle } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
@@ -37,6 +38,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-dark-900 text-white font-sans selection:bg-gold-500/30 selection:text-gold-400 overflow-x-hidden">
+      {/* Dynamic Laser Grid Background */}
+      <AnimatedBackground />
+
       <AnimatePresence mode="wait">
         {route === "landing" && (
           <motion.div

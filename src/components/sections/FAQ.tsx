@@ -33,7 +33,7 @@ export function FAQ() {
   };
 
   return (
-    <section className="py-32 bg-dark-900 relative overflow-hidden border-t border-white/5" aria-labelledby="faq-heading">
+    <section id="faq" className="py-32 bg-dark-900 relative overflow-hidden border-t border-white/5" aria-labelledby="faq-heading">
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div className="absolute bottom-[20%] right-[10%] w-[500px] h-[500px] bg-gold-500/5 blur-[120px] rounded-full" />
       </div>

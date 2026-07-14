@@ -11,7 +11,7 @@ export function Solution() {
   ];
 
   return (
-    <section className="py-32 relative overflow-hidden bg-dark-800" aria-labelledby="solution-heading">
+    <section id="metodo" className="py-32 relative overflow-hidden bg-dark-800" aria-labelledby="solution-heading">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-20 items-stretch">
           <div className="flex flex-col justify-center">
@@ -62,10 +62,9 @@ export function Solution() {
                 <div className="absolute inset-0 bg-gold-500 mix-blend-multiply z-20 opacity-30 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none" aria-hidden="true" />
                 
                 <img 
-                  src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1000&q=80" 
-                  alt="Equipe corporativa formulando estratégia de negócios"
+                  src="/solution_image.png" 
+                  alt="Equipe corporativa R.Guirado"
                   className="w-full h-full object-cover grayscale brightness-75 contrast-125 group-hover:grayscale-0 transition-all duration-700"
-                  crossOrigin="anonymous"
                   loading="lazy"
                 />
               </div>

@@ -29,3 +29,65 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
 }
+
+@keyframes laserHorizontal {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.4;
+  }
+  85% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+}
+
+@keyframes laserVertical {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.3;
+  }
+  85% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes floatOrb {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-10px, -20px) scale(1.05);
+  }
+}
+
+.animate-laser-h-1 {
+  animation: laserHorizontal 12s linear infinite;
+}
+.animate-laser-h-2 {
+  animation: laserHorizontal 18s linear infinite;
+  animation-delay: 5s;
+}
+.animate-laser-v-1 {
+  animation: laserVertical 16s linear infinite;
+  animation-delay: 2s;
+}
+.animate-laser-v-2 {
+  animation: laserVertical 22s linear infinite;
+  animation-delay: 8s;
+}
+.animate-float-orb {
+  animation: floatOrb 10s ease-in-out infinite;
+}
