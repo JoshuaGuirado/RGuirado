@@ -45,7 +45,7 @@ export function Navbar() {
           </motion.a>
           
           {/* Menu Superior de Navegação */}
-          <div className="hidden md:flex items-center gap-8 z-10 bg-white/5 border border-white/10 px-6 py-2 rounded-full backdrop-blur-md">
+          <div className="hidden md:flex items-center gap-8 z-10">
             <a href="#pilares" className="text-xs font-bold uppercase tracking-wider text-gray-300 hover:text-gold-500 transition-colors">Pilares</a>
             <a href="#metodo" className="text-xs font-bold uppercase tracking-wider text-gray-300 hover:text-gold-500 transition-colors">Método</a>
             <a href="#sobre" className="text-xs font-bold uppercase tracking-wider text-gray-300 hover:text-gold-500 transition-colors">Sobre</a>
