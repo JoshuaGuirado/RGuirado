@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { Volume2, VolumeX } from "lucide-react";
+import { Volume2, VolumeX, ChevronDown } from "lucide-react";
 import { Button } from "../ui/Button";
 import { GlassButton } from "../ui/GlassButton";
+import { AnimatedCounter } from "../ui/AnimatedCounter";
 
 export function Hero() {
   const scrollToForm = () => document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
@@ -149,13 +150,26 @@ export function Hero() {
                 transition={{ duration: 0.3 }}
                 className="space-y-3 p-6 rounded-2xl bg-dark-900/30 border border-white/5 hover:border-gold-500/20 hover:bg-dark-900/50 transition-all duration-300 flex flex-col justify-center min-h-[120px]"
               >
-                <p className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 tracking-tight leading-none">{item.value}</p>
+                <p className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 tracking-tight leading-none">
+                  <AnimatedCounter value={item.value} />
+                </p>
                 <p className="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest leading-normal">{item.label}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </motion.div>
+
+      {/* Scroll Down Indicator */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 cursor-pointer pointer-events-auto" onClick={() => document.getElementById("pilares")?.scrollIntoView({ behavior: "smooth" })} role="button" aria-label="Rolar para baixo">
+        <span className="text-[9px] uppercase font-bold text-gray-500 tracking-[0.2em] leading-none">Descubra mais</span>
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown className="w-4 h-4 text-gold-500/80" />
+        </motion.div>
+      </div>
     </section>
   );
 }

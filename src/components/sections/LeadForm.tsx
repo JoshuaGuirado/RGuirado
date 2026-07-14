@@ -41,6 +41,25 @@ export function LeadForm() {
     }
   };
 
+  const formatPhone = (value: string) => {
+    const clean = value.replace(/\D/g, "");
+    if (clean.length <= 2) {
+      return clean.length > 0 ? `(${clean}` : "";
+    }
+    if (clean.length <= 6) {
+      return `(${clean.slice(0, 2)}) ${clean.slice(2)}`;
+    }
+    if (clean.length <= 10) {
+      return `(${clean.slice(0, 2)}) ${clean.slice(2, 6)}-${clean.slice(6)}`;
+    }
+    return `(${clean.slice(0, 2)}) ${clean.slice(2, 7)}-${clean.slice(7, 11)}`;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhone(e.target.value);
+    setFormData(prev => ({ ...prev, phone: formatted }));
+  };
+
   return (
     <section id="contato" className="py-32 bg-dark-800 relative" aria-labelledby="form-heading">
       <div className="max-w-7xl mx-auto px-6">
@@ -83,17 +102,60 @@ export function LeadForm() {
           >
             <form onSubmit={handleSubmit} className="space-y-8 relative z-10" aria-label="Formulário de contato">
               <div className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="sr-only">Nome Completo</label>
-                  <input id="name" required type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-dark-800/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-gold-500 transition-all font-medium" placeholder="Nome Completo" />
+                <div className="relative">
+                  <input 
+                    id="name" 
+                    required 
+                    type="text" 
+                    value={formData.name} 
+                    onChange={(e) => setFormData({...formData, name: e.target.value})} 
+                    className="peer w-full bg-dark-800/50 border border-white/10 rounded-2xl px-6 pt-6 pb-2 text-white focus:outline-none focus:border-gold-500 transition-all font-medium placeholder-transparent" 
+                    placeholder="Nome Completo" 
+                  />
+                  <label 
+                    htmlFor="name" 
+                    className="absolute left-6 top-1.5 text-xs text-gray-500 transition-all pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-gold-500"
+                  >
+                    Nome Completo
+                  </label>
                 </div>
-                <div>
-                  <label htmlFor="phone" className="sr-only">Seu WhatsApp</label>
-                  <input id="phone" required type="tel" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full bg-dark-800/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-gold-500 transition-all font-medium" placeholder="Seu WhatsApp" />
+
+                <div className="relative">
+                  <input 
+                    id="phone" 
+                    required 
+                    type="tel" 
+                    pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
+                    title="Digite um WhatsApp válido no formato (XX) XXXXX-XXXX"
+                    value={formData.phone} 
+                    onChange={handlePhoneChange} 
+                    className="peer w-full bg-dark-800/50 border border-white/10 rounded-2xl px-6 pt-6 pb-2 text-white focus:outline-none focus:border-gold-500 transition-all font-medium placeholder-transparent" 
+                    placeholder="Seu WhatsApp" 
+                  />
+                  <label 
+                    htmlFor="phone" 
+                    className="absolute left-6 top-1.5 text-xs text-gray-500 transition-all pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-gold-500"
+                  >
+                    Seu WhatsApp
+                  </label>
                 </div>
-                <div>
-                  <label htmlFor="niche" className="sr-only">Nicho do seu Negócio</label>
-                  <input id="niche" required type="text" value={formData.niche} onChange={(e) => setFormData({...formData, niche: e.target.value})} className="w-full bg-dark-800/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-gold-500 transition-all font-medium" placeholder="Nicho do seu Negócio" />
+
+                <div className="relative">
+                  <input 
+                    id="niche" 
+                    required 
+                    type="text" 
+                    value={formData.niche} 
+                    onChange={(e) => setFormData({...formData, niche: e.target.value})} 
+                    className="peer w-full bg-dark-800/50 border border-white/10 rounded-2xl px-6 pt-6 pb-2 text-white focus:outline-none focus:border-gold-500 transition-all font-medium placeholder-transparent" 
+                    placeholder="Nicho do seu Negócio" 
+                  />
+                  <label 
+                    htmlFor="niche" 
+                    className="absolute left-6 top-1.5 text-xs text-gray-500 transition-all pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-gold-500"
+                  >
+                    Nicho do seu Negócio
+                  </label>
                 </div>
               </div>
               

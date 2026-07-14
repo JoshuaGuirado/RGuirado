@@ -11,9 +11,9 @@ export function Footer() {
         </div>
         
         <nav className="flex flex-wrap justify-center gap-6 text-gray-400 font-medium mb-10" aria-label="Links do rodapé">
-          <a href="#recursos" className="hover:text-gold-500 transition-colors">Método</a>
+          <a href="#metodo" className="hover:text-gold-500 transition-colors">Método</a>
           <a href="#resultados" className="hover:text-gold-500 transition-colors">Resultados</a>
-          <a href="#time" className="hover:text-gold-500 transition-colors">Time Técnico</a>
+          <a href="#sobre" className="hover:text-gold-500 transition-colors">Time Técnico</a>
           <a href="#contato" className="hover:text-gold-500 transition-colors px-3 py-1 bg-white/5 rounded-full border border-white/5">Consultoria de Expansão</a>
         </nav>
 

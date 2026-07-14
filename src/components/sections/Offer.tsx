@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Milestone, Sliders, Cpu, Layers, Target, TrendingUp } from "lucide-react";
+import { AnimatedCounter } from "../ui/AnimatedCounter";
 
 export function Offer() {
   const differentiators = [
@@ -27,7 +28,7 @@ export function Offer() {
   ];
 
   return (
-    <section id="resultados" className="py-24 relative bg-dark-900 overflow-hidden border-t border-white/5" aria-labelledby="offer-heading">
+    <section id="diferenciais" className="py-24 relative bg-dark-900 overflow-hidden border-t border-white/5" aria-labelledby="offer-heading">
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div className="absolute top-[30%] right-[10%] w-[400px] h-[400px] bg-gold-500/5 blur-[120px] rounded-full" />
       </div>
@@ -54,7 +55,9 @@ export function Offer() {
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-gold-500">
                   <Target className="w-5 h-5" />
-                  <span className="text-3xl font-black text-white">750+</span>
+                  <span className="text-3xl font-black text-white">
+                    <AnimatedCounter value="250+" />
+                  </span>
                 </div>
                 <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">Empresas estruturadas</p>
               </div>
@@ -62,7 +65,9 @@ export function Offer() {
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-gold-500">
                   <TrendingUp className="w-5 h-5" />
-                  <span className="text-3xl font-black text-white">1000+</span>
+                  <span className="text-3xl font-black text-white">
+                    <AnimatedCounter value="1000+" />
+                  </span>
                 </div>
                 <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">Unidades abertas</p>
               </div>
