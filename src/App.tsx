@@ -3,24 +3,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Navbar, Hero, Problem, Solution, SocialProof, Team, Offer, LeadForm, Footer, PartnersMarquee } from "./components/Landing";
+import Landing from "./components/Landing";
 import { MessageCircle } from "lucide-react";
 
 export default function App() {
   return (
     <div className="min-h-screen bg-dark-900 text-white font-sans selection:bg-gold-500/30 selection:text-gold-400">
-      <Navbar />
-      <main>
-        <Hero />
-        <PartnersMarquee />
-        <Problem />
-        <Solution />
-        <SocialProof />
-        <Team />
-        <Offer />
-        <LeadForm />
-      </main>
-      <Footer />
+      <Landing />
       
       {/* Sticky WhatsApp Button */}
       <a 
