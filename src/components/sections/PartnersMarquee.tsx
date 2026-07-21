@@ -30,29 +30,29 @@ const partners: PartnerItem[] = [
     imageSrc: "/logos/triangulo.png"
   },
   {
-    id: "lavathru",
-    name: "Lava Thru",
-    renderLogo: () => (
-      <svg viewBox="0 0 200 80" className="h-10 sm:h-12 w-auto fill-current">
-        <path d="M15 40 C25 25, 35 25, 45 40 C55 55, 65 55, 75 40" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" />
-        <path d="M15 52 C25 37, 35 37, 45 52 C55 67, 65 67, 75 52" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" opacity="0.6" />
-        <circle cx="45" cy="20" r="6" fill="currentColor" />
-        <text x="88" y="48" fontWeight="900" fontSize="24" letterSpacing="1.5" fill="currentColor">LAVA THRU</text>
-      </svg>
-    )
+    id: "titanium",
+    name: "Grupo Titanium",
+    imageSrc: "/logos/titanium.png"
   },
   {
     id: "dompizza",
-    name: "Dom Pizza",
-    renderLogo: () => (
-      <svg viewBox="0 0 190 80" className="h-10 sm:h-12 w-auto fill-current">
-        <polygon points="30,12 55,62 5,62" stroke="currentColor" strokeWidth="5" fill="none" strokeLinejoin="round" />
-        <circle cx="30" cy="32" r="4" fill="currentColor" />
-        <circle cx="22" cy="46" r="3" fill="currentColor" />
-        <circle cx="38" cy="46" r="3" fill="currentColor" />
-        <text x="68" y="46" fontWeight="900" fontSize="26" letterSpacing="2" fill="currentColor">DOM PIZZA</text>
-      </svg>
-    )
+    name: "Dom Pizza 18",
+    imageSrc: "/logos/dompizza.png"
+  },
+  {
+    id: "lavathru",
+    name: "Lava Thru",
+    imageSrc: "/logos/lavathru.png"
+  },
+  {
+    id: "clzo",
+    name: "CLZO Alvos Premium",
+    imageSrc: "/logos/clzo.png"
+  },
+  {
+    id: "rolls",
+    name: "Rolls Food",
+    imageSrc: "/logos/rolls.png"
   },
   {
     id: "colegioplatao",
@@ -102,16 +102,6 @@ const partners: PartnerItem[] = [
     )
   },
   {
-    id: "clzo",
-    name: "CLZO",
-    renderLogo: () => (
-      <svg viewBox="0 0 150 80" className="h-10 sm:h-12 w-auto fill-current">
-        <polygon points="30,12 52,24 52,48 30,60 8,48 8,24" stroke="currentColor" strokeWidth="5" fill="none" strokeLinejoin="round" />
-        <text x="62" y="52" fontWeight="900" fontSize="34" letterSpacing="4" fill="currentColor">CLZO</text>
-      </svg>
-    )
-  },
-  {
     id: "culturasteam",
     name: "Cultura Steam",
     renderLogo: () => (
@@ -135,30 +125,6 @@ const partners: PartnerItem[] = [
         <text x="68" y="58" fontWeight="900" fontSize="20" letterSpacing="3" fill="currentColor">PASS</text>
       </svg>
     )
-  },
-  {
-    id: "grupotitanium",
-    name: "Grupo Titanium",
-    renderLogo: () => (
-      <svg viewBox="0 0 230 80" className="h-10 sm:h-12 w-auto fill-current">
-        <polygon points="12,18 52,18 32,58" stroke="currentColor" strokeWidth="5" fill="none" strokeLinejoin="round" />
-        <line x1="22" y1="30" x2="42" y2="30" stroke="currentColor" strokeWidth="4" />
-        <text x="62" y="36" fontWeight="700" fontSize="12" letterSpacing="3" fill="currentColor">GRUPO</text>
-        <text x="62" y="62" fontWeight="900" fontSize="25" letterSpacing="2" fill="currentColor">TITANIUM</text>
-      </svg>
-    )
-  },
-  {
-    id: "rollsfood",
-    name: "Rolls Food",
-    renderLogo: () => (
-      <svg viewBox="0 0 190 80" className="h-10 sm:h-12 w-auto fill-current">
-        <circle cx="32" cy="40" r="22" stroke="currentColor" strokeWidth="5" fill="none" />
-        <path d="M22 40 Q 32 26 42 40 Q 32 54 22 40 Z" fill="currentColor" opacity="0.7" />
-        <text x="64" y="38" fontWeight="900" fontSize="22" letterSpacing="2" fill="currentColor">ROLLS</text>
-        <text x="64" y="58" fontWeight="800" fontSize="16" letterSpacing="4" fill="currentColor">FOOD</text>
-      </svg>
-    )
   }
 ];
 
@@ -176,7 +142,7 @@ export function PartnersMarquee() {
         
         <motion.div 
           animate={{ x: ["0%", "-33.333333333333%"] }} 
-          transition={{ ease: "linear", duration: 45, repeat: Infinity }}
+          transition={{ ease: "linear", duration: 50, repeat: Infinity }}
           className="flex whitespace-nowrap items-center w-max"
           aria-hidden="true"
         >
