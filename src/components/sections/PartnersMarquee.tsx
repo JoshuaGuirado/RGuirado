@@ -112,7 +112,7 @@ export function PartnersMarquee() {
               <img 
                 src={partner.imageSrc} 
                 alt={partner.name}
-                className="h-9 sm:h-11 md:h-12 w-auto max-w-[150px] sm:max-w-[210px] object-contain opacity-70 hover:opacity-100 transition-all duration-300 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.08)]"
+                className="h-10 sm:h-12 md:h-14 w-auto object-contain opacity-75 hover:opacity-100 transition-all duration-300 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.08)]"
               />
             </motion.div>
           ))}
