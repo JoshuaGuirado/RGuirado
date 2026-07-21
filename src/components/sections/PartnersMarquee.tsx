@@ -99,7 +99,7 @@ export function PartnersMarquee() {
         
         <motion.div 
           animate={{ x: ["0%", "-33.333333333333%"] }} 
-          transition={{ ease: "linear", duration: 55, repeat: Infinity }}
+          transition={{ ease: "linear", duration: 50, repeat: Infinity }}
           className="flex whitespace-nowrap items-center w-max"
           aria-hidden="true"
         >
@@ -107,12 +107,12 @@ export function PartnersMarquee() {
             <motion.div 
               key={`${partner.id}-${idx}`}
               whileHover={{ scale: 1.08 }}
-              className="mx-6 sm:mx-10 md:mx-14 flex items-center justify-center cursor-default select-none transition-all duration-300"
+              className="mx-6 sm:mx-10 md:mx-14 flex items-center justify-center shrink-0 min-w-[140px] sm:min-w-[180px] cursor-default select-none transition-all duration-300"
             >
               <img 
                 src={partner.imageSrc} 
                 alt={partner.name}
-                className="h-10 sm:h-12 md:h-14 w-auto object-contain opacity-75 hover:opacity-100 transition-all duration-300 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.08)]"
+                className="h-10 sm:h-12 md:h-14 w-auto object-contain opacity-80 hover:opacity-100 transition-all duration-300 filter drop-shadow-[0_0_12px_rgba(255,255,255,0.15)]"
               />
             </motion.div>
           ))}
