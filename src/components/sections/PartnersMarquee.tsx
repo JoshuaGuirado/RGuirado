@@ -55,6 +55,31 @@ const partners: PartnerItem[] = [
     imageSrc: "/logos/rolls.png"
   },
   {
+    id: "etzme",
+    name: "ETZME",
+    imageSrc: "/logos/etzme.png"
+  },
+  {
+    id: "mundodofutsal",
+    name: "Mundo do Futsal",
+    imageSrc: "/logos/mundodofutsal.png"
+  },
+  {
+    id: "armazem",
+    name: "Armazém da Limpeza",
+    imageSrc: "/logos/armazem.png"
+  },
+  {
+    id: "culturasteam",
+    name: "Cultura Steam",
+    imageSrc: "/logos/culturasteam.png"
+  },
+  {
+    id: "facilitapass",
+    name: "Facilita Pass",
+    imageSrc: "/logos/facilitapass.png"
+  },
+  {
     id: "colegioplatao",
     name: "Colégio Platão",
     renderLogo: () => (
@@ -63,66 +88,6 @@ const partners: PartnerItem[] = [
         <path d="M20 32 V52 C20 56 60 56 60 52 V32" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" />
         <text x="82" y="36" fontWeight="700" fontSize="12" letterSpacing="2" fill="currentColor">COLÉGIO</text>
         <text x="82" y="62" fontWeight="900" fontSize="28" letterSpacing="1" fill="currentColor">PLATÃO</text>
-      </svg>
-    )
-  },
-  {
-    id: "etzme",
-    name: "ETZME",
-    renderLogo: () => (
-      <svg viewBox="0 0 170 80" className="h-10 sm:h-12 w-auto fill-current">
-        <rect x="10" y="15" width="48" height="48" rx="8" stroke="currentColor" strokeWidth="5" fill="none" />
-        <path d="M22 39 L34 27 L46 39 L34 51 Z" fill="currentColor" />
-        <text x="70" y="52" fontWeight="900" fontSize="32" letterSpacing="4" fill="currentColor">ETZME</text>
-      </svg>
-    )
-  },
-  {
-    id: "mundodofutsal",
-    name: "Mundo do Futsal",
-    renderLogo: () => (
-      <svg viewBox="0 0 230 80" className="h-10 sm:h-12 w-auto fill-current">
-        <circle cx="35" cy="40" r="26" stroke="currentColor" strokeWidth="5" fill="none" />
-        <polygon points="35,24 45,31 41,43 29,43 25,31" fill="currentColor" />
-        <text x="72" y="36" fontWeight="700" fontSize="12" letterSpacing="2" fill="currentColor">MUNDO DO</text>
-        <text x="72" y="62" fontWeight="900" fontSize="26" letterSpacing="2" fill="currentColor">FUTSAL</text>
-      </svg>
-    )
-  },
-  {
-    id: "armazemdalimpeza",
-    name: "Armazém da Limpeza",
-    renderLogo: () => (
-      <svg viewBox="0 0 250 80" className="h-10 sm:h-12 w-auto fill-current">
-        <path d="M35 12 C35 12 55 35 55 48 C55 59 46 68 35 68 C24 68 15 59 15 48 C15 35 35 12 35 12 Z" stroke="currentColor" strokeWidth="5" fill="none" strokeLinejoin="round" />
-        <circle cx="30" cy="46" r="4" fill="currentColor" />
-        <text x="66" y="38" fontWeight="800" fontSize="18" letterSpacing="1" fill="currentColor">ARMAZÉM</text>
-        <text x="66" y="58" fontWeight="600" fontSize="12" letterSpacing="3" fill="currentColor">DA LIMPEZA</text>
-      </svg>
-    )
-  },
-  {
-    id: "culturasteam",
-    name: "Cultura Steam",
-    renderLogo: () => (
-      <svg viewBox="0 0 220 80" className="h-10 sm:h-12 w-auto fill-current">
-        <ellipse cx="35" cy="40" rx="24" ry="10" transform="rotate(-30 35 40)" stroke="currentColor" strokeWidth="4" fill="none" />
-        <ellipse cx="35" cy="40" rx="24" ry="10" transform="rotate(30 35 40)" stroke="currentColor" strokeWidth="4" fill="none" />
-        <circle cx="35" cy="40" r="5" fill="currentColor" />
-        <text x="70" y="36" fontWeight="700" fontSize="12" letterSpacing="2" fill="currentColor">CULTURA</text>
-        <text x="70" y="62" fontWeight="900" fontSize="26" letterSpacing="2" fill="currentColor">STEAM</text>
-      </svg>
-    )
-  },
-  {
-    id: "facilitapass",
-    name: "Facilita Pass",
-    renderLogo: () => (
-      <svg viewBox="0 0 210 80" className="h-10 sm:h-12 w-auto fill-current">
-        <rect x="10" y="20" width="48" height="36" rx="6" stroke="currentColor" strokeWidth="5" fill="none" />
-        <line x1="10" y1="32" x2="58" y2="32" stroke="currentColor" strokeWidth="5" />
-        <text x="68" y="38" fontWeight="800" fontSize="16" letterSpacing="1" fill="currentColor">FACILITA</text>
-        <text x="68" y="58" fontWeight="900" fontSize="20" letterSpacing="3" fill="currentColor">PASS</text>
       </svg>
     )
   }
@@ -142,7 +107,7 @@ export function PartnersMarquee() {
         
         <motion.div 
           animate={{ x: ["0%", "-33.333333333333%"] }} 
-          transition={{ ease: "linear", duration: 50, repeat: Infinity }}
+          transition={{ ease: "linear", duration: 55, repeat: Infinity }}
           className="flex whitespace-nowrap items-center w-max"
           aria-hidden="true"
         >
