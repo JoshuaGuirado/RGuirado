@@ -34,25 +34,25 @@ export function About() {
   ];
 
   return (
-    <section id="sobre" className="py-24 bg-dark-900 relative overflow-hidden border-t border-white/5" aria-labelledby="about-heading">
+    <section id="sobre" className="py-14 md:py-24 bg-dark-900 relative overflow-hidden border-t border-white/5" aria-labelledby="about-heading">
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div className="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] bg-gold-500/5 blur-[120px] rounded-full" />
       </div>
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-16 items-center">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           
           {/* Left Column: Story */}
-          <div className="lg:col-span-6 space-y-8">
+          <div className="lg:col-span-6 space-y-6 sm:space-y-8">
             <div className="space-y-4">
               <span className="text-xs font-bold text-gold-500 uppercase tracking-widest block">Quem Somos</span>
-              <h2 id="about-heading" className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
+              <h2 id="about-heading" className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
                 Consultoria de <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">dono para dono.</span>
               </h2>
             </div>
             
-            <p className="text-lg text-gray-300 font-light leading-relaxed border-l-2 border-gold-500/30 pl-6">
+            <p className="text-base sm:text-lg text-gray-300 font-light leading-relaxed border-l-2 border-gold-500/30 pl-4 sm:pl-6">
               Crescer não é fazer mais do mesmo com mais afinco. É reinventar o que já não serve — antes que o mercado faça isso por você.
             </p>
 

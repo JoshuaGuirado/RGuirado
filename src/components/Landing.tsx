@@ -6,8 +6,6 @@ import { WhatsAppButton } from "./ui/WhatsAppButton";
 // Lazy loading the components that are below the fold
 const Services = React.lazy(() => import("./sections/Services").then(module => ({ default: module.Services })));
 const PartnersMarquee = React.lazy(() => import("./sections/PartnersMarquee").then(module => ({ default: module.PartnersMarquee })));
-const Problem = React.lazy(() => import("./sections/Problem").then(module => ({ default: module.Problem })));
-const TargetAudience = React.lazy(() => import("./sections/TargetAudience").then(module => ({ default: module.TargetAudience })));
 const About = React.lazy(() => import("./sections/About").then(module => ({ default: module.About })));
 const Solution = React.lazy(() => import("./sections/Solution").then(module => ({ default: module.Solution })));
 const Offer = React.lazy(() => import("./sections/Offer").then(module => ({ default: module.Offer })));
@@ -33,8 +31,6 @@ export default function Landing() {
         </Suspense>
         
         <Suspense fallback={<div className="h-96 bg-dark-900 animate-pulse" />}>
-          <Problem />
-          <TargetAudience />
           <About />
           <Solution />
           <Offer />

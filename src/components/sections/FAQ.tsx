@@ -33,13 +33,13 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-24 bg-dark-900 relative overflow-hidden border-t border-white/5" aria-labelledby="faq-heading">
+    <section id="faq" className="py-14 md:py-24 bg-dark-900 relative overflow-hidden border-t border-white/5" aria-labelledby="faq-heading">
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div className="absolute bottom-[20%] right-[10%] w-[400px] h-[400px] bg-gold-500/5 blur-[120px] rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-16 items-start">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           
           {/* Left Column: Heading */}
           <div className="lg:col-span-5 space-y-4">

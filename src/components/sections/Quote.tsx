@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 
 export function Quote() {
   return (
-    <section className="py-24 bg-dark-950 relative overflow-hidden flex items-center justify-center border-y border-white/5">
+    <section className="py-14 md:py-24 bg-dark-950 relative overflow-hidden flex items-center justify-center border-y border-white/5">
       {/* Subtle Background Glow */}
       <div className="absolute inset-0 bg-gradient-to-r from-gold-500/5 via-transparent to-gold-500/5 pointer-events-none" />
       
@@ -15,9 +15,9 @@ export function Quote() {
           transition={{ duration: 0.8 }}
           className="space-y-6"
         >
-          <span className="text-6xl md:text-8xl font-serif text-gold-500/20 block h-6 leading-[0.5] select-none">“</span>
+          <span className="text-5xl md:text-8xl font-serif text-gold-500/20 block h-6 leading-[0.5] select-none">“</span>
           
-          <blockquote className="text-2xl md:text-3xl lg:text-4xl font-light italic leading-relaxed text-gray-200">
+          <blockquote className="text-xl sm:text-3xl lg:text-4xl font-light italic leading-relaxed text-gray-200">
             As empresas morrem hoje não por fazer as coisas erradas, mas por fazerem bem as mesmas coisas durante tempo demais.
           </blockquote>
           

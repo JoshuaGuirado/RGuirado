@@ -61,32 +61,59 @@ export function LeadForm() {
   };
 
   return (
-    <section id="contato" className="py-32 bg-dark-800 relative" aria-labelledby="form-heading">
+    <section id="contato" className="py-14 md:py-28 bg-dark-800 relative" aria-labelledby="form-heading">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
           <div>
             <motion.h2 
               id="form-heading"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-black mb-8 leading-tight tracking-tight"
+              className="text-3xl sm:text-4xl md:text-5xl font-black mb-6 sm:mb-8 leading-tight tracking-tight"
             >
               O próximo ano da sua empresa começa <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">com uma conversa.</span>
             </motion.h2>
-            <p className="text-xl text-gray-400 mb-10 font-light leading-relaxed">
-              Agende um diagnóstico inicial com nosso time. Sem compromisso, sem apresentação institucional de uma hora. Você fala do seu negócio, nós apontamos onde estão os gargalos e o que pode ser feito.
-            </p>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <div className="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-400 font-bold" aria-hidden="true">
-                <span className="flex h-3 w-3 rounded-full bg-gold-500 animate-pulse" />
-                Diagnóstico Inicial Gratuito
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-base sm:text-lg text-gray-400 font-light leading-relaxed mb-8 sm:mb-12"
+            >
+              Preencha o formulário para agendar um diagnóstico inicial com Ricardo Guirado. Entendemos seu momento e apresentamos o caminho mais rápido para a escalabilidade.
+            </motion.p>
+            
+            <div className="hidden lg:block space-y-6 border-t border-white/5 pt-8">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-gold-500/10 flex items-center justify-center text-gold-500 font-bold border border-gold-500/20">
+                  1
+                </div>
+                <div>
+                  <h4 className="font-bold text-white text-sm">Sem compromisso</h4>
+                  <p className="text-xs text-gray-400">Conversa franca sobre os gargalos do seu negócio.</p>
+                </div>
               </div>
+
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-gold-500/10 flex items-center justify-center text-gold-500 font-bold border border-gold-500/20">
+                  2
+                </div>
+                <div>
+                  <h4 className="font-bold text-white text-sm">Plano Sob Medida</h4>
+                  <p className="text-xs text-gray-400">Proposta desenhada para o seu orçamento e objetivo.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-white/5">
+              <p className="text-xs text-gray-400 font-medium mb-3">Prefere conversar direto pelo WhatsApp?</p>
               <a 
-                href="https://wa.me/5544999665711?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20para%20o%20meu%20neg%C3%B3cio."
-                target="_blank"
+                href="https://wa.me/5544999665711?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20como%20escalar%20meu%20neg%C3%B3cio." 
+                target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-gold-500/30 hover:border-gold-400 bg-gold-500/10 hover:bg-gold-500/20 text-gold-400 font-sans font-black uppercase tracking-wider text-xs transition-all text-center"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-bold hover:bg-gold-500 hover:text-dark-900 transition-all duration-300"
               >
                 <MessageCircle className="w-4 h-4" />
                 Falar agora no WhatsApp
@@ -98,7 +125,7 @@ export function LeadForm() {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-dark-900 p-10 md:p-12 rounded-[3rem] border border-white/5 shadow-2xl relative"
+            className="bg-dark-900 p-6 sm:p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-white/5 shadow-2xl relative"
           >
             <form onSubmit={handleSubmit} className="space-y-8 relative z-10" aria-label="Formulário de contato">
               <div className="space-y-6">

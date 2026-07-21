@@ -37,7 +37,7 @@ export function Solution() {
   ];
 
   return (
-    <section id="metodo" className="py-24 relative overflow-hidden bg-dark-800 border-t border-white/5" aria-labelledby="solution-heading">
+    <section id="metodo" className="py-14 md:py-24 relative overflow-hidden bg-dark-800 border-t border-white/5" aria-labelledby="solution-heading">
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div className="absolute top-[20%] right-[5%] w-[500px] h-[500px] bg-gold-500/5 blur-[120px] rounded-full" />
       </div>
@@ -45,24 +45,24 @@ export function Solution() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Row 1: Header (Intro & Slogans) */}
-        <div className="grid lg:grid-cols-12 gap-16 items-start mb-16">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-12 lg:mb-16">
           {/* Left Side: Concept & Quote */}
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-4">
               <span className="text-xs font-bold text-gold-500 uppercase tracking-widest block">Nosso Método</span>
-              <h2 id="solution-heading" className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
+              <h2 id="solution-heading" className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
                 Um método - <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">ALTA</span>
               </h2>
             </div>
 
-            <p className="text-lg text-gray-400 leading-relaxed font-light">
+            <p className="text-base sm:text-lg text-gray-400 leading-relaxed font-light">
               Consultoria séria não é sobre entregar diagnóstico bonito. É sobre fazer a empresa andar — e continuar andando depois que a gente sai. Por isso todo projeto da R.Guirado percorre quatro etapas. Elas se chamam ALTA.
             </p>
 
             {/* Frase Yves Doz Integrada */}
-            <div className="border-l-2 border-gold-500 pl-6 italic text-gray-300 text-lg leading-relaxed">
+            <div className="border-l-2 border-gold-500 pl-4 sm:pl-6 italic text-gray-300 text-base sm:text-lg leading-relaxed">
               "As empresas morrem hoje não por fazer as coisas erradas, mas por fazerem bem as mesmas coisas durante tempo demais."
-              <span className="block text-sm font-black uppercase tracking-widest text-gold-500 mt-2 not-italic">— Yves Doz</span>
+              <span className="block text-xs sm:text-sm font-black uppercase tracking-widest text-gold-500 mt-2 not-italic">— Yves Doz</span>
             </div>
           </div>
 
@@ -74,7 +74,7 @@ export function Solution() {
               <p className="text-md text-gray-400 font-light leading-relaxed">
                 Toda consultoria quer ficar.
               </p>
-              <p className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 tracking-tight mt-1">
+              <p className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 tracking-tight mt-1">
                 A gente quer te dar alta.
               </p>
             </div>
@@ -107,7 +107,7 @@ export function Solution() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.6 }}
               whileHover={{ y: -5 }}
-              className="group bg-dark-900 border border-gold-500/10 hover:border-gold-500/30 rounded-[2rem] p-6 md:p-8 shadow-xl transition-all relative overflow-hidden flex flex-col justify-between min-h-[380px]"
+              className="group bg-dark-900 border border-gold-500/10 hover:border-gold-500/30 rounded-[1.8rem] md:rounded-[2rem] p-6 md:p-8 shadow-xl transition-all relative overflow-hidden flex flex-col justify-between min-h-0 md:min-h-[380px]"
             >
               {/* Decorative Background Letter */}
               <div className="absolute -top-6 -right-4 font-heading font-black text-[7rem] text-white/2 select-none group-hover:text-gold-500/5 transition-colors duration-500">
