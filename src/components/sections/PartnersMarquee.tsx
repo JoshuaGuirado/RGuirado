@@ -4,8 +4,7 @@ import { motion } from "motion/react";
 interface PartnerItem {
   id: string;
   name: string;
-  imageSrc?: string;
-  renderLogo?: () => React.ReactNode;
+  imageSrc: string;
 }
 
 const partners: PartnerItem[] = [
@@ -80,16 +79,9 @@ const partners: PartnerItem[] = [
     imageSrc: "/logos/facilitapass.png"
   },
   {
-    id: "colegioplatao",
+    id: "platao",
     name: "Colégio Platão",
-    renderLogo: () => (
-      <svg viewBox="0 0 220 80" className="h-10 sm:h-12 w-auto fill-current">
-        <path d="M10 25 L40 10 L70 25 L40 40 Z" stroke="currentColor" strokeWidth="5" fill="none" strokeLinejoin="round" />
-        <path d="M20 32 V52 C20 56 60 56 60 52 V32" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" />
-        <text x="82" y="36" fontWeight="700" fontSize="12" letterSpacing="2" fill="currentColor">COLÉGIO</text>
-        <text x="82" y="62" fontWeight="900" fontSize="28" letterSpacing="1" fill="currentColor">PLATÃO</text>
-      </svg>
-    )
+    imageSrc: "/logos/platao.png"
   }
 ];
 
@@ -117,17 +109,11 @@ export function PartnersMarquee() {
               whileHover={{ scale: 1.08 }}
               className="mx-6 sm:mx-10 md:mx-14 flex items-center justify-center cursor-default select-none transition-all duration-300"
             >
-              {partner.imageSrc ? (
-                <img 
-                  src={partner.imageSrc} 
-                  alt={partner.name}
-                  className="h-10 sm:h-12 md:h-14 w-auto max-w-[150px] sm:max-w-[200px] object-contain filter grayscale brightness-125 contrast-125 opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300 rounded-md mix-blend-screen"
-                />
-              ) : (
-                <div className="text-white/60 hover:text-white opacity-70 hover:opacity-100 transition-all duration-300 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
-                  {partner.renderLogo ? partner.renderLogo() : partner.name}
-                </div>
-              )}
+              <img 
+                src={partner.imageSrc} 
+                alt={partner.name}
+                className="h-9 sm:h-11 md:h-12 w-auto max-w-[150px] sm:max-w-[210px] object-contain opacity-70 hover:opacity-100 transition-all duration-300 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.08)]"
+              />
             </motion.div>
           ))}
         </motion.div>
