@@ -11,77 +11,77 @@ const partners: PartnerItem[] = [
   {
     id: "gelaboca",
     name: "Gela Boca Sorvetes",
-    imageSrc: "/logos/gelaboca.png"
+    imageSrc: "/logos/gelaboca-v2.png"
   },
   {
     id: "bless",
     name: "Bless Internet",
-    imageSrc: "/logos/bless.png"
+    imageSrc: "/logos/bless-v2.png"
   },
   {
     id: "marques",
     name: "Marques Adm. Judiciais",
-    imageSrc: "/logos/marques.png"
+    imageSrc: "/logos/marques-v2.png"
   },
   {
     id: "triangulo",
     name: "Consórcio Triângulo",
-    imageSrc: "/logos/triangulo.png"
+    imageSrc: "/logos/triangulo-v2.png"
   },
   {
     id: "titanium",
     name: "Grupo Titanium",
-    imageSrc: "/logos/titanium.png"
+    imageSrc: "/logos/titanium-v2.png"
   },
   {
     id: "dompizza",
     name: "Dom Pizza 18",
-    imageSrc: "/logos/dompizza.png"
+    imageSrc: "/logos/dompizza-v2.png"
   },
   {
     id: "lavathru",
     name: "Lava Thru",
-    imageSrc: "/logos/lavathru.png"
+    imageSrc: "/logos/lavathru-v2.png"
   },
   {
     id: "clzo",
     name: "CLZO Alvos Premium",
-    imageSrc: "/logos/clzo.png"
+    imageSrc: "/logos/clzo-v2.png"
   },
   {
     id: "rolls",
     name: "Rolls Food",
-    imageSrc: "/logos/rolls.png"
+    imageSrc: "/logos/rolls-v2.png"
   },
   {
     id: "etzme",
     name: "ETZME",
-    imageSrc: "/logos/etzme.png"
+    imageSrc: "/logos/etzme-v2.png"
   },
   {
     id: "mundodofutsal",
     name: "Mundo do Futsal",
-    imageSrc: "/logos/mundodofutsal.png"
+    imageSrc: "/logos/mundodofutsal-v2.png"
   },
   {
     id: "armazem",
     name: "Armazém da Limpeza",
-    imageSrc: "/logos/armazem.png"
+    imageSrc: "/logos/armazem-v2.png"
   },
   {
     id: "culturasteam",
     name: "Cultura Steam",
-    imageSrc: "/logos/culturasteam.png"
+    imageSrc: "/logos/culturasteam-v2.png"
   },
   {
     id: "facilitapass",
     name: "Facilita Pass",
-    imageSrc: "/logos/facilitapass.png"
+    imageSrc: "/logos/facilitapass-v2.png"
   },
   {
     id: "platao",
     name: "Colégio Platão",
-    imageSrc: "/logos/platao.png"
+    imageSrc: "/logos/platao-v2.png"
   }
 ];
 
