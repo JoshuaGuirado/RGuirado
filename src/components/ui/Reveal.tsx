@@ -5,10 +5,10 @@ import { EASE_OUT_EXPO } from "../../lib/constants";
 type Direction = "up" | "down" | "left" | "right" | "none";
 
 const offsets: Record<Direction, { x?: number; y?: number }> = {
-  up: { y: 40 },
-  down: { y: -40 },
-  left: { x: 48 },
-  right: { x: -48 },
+  up: { y: 32 },
+  down: { y: -32 },
+  left: { x: 40 },
+  right: { x: -40 },
   none: {},
 };
 
@@ -18,18 +18,20 @@ interface RevealProps {
   delay?: number;
   duration?: number;
   direction?: Direction;
-  blur?: boolean;
   as?: "div" | "section" | "li" | "span" | "p";
 }
 
+// Only opacity and transform are animated: both stay on the compositor,
+// unlike filter: blur(), which forces a repaint on every frame.
+
 /** Fades and slides its children in the first time they scroll into view. */
-export function Reveal({ children, className, delay = 0, duration = 0.9, direction = "up", blur = true, as = "div" }: RevealProps) {
+export function Reveal({ children, className, delay = 0, duration = 0.9, direction = "up", as = "div" }: RevealProps) {
   const Component = motion[as];
   return (
     <Component
       className={className}
-      initial={{ opacity: 0, ...offsets[direction], filter: blur ? "blur(8px)" : "blur(0px)" }}
-      whileInView={{ opacity: 1, x: 0, y: 0, filter: "blur(0px)" }}
+      initial={{ opacity: 0, ...offsets[direction] }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: "0px 0px -12% 0px" }}
       transition={{ duration, delay, ease: EASE_OUT_EXPO }}
     >
@@ -44,14 +46,15 @@ const staggerParent: Variants = {
 };
 
 export const staggerChild: Variants = {
-  hidden: { opacity: 0, y: 48, filter: "blur(8px)" },
-  show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.9, ease: EASE_OUT_EXPO } },
+  hidden: { opacity: 0, y: 36 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE_OUT_EXPO } },
 };
 
 /** Reveals each direct `StaggerItem` child one after the other. */
-export function Stagger({ children, className, stagger = 0.12 }: { children: React.ReactNode; className?: string; stagger?: number }) {
+export function Stagger({ children, className, stagger = 0.12, as = "div" }: { children: React.ReactNode; className?: string; stagger?: number; as?: "div" | "ol" | "ul" | "dl" }) {
+  const Component = motion[as];
   return (
-    <motion.div
+    <Component
       className={className}
       variants={staggerParent}
       custom={stagger}
@@ -60,14 +63,15 @@ export function Stagger({ children, className, stagger = 0.12 }: { children: Rea
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
     >
       {children}
-    </motion.div>
+    </Component>
   );
 }
 
-export function StaggerItem({ children, className }: { children: React.ReactNode; className?: string }) {
+export function StaggerItem({ children, className, as = "div" }: { children: React.ReactNode; className?: string; as?: "div" | "li" }) {
+  const Component = motion[as];
   return (
-    <motion.div className={className} variants={staggerChild}>
+    <Component className={className} variants={staggerChild}>
       {children}
-    </motion.div>
+    </Component>
   );
 }

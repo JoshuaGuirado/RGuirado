@@ -11,6 +11,7 @@ import { Offer } from "./sections/Offer";
 import { FAQ } from "./sections/FAQ";
 import { LeadForm } from "./sections/LeadForm";
 import { Footer } from "./sections/Footer";
+import { TextBand } from "./ui/TextBand";
 import { consumeQueuedScroll } from "../lib/scroll";
 
 // Sections are small, so they ship in one chunk: this keeps in-page navigation
@@ -28,6 +29,7 @@ export default function Landing() {
         <Solution />
         <Quote />
         <SocialProof />
+        <TextBand words={["Franchising", "Gestão Estratégica", "Performance Comportamental"]} />
         <About />
         <Offer />
         <FAQ />

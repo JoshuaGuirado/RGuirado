@@ -15,7 +15,7 @@ export default defineConfig({
       output: {
         // Keep framework code in its own long-lived cached chunk.
         manualChunks: {
-          vendor: ['react', 'react-dom', 'react-dom/client', 'scheduler', 'motion', 'framer-motion', 'motion-dom', 'lenis'],
+          vendor: ['react', 'react-dom', 'react-dom/client', 'scheduler', 'motion', 'framer-motion', 'motion-dom'],
         },
       },
     },

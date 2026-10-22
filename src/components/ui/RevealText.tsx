@@ -42,10 +42,10 @@ export function RevealText({ lines, as = "h2", className, id, delay = 0, immedia
             return (
               <span key={i} className="inline-block overflow-hidden pb-[0.12em] -mb-[0.12em] align-bottom">
                 <motion.span
-                  className={`inline-block will-change-transform ${line.className ?? ""}`}
+                  className={`inline-block ${line.className ?? ""}`}
                   variants={{
-                    hidden: { y: "110%", rotate: 4 },
-                    show: { y: "0%", rotate: 0, transition: { duration: 0.9, ease: EASE_OUT_EXPO } },
+                    hidden: { y: "110%" },
+                    show: { y: "0%", transition: { duration: 0.9, ease: EASE_OUT_EXPO } },
                   }}
                 >
                   {word}

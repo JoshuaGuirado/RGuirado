@@ -4,37 +4,31 @@ import { motion, useScroll, useTransform, type MotionValue } from "motion/react"
 const quote = "As empresas morrem hoje não por fazer as coisas erradas, mas por fazerem bem as mesmas coisas durante tempo demais.";
 
 function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
-  const opacity = useTransform(progress, range, [0.12, 1]);
-  const y = useTransform(progress, range, [6, 0]);
+  const opacity = useTransform(progress, range, [0.18, 1]);
   return (
-    <motion.span style={{ opacity, y }} className="inline-block">
+    <motion.span style={{ opacity }} className="inline-block">
       {children}&nbsp;
     </motion.span>
   );
 }
 
-/** Quote whose words light up one by one, tied to scroll position. */
+/** Full-bleed gold interlude whose words darken one by one as it scrolls past. */
 export function Quote() {
   const ref = useRef<HTMLQuoteElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 45%"] });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 50%"] });
   const words = quote.split(" ");
-  const markScale = useTransform(scrollYProgress, [0, 1], [0.6, 1.1]);
-  const markRotate = useTransform(scrollYProgress, [0, 1], [-20, 0]);
 
   return (
-    <section className="relative overflow-hidden border-y border-white/[0.06] bg-dark-900 py-28 md:py-40" aria-label="Citação de Yves Doz">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(243_198_17/0.06),transparent_65%)]" aria-hidden="true" />
+    <section className="relative overflow-hidden bg-gold-500 py-24 text-dark-950 md:py-36" aria-label="Citação de Yves Doz">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6">
+        <div className="mb-12 flex items-center gap-5 text-[11px] font-bold uppercase tracking-[0.24em] md:mb-16">
+          <span>Uma frase que guia o nosso trabalho</span>
+          <span className="relative h-px flex-1 bg-dark-950/20" aria-hidden="true">
+            <motion.span className="absolute inset-0 origin-left bg-dark-950" style={{ scaleX: scrollYProgress }} />
+          </span>
+        </div>
 
-      <div className="relative mx-auto max-w-5xl px-5 text-center sm:px-6">
-        <motion.span
-          aria-hidden="true"
-          style={{ scale: markScale, rotate: markRotate }}
-          className="mx-auto mb-4 block h-16 font-serif text-[8rem] leading-none text-gold-500/40"
-        >
-          “
-        </motion.span>
-
-        <blockquote ref={ref} className="text-[1.7rem] font-light leading-[1.35] tracking-tight text-white sm:text-4xl lg:text-5xl">
+        <blockquote ref={ref} className="text-[1.75rem] font-bold leading-[1.18] tracking-[-0.025em] sm:text-4xl lg:text-[3.4rem]">
           <p className="sr-only">{quote}</p>
           <p aria-hidden="true">
             {words.map((w, i) => (
@@ -45,9 +39,15 @@ export function Quote() {
           </p>
         </blockquote>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="mt-10 space-y-4">
-          <cite className="block text-sm font-extrabold uppercase not-italic tracking-[0.3em] text-gold-500">— Yves Doz</cite>
-          <p className="text-base font-medium text-gray-400">É exatamente contra isso que trabalhamos.</p>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mt-12 flex flex-col gap-2 border-t border-dark-950/20 pt-6 sm:flex-row sm:items-baseline sm:justify-between"
+        >
+          <cite className="text-sm font-black uppercase not-italic tracking-[0.24em]">Yves Doz</cite>
+          <p className="text-base font-semibold">É exatamente contra isso que trabalhamos.</p>
         </motion.div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "motion/react";
-import { Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { PauseGlyph, PlayGlyph, SoundGlyph } from "./Icons";
 
 interface VideoCardProps {
   src: string;
@@ -61,7 +61,7 @@ export function VideoCard({ src, poster, label, className = "", mode = "player",
   const showOverlay = mode === "player" && !playing;
 
   return (
-    <div className={`group relative aspect-[9/16] overflow-hidden rounded-[1.75rem] border border-white/10 bg-dark-950 shadow-2xl shadow-black/50 ${className}`}>
+    <div className={`group relative aspect-[9/16] overflow-hidden rounded-[6px] bg-dark-900 ${className}`}>
       <video
         ref={ref}
         src={src}
@@ -97,9 +97,8 @@ export function VideoCard({ src, poster, label, className = "", mode = "player",
             transition={{ duration: 0.4 }}
             className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center"
           >
-            <span className="relative flex h-20 w-20 items-center justify-center rounded-full bg-gold-500 text-dark-900 shadow-[0_0_60px_rgb(243_198_17/0.5)]">
-              <span className="absolute inset-0 animate-ping rounded-full bg-gold-500/40" />
-              <Play className="relative ml-1 h-8 w-8 fill-current" aria-hidden="true" />
+            <span className="flex h-[72px] w-[72px] items-center justify-center rounded-full border border-white/60 text-white transition-colors duration-300 group-hover:border-gold-500 group-hover:bg-gold-500 group-hover:text-dark-950">
+              <PlayGlyph className="ml-1 h-5 w-5" />
             </span>
           </motion.div>
         )}
@@ -110,17 +109,17 @@ export function VideoCard({ src, poster, label, className = "", mode = "player",
       {/* Sound / play state chip. */}
       <div className="pointer-events-none absolute right-4 top-4 z-20 flex gap-2 [&>button]:pointer-events-auto">
         {mode === "player" && playing && (
-          <span className="pointer-events-none flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-dark-950/70 text-white backdrop-blur-md">
-            <Pause className="h-4 w-4" aria-hidden="true" />
+          <span className="pointer-events-none flex h-10 w-10 items-center justify-center rounded-full bg-dark-950/80 text-white">
+            <PauseGlyph className="h-3 w-3" />
           </span>
         )}
         <button
           type="button"
           onClick={mode === "ambient" ? (e) => (e.stopPropagation(), toggle()) : toggleMute}
-          className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-dark-950/70 text-white backdrop-blur-md transition-colors hover:bg-gold-500 hover:text-dark-900"
+          className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-dark-950/80 text-white transition-colors hover:bg-gold-500 hover:text-dark-950"
           aria-label={muted ? "Ativar som" : "Silenciar"}
         >
-          {muted ? <VolumeX className="h-4 w-4" aria-hidden="true" /> : <Volume2 className="h-4 w-4" aria-hidden="true" />}
+          <SoundGlyph muted={muted} />
         </button>
       </div>
 

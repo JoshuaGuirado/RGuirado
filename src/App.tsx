@@ -3,7 +3,7 @@ import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import Landing from "./components/Landing";
 import { PillarPage } from "./components/sections/PillarPage";
 import { WhatsAppButton } from "./components/ui/WhatsAppButton";
-import { useSmoothScroll, scrollToTop } from "./lib/scroll";
+import { scrollToTop } from "./lib/scroll";
 import { EASE_OUT_EXPO } from "./lib/constants";
 
 type Route = "landing" | "franchising" | "gestao" | "performance";
@@ -18,7 +18,6 @@ const routeFromHash = (): Route => {
 
 export default function App() {
   const [route, setRoute] = useState<Route>(routeFromHash);
-  useSmoothScroll();
 
   useEffect(() => {
     const handleHashChange = () => {

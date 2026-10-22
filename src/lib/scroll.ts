@@ -1,47 +1,21 @@
-import Lenis from "lenis";
-import { useEffect } from "react";
+// Native scrolling only: it runs on the compositor thread, so the page keeps
+// scrolling smoothly even while videos decode or React is busy.
 
-let lenis: Lenis | null = null;
+const NAV_OFFSET = 72;
 
-const NAV_OFFSET = -72;
-
-/** Starts Lenis smooth scrolling for the lifetime of the component that calls it. */
-export function useSmoothScroll() {
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1 });
-    let frame = requestAnimationFrame(function raf(time) {
-      lenis?.raf(time);
-      frame = requestAnimationFrame(raf);
-    });
-
-    return () => {
-      cancelAnimationFrame(frame);
-      lenis?.destroy();
-      lenis = null;
-    };
-  }, []);
-}
+const behavior = (): ScrollBehavior =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 
 /** Smoothly scrolls to the element with the given id, accounting for the fixed navbar. */
 export function scrollToId(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
-  if (lenis) {
-    lenis.scrollTo(el, { offset: NAV_OFFSET, duration: 1.4 });
-  } else {
-    const top = el.getBoundingClientRect().top + window.scrollY + NAV_OFFSET;
-    window.scrollTo({ top, behavior: "smooth" });
-  }
+  const top = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+  window.scrollTo({ top, behavior: behavior() });
 }
 
 export function scrollToTop(immediate = false) {
-  if (lenis) {
-    lenis.scrollTo(0, { immediate, duration: 1.2 });
-  } else {
-    window.scrollTo({ top: 0, behavior: immediate ? "instant" : "smooth" });
-  }
+  window.scrollTo({ top: 0, behavior: immediate ? "instant" : behavior() });
 }
 
 export const scrollToForm = () => scrollToId("contato");

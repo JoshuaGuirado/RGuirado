@@ -1,6 +1,5 @@
 import React from "react";
-import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { Arrow } from "./Icons";
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -8,38 +7,37 @@ interface ButtonProps {
   onClick?: () => void;
   type?: "button" | "submit";
   disabled?: boolean;
-  variant?: "primary" | "glass";
+  /** "primary": gold. "outline": hairline border. "dark": navy, for light sections. */
+  variant?: "primary" | "outline" | "dark";
   icon?: boolean;
   "aria-label"?: string;
 }
 
 const variants = {
-  primary:
-    "bg-gold-500 text-dark-900 shadow-[0_10px_40px_-10px_rgb(243_198_17/0.6)] hover:bg-gold-400 hover:shadow-[0_14px_50px_-8px_rgb(243_198_17/0.75)]",
-  glass:
-    "border border-white/15 bg-white/[0.04] text-white backdrop-blur-md hover:border-gold-500/50 hover:bg-white/[0.08]",
+  primary: { base: "bg-gold-500 text-dark-950", fill: "bg-white", hover: "" },
+  outline: { base: "border border-white/25 text-white", fill: "bg-white", hover: "group-hover:text-dark-950" },
+  dark: { base: "bg-dark-950 text-white", fill: "bg-gold-500", hover: "group-hover:text-dark-950" },
 };
 
-/** Pill button with a light sweep on hover. `variant="glass"` is the secondary style. */
+/** Squared button whose hover state is a fill that wipes in from the left. */
 export function Button({ children, className = "", onClick, type = "button", disabled = false, variant = "primary", icon = true, "aria-label": ariaLabel }: ButtonProps) {
+  const v = variants[variant];
   return (
-    <motion.button
+    <button
       type={type}
       onClick={onClick}
       disabled={disabled}
       aria-label={ariaLabel}
-      whileHover={disabled ? undefined : { y: -2 }}
-      whileTap={disabled ? undefined : { scale: 0.97 }}
-      className={`group relative inline-flex cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full px-8 py-4 text-xs font-extrabold uppercase tracking-[0.14em] transition-[background-color,box-shadow,border-color] duration-300 ${variants[variant]} ${disabled ? "cursor-not-allowed opacity-60" : ""} ${className}`}
+      className={`group relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-[3px] px-7 py-4 text-[11px] font-bold uppercase tracking-[0.18em] transition-transform duration-200 active:scale-[0.98] ${v.base} ${disabled ? "cursor-not-allowed opacity-60" : ""} ${className}`}
     >
-      <span className="relative z-10 flex items-center gap-2">
-        {children}
-        {icon && <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />}
-      </span>
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 left-0 w-full -translate-x-[120%] bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-shimmer"
+        className={`absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 ${v.fill} ${disabled ? "hidden" : ""}`}
       />
-    </motion.button>
+      <span className={`relative flex items-center gap-3 transition-colors duration-300 ${v.hover}`}>
+        {children}
+        {icon && <Arrow className="h-2.5 w-5 shrink-0 transition-transform duration-500 group-hover:translate-x-1" />}
+      </span>
+    </button>
   );
 }

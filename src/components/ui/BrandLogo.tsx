@@ -36,44 +36,13 @@ export function Logo({ className = "", showText = true }: { className?: string; 
   );
 }
 
-export function LogoFranchising({ className = "" }: { className?: string }) {
+/** Main logo followed by the name of a pillar, separated by a hairline. */
+export function LogoPillar({ label, className = "" }: { label: string; className?: string }) {
   return (
-    <div className={`flex flex-col items-start select-none ${className}`}>
-      <div className="flex items-center gap-2">
-        <LogoSymbol className="w-8 h-8 text-[#f3c611]" />
-        <span className="font-sans font-black text-2xl text-white lowercase tracking-tighter">guirado</span>
-      </div>
-      <span className="font-sans font-black text-[9px] text-[#f3c611] tracking-[0.24em] uppercase self-end mt-1 mr-0.5">
-        franchising
-      </span>
-    </div>
-  );
-}
-
-export function LogoGestao({ className = "" }: { className?: string }) {
-  return (
-    <div className={`flex flex-col items-start select-none ${className}`}>
-      <div className="flex items-center gap-2">
-        <LogoSymbol className="w-8 h-8 text-[#f3c611]" />
-        <span className="font-sans font-black text-2xl text-white lowercase tracking-tighter">guirado</span>
-      </div>
-      <span className="font-sans font-black text-[7px] text-[#f3c611] tracking-[0.16em] uppercase self-end mt-1 mr-0.5">
-        gestão estratégica
-      </span>
-    </div>
-  );
-}
-
-export function LogoPerformance({ className = "" }: { className?: string }) {
-  return (
-    <div className={`flex flex-col items-start select-none ${className}`}>
-      <div className="flex items-center gap-2">
-        <LogoSymbol className="w-8 h-8 text-[#f3c611]" />
-        <span className="font-sans font-black text-2xl text-white lowercase tracking-tighter">guirado</span>
-      </div>
-      <span className="font-sans font-black text-[6.5px] text-[#f3c611] tracking-[0.11em] uppercase self-end mt-1 mr-0.5">
-        performance comportamental
-      </span>
+    <div className={`flex items-center gap-3 select-none sm:gap-4 ${className}`}>
+      <Logo />
+      <span className="hidden h-8 w-px bg-white/20 sm:block" aria-hidden="true" />
+      <span className="hidden text-[11px] font-bold uppercase tracking-[0.2em] text-gold-500 sm:block">{label}</span>
     </div>
   );
 }

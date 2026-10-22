@@ -1,8 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
-import { Check } from "lucide-react";
 import { Button } from "../ui/Button";
-import { SectionLabel } from "../ui/SectionLabel";
+import { SectionDivider } from "../ui/SectionDivider";
 import { RevealText } from "../ui/RevealText";
 import { Reveal, Stagger, StaggerItem } from "../ui/Reveal";
 import { VideoCard } from "../ui/VideoCard";
@@ -63,14 +62,12 @@ function CaseRow({ c, index }: { c: (typeof cases)[number]; index: number }) {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center center"] });
   const flip = index % 2 === 1;
   // The video swings into place as the row scrolls up to the middle of the screen.
-  const scale = useTransform(scrollYProgress, [0, 1], [0.82, 1]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [flip ? 8 : -8, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.86, 1]);
   const y = useTransform(scrollYProgress, [0, 1], [80, 0]);
 
   return (
     <div ref={ref} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
-      <motion.div style={{ scale, rotate, y }} className={`relative mx-auto w-full max-w-[340px] ${flip ? "lg:order-2" : ""}`}>
-        <div className="absolute -inset-8 -z-10 rounded-full bg-gold-500/10 blur-[70px]" aria-hidden="true" />
+      <motion.div style={{ scale, y }} className={`relative mx-auto w-full max-w-[340px] ${flip ? "lg:order-2" : ""}`}>
         <VideoCard src={c.video} poster={c.poster} label={`Depoimento de ${c.person}, ${c.company}`}>
           <p className="text-base font-black text-white">{c.person}</p>
           <p className="text-[11px] font-semibold text-gray-300">{c.role}</p>
@@ -79,20 +76,20 @@ function CaseRow({ c, index }: { c: (typeof cases)[number]; index: number }) {
 
       <div className={flip ? "lg:order-1" : ""}>
         <Reveal>
-          <div className="mb-5 flex flex-wrap items-center gap-3">
-            <span className="rounded-full bg-gold-500 px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-dark-900">Case 0{index + 1}</span>
-            <span className="rounded-full border border-gold-500/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gold-400">{c.pillar}</span>
-          </div>
+          <p className="mb-5 flex flex-wrap items-center gap-3 text-[11px] font-bold uppercase tracking-[0.2em]">
+            <span className="text-gold-500">Case 0{index + 1}</span>
+            <span className="h-px w-8 bg-white/25" aria-hidden="true" />
+            <span className="text-gray-400">{c.pillar}</span>
+          </p>
           <h3 className="mb-2 text-3xl font-black tracking-tight text-white sm:text-4xl">{c.company}</h3>
           <p className="mb-6 text-sm font-semibold uppercase tracking-[0.14em] text-gray-500">{c.segment}</p>
-          <p className="mb-8 text-base font-light leading-relaxed text-gray-300 sm:text-lg">{c.summary}</p>
+          <p className="mb-8 text-base leading-relaxed text-gray-300 sm:text-lg">{c.summary}</p>
         </Reveal>
-        <Stagger className="grid gap-3 sm:grid-cols-2" stagger={0.08}>
-          {c.results.map((r) => (
-            <StaggerItem key={r} className="flex items-start gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4">
-              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold-500/15">
-                <Check className="h-3 w-3 text-gold-400" aria-hidden="true" />
-              </span>
+        <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">O que mudou</p>
+        <Stagger as="ol" className="grid border-t border-white/15 sm:grid-cols-2 sm:gap-x-8" stagger={0.08}>
+          {c.results.map((r, i) => (
+            <StaggerItem as="li" key={r} className="flex items-baseline gap-4 border-b border-white/10 py-4">
+              <span className="text-[11px] font-black tabular-nums text-gold-500">{String(i + 1).padStart(2, "0")}</span>
               <span className="text-sm leading-snug text-gray-200">{r}</span>
             </StaggerItem>
           ))}
@@ -104,21 +101,17 @@ function CaseRow({ c, index }: { c: (typeof cases)[number]; index: number }) {
 
 export function SocialProof() {
   return (
-    <section id="cases" className="relative overflow-hidden bg-dark-950 py-24 md:py-36" aria-labelledby="cases-heading">
-      <div className="pointer-events-none absolute -left-60 top-1/3 h-[600px] w-[600px] rounded-full bg-gold-500/[0.06] blur-[150px]" aria-hidden="true" />
-
+    <section id="cases" className="relative overflow-hidden bg-dark-950 pb-24 pt-20 md:pb-36 md:pt-28" aria-labelledby="cases-heading">
       <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
-        <div className="mx-auto mb-16 max-w-3xl text-center md:mb-24">
-          <SectionLabel center className="mb-6">
-            Cases de sucesso
-          </SectionLabel>
+        <SectionDivider index="03" label="Cases" note="Depoimentos em vídeo" className="mb-14 md:mb-20" />
+        <div className="mb-16 grid gap-8 md:mb-24 lg:grid-cols-[1.2fr_1fr] lg:items-end">
           <RevealText
             id="cases-heading"
-            className="mb-6 text-4xl font-black leading-[1.05] tracking-[-0.03em] sm:text-5xl lg:text-6xl"
-            lines={[{ text: "Quem viveu o método" }, { text: "conta como foi.", className: "text-gold-gradient" }]}
+            className="text-4xl font-black leading-[1.03] tracking-[-0.03em] sm:text-5xl lg:text-6xl"
+            lines={[{ text: "Quem viveu o método" }, { text: "conta como foi.", className: "text-gold-500" }]}
           />
           <Reveal delay={0.15}>
-            <p className="text-base font-light leading-relaxed text-gray-400 sm:text-lg">Sem roteiro de vendas: empresários e líderes falando, com as próprias palavras, do que mudou depois da R.Guirado.</p>
+            <p className="max-w-md text-base leading-relaxed text-gray-400 sm:text-lg lg:ml-auto">Sem roteiro de vendas: empresários e líderes falando, com as próprias palavras, do que mudou depois da R.Guirado.</p>
           </Reveal>
         </div>
 
@@ -130,20 +123,19 @@ export function SocialProof() {
 
         {/* Written testimonials */}
         <div className="mt-28 md:mt-40">
-          <Reveal className="mb-10 text-center">
-            <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-gray-400">
-              E o que mais dizem <span className="text-gold-500">nossos parceiros</span>
-            </h3>
+          <Reveal className="mb-10 flex items-center gap-6">
+            <h3 className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">E o que mais dizem nossos parceiros</h3>
+            <span className="h-px flex-1 bg-white/10" aria-hidden="true" />
           </Reveal>
-          <Stagger className="grid gap-5 md:grid-cols-3" stagger={0.12}>
-            {testimonials.map((t) => (
-              <StaggerItem key={t.company} className="h-full">
-                <figure className="flex h-full flex-col rounded-[1.75rem] border border-white/[0.07] bg-dark-900/70 p-7 transition-colors duration-500 hover:border-gold-500/30 sm:p-8">
-                  <img src={`/logos/${t.logo}.svg`} alt={t.company} loading="lazy" className="mb-6 h-12 w-auto max-w-[140px] self-start object-contain object-left opacity-80" />
-                  <blockquote className="mb-8 text-[15px] leading-relaxed text-gray-300">“{t.quote}”</blockquote>
-                  <figcaption className="mt-auto border-t border-white/[0.07] pt-5">
+          <Stagger className="grid md:grid-cols-3" stagger={0.12}>
+            {testimonials.map((t, i) => (
+              <StaggerItem key={t.company} className={`h-full border-white/10 py-8 md:px-8 md:py-2 ${i > 0 ? "border-t md:border-l md:border-t-0" : "md:pl-0"}`}>
+                <figure className="flex h-full flex-col">
+                  <img src={`/logos/${t.logo}.svg`} alt={t.company} loading="lazy" className="mb-7 h-11 w-auto max-w-[130px] self-start object-contain object-left opacity-70" />
+                  <blockquote className="mb-8 text-[17px] font-medium leading-relaxed text-white">“{t.quote}”</blockquote>
+                  <figcaption className="mt-auto">
                     <p className="text-sm font-bold text-white">{t.author}</p>
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-gold-500/80">{t.company}</p>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-gold-500">{t.company}</p>
                   </figcaption>
                 </figure>
               </StaggerItem>
@@ -151,7 +143,7 @@ export function SocialProof() {
           </Stagger>
         </div>
 
-        <Reveal className="mt-16 text-center">
+        <Reveal className="mt-16">
           <Button onClick={scrollToForm} aria-label="Quero ser o próximo case">
             Quero ser o próximo case
           </Button>
