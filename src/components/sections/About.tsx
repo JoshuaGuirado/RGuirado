@@ -1,151 +1,161 @@
-import React from "react";
-import { motion } from "motion/react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { Shield, Cpu, Linkedin, Instagram } from "lucide-react";
 import { Button } from "../ui/Button";
+import { SectionLabel } from "../ui/SectionLabel";
+import { RevealText } from "../ui/RevealText";
+import { Reveal } from "../ui/Reveal";
+import { VideoCard } from "../ui/VideoCard";
+import { scrollToForm } from "../../lib/scroll";
+import { EASE_OUT_EXPO } from "../../lib/constants";
 
-export function About() {
-  const scrollToForm = () => document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+const team = [
+  {
+    name: "Ricardo Guirado",
+    role: "Fundador e consultor principal",
+    image: "/team/ricardo.webp",
+    width: 640,
+    height: 958,
+    linkedin: "https://www.linkedin.com/in/ricardoguiradofranquias/",
+    instagram: "https://www.instagram.com/ricardoguirado_/",
+  },
+  {
+    name: "Gabriel Krüger",
+    role: "Gestor de projetos",
+    image: "/team/gabriel.webp",
+    width: 383,
+    height: 738,
+    linkedin: "https://www.linkedin.com/in/gabriel-kruger/",
+    instagram: "https://www.instagram.com/g.kruger97/",
+  },
+  {
+    name: "Joshua Guirado",
+    role: "Consultor de processos",
+    image: "/team/joshua.webp",
+    width: 640,
+    height: 961,
+    linkedin: "https://www.linkedin.com/in/joshua-guirado-681108353/",
+    instagram: "https://www.instagram.com/joshuafguirado/",
+  },
+];
 
-  const team = [
-    { 
-      name: "Ricardo Guirado", 
-      role: "Dono e Consultor Principal", 
-      image: "/ricardo-new.jpg",
-      position: "object-[center_15%]",
-      linkedin: "https://www.linkedin.com/in/ricardoguiradofranquias/",
-      instagram: "https://www.instagram.com/ricardoguirado_/"
-    },
-    { 
-      name: "Gabriel Krüger", 
-      role: "Gestor de Projetos", 
-      image: "/gabriel.png",
-      position: "object-[center_15%]",
-      linkedin: "https://www.linkedin.com/in/gabriel-kruger/",
-      instagram: "https://www.instagram.com/g.kruger97/"
-    },
-    { 
-      name: "Joshua Guirado", 
-      role: "Consultor de Processos", 
-      image: "/joshua.png",
-      position: "object-[center_15%]",
-      linkedin: "https://www.linkedin.com/in/joshua-guirado-681108353/",
-      instagram: "https://www.instagram.com/joshuafguirado/"
-    }
-  ];
+const differentiators = [
+  { Icon: Shield, title: "Sem copiar e colar", desc: "Nossa metodologia parte da sua realidade, não de templates genéricos." },
+  { Icon: Cpu, title: "IA aplicada à gestão", desc: "Automações e agentes de IA personalizados integrados ao seu fluxo real." },
+];
+
+function TeamCard({ member, index }: { member: (typeof team)[number]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
 
   return (
-    <section id="sobre" className="py-14 md:py-24 bg-dark-900 relative overflow-hidden border-t border-white/5" aria-labelledby="about-heading">
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] bg-gold-500/5 blur-[120px] rounded-full" />
+    <motion.div
+      ref={ref}
+      initial={{ clipPath: "inset(100% 0% 0% 0% round 28px)" }}
+      whileInView={{ clipPath: "inset(0% 0% 0% 0% round 28px)" }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+      transition={{ duration: 1.3, delay: index * 0.12, ease: EASE_OUT_EXPO }}
+      className="group relative overflow-hidden rounded-[1.75rem] border border-white/[0.07] bg-dark-800"
+    >
+      <div className="relative aspect-square overflow-hidden sm:aspect-[4/5]">
+        <motion.img
+          src={member.image}
+          alt={`Foto de ${member.name}`}
+          width={member.width}
+          height={member.height}
+          loading="lazy"
+          decoding="async"
+          style={{ y: imageY }}
+          className="absolute left-0 top-[-8%] h-[116%] w-full object-cover object-top grayscale transition-[filter] duration-700 group-hover:grayscale-0"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/10 to-transparent" />
       </div>
-      
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-          
-          {/* Left Column: Story */}
-          <div className="lg:col-span-6 space-y-6 sm:space-y-8">
-            <div className="space-y-4">
-              <span className="text-xs font-bold text-gold-500 uppercase tracking-widest block">Quem Somos</span>
-              <h2 id="about-heading" className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
-                Consultoria de <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">dono para dono.</span>
-              </h2>
-            </div>
-            
-            <p className="text-base sm:text-lg text-gray-300 font-light leading-relaxed border-l-2 border-gold-500/30 pl-4 sm:pl-6">
-              Crescer não é fazer mais do mesmo com mais afinco. É reinventar o que já não serve — antes que o mercado faça isso por você.
-            </p>
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
+        <div>
+          <h4 className="text-base font-black leading-tight text-white">{member.name}</h4>
+          <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-gold-400">{member.role}</p>
+        </div>
+        <div className="flex gap-1.5">
+          <a href={member.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`LinkedIn de ${member.name}`} className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-dark-950/60 text-gray-300 backdrop-blur transition-colors hover:bg-gold-500 hover:text-dark-900">
+            <Linkedin className="h-4 w-4" />
+          </a>
+          <a href={member.instagram} target="_blank" rel="noopener noreferrer" aria-label={`Instagram de ${member.name}`} className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-dark-950/60 text-gray-300 backdrop-blur transition-colors hover:bg-gold-500 hover:text-dark-900">
+            <Instagram className="h-4 w-4" />
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
-            <div className="space-y-6 text-md text-gray-400 leading-relaxed font-light">
+export function About() {
+  return (
+    <section id="sobre" className="relative overflow-hidden bg-dark-900 py-24 md:py-36" aria-labelledby="about-heading">
+      <div className="pointer-events-none absolute bottom-[10%] right-[5%] h-[500px] w-[500px] rounded-full bg-gold-500/[0.05] blur-[140px]" aria-hidden="true" />
+
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
+        <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+          <div>
+            <SectionLabel className="mb-6">Quem somos</SectionLabel>
+            <RevealText
+              id="about-heading"
+              className="mb-8 text-4xl font-black leading-[1.05] tracking-[-0.03em] sm:text-5xl lg:text-6xl"
+              lines={[{ text: "Consultoria de" }, { text: "dono para dono.", className: "text-gold-gradient" }]}
+            />
+            <Reveal>
+              <p className="mb-8 border-l-2 border-gold-500/50 pl-5 text-lg font-light leading-relaxed text-gray-200 sm:text-xl">
+                Crescer não é fazer mais do mesmo com mais afinco. É reinventar o que já não serve — antes que o mercado faça isso por você.
+              </p>
+            </Reveal>
+            <Reveal delay={0.1} className="mb-10 space-y-5 text-[15px] font-light leading-relaxed text-gray-400 sm:text-base">
               <p>
                 Desde 2001, Ricardo Guirado e sua equipe acompanham empresários brasileiros exatamente no ponto de virada: quando o negócio pede um novo patamar e os métodos que trouxeram até aqui não levam adiante.
               </p>
               <p>
-                São mais de 25 anos estruturando gestão, formatando redes de franquias e desenvolvendo lideranças em empresas de pequeno e médio porte — operando em escala nacional a partir de Maringá/PR.
+                São mais de 25 anos estruturando gestão, formatando redes de franquias e desenvolvendo lideranças em pequenas e médias empresas — em escala nacional, a partir de Maringá/PR.
               </p>
-            </div>
+            </Reveal>
 
-            {/* Differentiator Badges */}
-            <div className="grid sm:grid-cols-2 gap-6 pt-2">
-              <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-lg bg-gold-500/10 flex items-center justify-center shrink-0 border border-gold-500/20 mt-1">
-                  <Shield className="w-4 h-4 text-gold-500" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-white text-sm">Sem copiar e colar</h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">Nossa metodologia parte da sua realidade, não de templates genéricos.</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-lg bg-gold-500/10 flex items-center justify-center shrink-0 border border-gold-500/20 mt-1">
-                  <Cpu className="w-4 h-4 text-gold-500" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-white text-sm">IA Aplicada à Gestão</h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">Automações e agentes de IA personalizados integrados ao seu fluxo real.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Right Column: Compact Team Grid */}
-          <div className="lg:col-span-6 space-y-6">
-            <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest block text-center lg:text-left">
-              Especialistas por trás da consultoria
-            </h4>
-            
-            <div className="grid sm:grid-cols-3 gap-6">
-              {team.map((member, idx) => (
-                <motion.div 
-                  key={idx}
-                  whileHover={{ y: -5 }}
-                  className="bg-dark-800 rounded-2xl overflow-hidden border border-gold-500/10 hover:border-gold-500/30 transition-colors shadow-lg group flex flex-col"
-                >
-                  <div className="aspect-[4/5] overflow-hidden relative w-full bg-dark-900">
-                    <img 
-                      src={member.image} 
-                      alt={`Foto de ${member.name}`} 
-                      className={`w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 ${member.position || "object-center"}`}
-                      loading="lazy"
-                    />
+            <div className="mb-10 grid gap-4 sm:grid-cols-2">
+              {differentiators.map(({ Icon, title, desc }, i) => (
+                <Reveal key={title} delay={0.15 + i * 0.1} className="flex items-start gap-4 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-gold-500/20 bg-gold-500/10">
+                    <Icon className="h-4 w-4 text-gold-400" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h4 className="mb-1 text-sm font-bold text-white">{title}</h4>
+                    <p className="text-xs leading-relaxed text-gray-400">{desc}</p>
                   </div>
-                  <div className="p-4 text-center bg-dark-800 border-t border-white/5 flex-grow flex flex-col justify-center items-center">
-                    <h5 className="font-bold text-sm text-white leading-tight">{member.name}</h5>
-                    <p className="text-[10px] text-gold-500 font-bold uppercase tracking-wider mt-1">{member.role}</p>
-                    
-                    <div className="flex items-center gap-3 mt-3 border-t border-white/5 pt-3 w-full justify-center">
-                      <a 
-                        href={member.linkedin} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="text-gray-400 hover:text-gold-500 transition-colors p-1"
-                        aria-label={`LinkedIn de ${member.name}`}
-                      >
-                        <Linkedin className="w-4 h-4" />
-                      </a>
-                      <a 
-                        href={member.instagram} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="text-gray-400 hover:text-gold-500 transition-colors p-1"
-                        aria-label={`Instagram de ${member.name}`}
-                      >
-                        <Instagram className="w-4 h-4" />
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
+                </Reveal>
               ))}
             </div>
-            
-            <div className="pt-4 text-center lg:text-left">
-              <Button onClick={scrollToForm} className="text-xs py-3 px-6" aria-label="Vamos conversar">
-                Agendar Reunião com Ricardo
-              </Button>
-            </div>
+
+            <Reveal delay={0.2}>
+              <Button onClick={scrollToForm}>Agendar reunião com Ricardo</Button>
+            </Reveal>
           </div>
 
+          <Reveal direction="left" className="relative mx-auto w-full max-w-[340px]">
+            <div className="absolute -inset-10 -z-10 rounded-full bg-gold-500/10 blur-[80px]" aria-hidden="true" />
+            <VideoCard src="/media/institucional.mp4" poster="/media/institucional-poster.webp" label="Ricardo Guirado apresenta a R.Guirado">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-400">Conheça a R.Guirado</p>
+              <p className="text-base font-black text-white">Ricardo Guirado</p>
+              <p className="text-[11px] font-semibold text-gray-300">Fundador da R.Guirado</p>
+            </VideoCard>
+          </Reveal>
+        </div>
+
+        <div className="mt-24 md:mt-32">
+          <Reveal className="mb-8 flex items-end justify-between gap-6">
+            <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-gray-400">Especialistas por trás da consultoria</h3>
+            <span className="hidden h-px flex-1 bg-white/[0.08] sm:block" aria-hidden="true" />
+          </Reveal>
+          <div className="grid gap-5 sm:grid-cols-3">
+            {team.map((member, i) => (
+              <TeamCard key={member.name} member={member} index={i} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

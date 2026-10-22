@@ -1,83 +1,95 @@
 import React from "react";
-import { motion } from "motion/react";
-import { Briefcase, BarChart, Brain, ArrowRight } from "lucide-react";
+import { Briefcase, BarChart3, Brain, ArrowUpRight } from "lucide-react";
+import { SectionLabel } from "../ui/SectionLabel";
+import { RevealText } from "../ui/RevealText";
+import { Reveal, Stagger, StaggerItem } from "../ui/Reveal";
+import { SpotlightCard } from "../ui/SpotlightCard";
+
+const pillars = [
+  {
+    id: "franchising",
+    Icon: Briefcase,
+    title: "Franchising",
+    desc: "Transforme seu negócio em uma rede de franquias de sucesso. Empacotamos seu modelo para que seja replicado e expandido nacionalmente.",
+    tags: ["Franqueabilidade", "Formatação", "Expansão"],
+  },
+  {
+    id: "gestao",
+    Icon: BarChart3,
+    title: "Gestão Estratégica",
+    desc: "Transforme crescimento em plano, não em sorte. Estabelecemos governança, metas mensuráveis e rotina de execução.",
+    tags: ["Planejamento", "Processos", "IA aplicada"],
+  },
+  {
+    id: "performance",
+    Icon: Brain,
+    title: "Performance Comportamental",
+    desc: "Eleve o potencial humano e a liderança do seu time. Alinhamos a cultura aos objetivos e desenvolvemos inteligência comportamental.",
+    tags: ["Liderança", "RH estratégico", "Assessment"],
+  },
+];
 
 export function Services() {
-  const pillars = [
-    { 
-      id: "franchising",
-      icon: <Briefcase className="w-8 h-8 text-gold-500" aria-hidden="true" />, 
-      title: "Franchising", 
-      desc: "Transforme seu negócio em uma rede de franquias de sucesso. Empacotamos seu modelo de negócio para que seja replicado e expandido nacionalmente." 
-    },
-    { 
-      id: "gestao",
-      icon: <BarChart className="w-8 h-8 text-gold-500" aria-hidden="true" />, 
-      title: "Gestão Estratégica", 
-      desc: "Maximize sua eficiência e transforme crescimento em plano, não em sorte. Estabelecemos governança, metas mensuráveis e rotina de execução." 
-    },
-    { 
-      id: "performance",
-      icon: <Brain className="w-8 h-8 text-gold-500" aria-hidden="true" />, 
-      title: "Performance Comportamental", 
-      desc: "Eleve o potencial humano e a liderança da sua equipe. Alinhamos sua cultura aos objetivos e desenvolvemos inteligência comportamental." 
-    }
-  ];
-
-  const handlePillarClick = (id: string) => {
-    window.location.hash = `#/${id}`;
-  };
-
   return (
-    <section id="pilares" className="py-14 md:py-28 bg-dark-800 relative overflow-hidden" aria-labelledby="services-heading">
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="absolute top-[20%] left-[5%] w-[600px] h-[600px] bg-gold-500/5 blur-[120px] rounded-full" />
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div id="services-heading" className="max-w-3xl mb-10 md:mb-20">
-          <span className="text-xs font-bold text-gold-500 uppercase tracking-widest block mb-3 md:mb-4">Os 3 Pilares</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight mb-4 md:mb-6">
-            Três frentes. Um objetivo: colocar sua empresa no próximo nível.
-          </h2>
-          <p className="text-base sm:text-lg text-gray-400 font-light leading-relaxed">
-            Você pode contratar um pilar isolado ou combiná-los em um plano integrado. O diagnóstico inicial define o caminho — e ele é sempre desenhado para o seu negócio.
-          </p>
+    <section id="pilares" className="relative overflow-hidden bg-dark-900 py-24 md:py-36" aria-labelledby="services-heading">
+      <div className="pointer-events-none absolute left-[5%] top-[15%] h-[600px] w-[600px] rounded-full bg-gold-500/[0.05] blur-[140px]" aria-hidden="true" />
+
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
+        <div className="mb-14 grid gap-8 md:mb-20 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+          <div>
+            <SectionLabel className="mb-6">Os 3 pilares</SectionLabel>
+            <RevealText
+              id="services-heading"
+              className="text-4xl font-black leading-[1.05] tracking-[-0.03em] sm:text-5xl lg:text-6xl"
+              lines={[{ text: "Três frentes." }, { text: "Um objetivo:", className: "text-gray-500" }, { text: "o próximo nível.", className: "text-gold-gradient" }]}
+            />
+          </div>
+          <Reveal delay={0.2}>
+            <p className="max-w-md text-base font-light leading-relaxed text-gray-400 sm:text-lg lg:ml-auto">
+              Contrate um pilar isolado ou combine-os em um plano integrado. O diagnóstico inicial define o caminho — sempre desenhado para o seu negócio.
+            </p>
+          </Reveal>
         </div>
-        
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-          {pillars.map((pillar, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: idx * 0.15, duration: 0.7, type: "spring" }}
-              whileHover={{ y: -10, scale: 1.02 }}
-              onClick={() => handlePillarClick(pillar.id)}
-              className="group bg-dark-900 p-6 sm:p-8 lg:p-10 rounded-[1.8rem] md:rounded-[2.5rem] border border-white/5 border-t-gold-500/30 hover:border-gold-500/60 transition-all shadow-xl hover:shadow-[0_20px_50px_rgba(243,192,18,0.1)] relative overflow-hidden flex flex-col justify-between cursor-pointer"
-              role="button"
-              aria-label={`Ver mais sobre ${pillar.title}`}
-            >
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-gold-500/10 rounded-full blur-[30px] group-hover:bg-gold-500/20 transition-colors duration-500 pointer-events-none" />
-              
-              <div className="relative z-10 w-full h-full flex flex-col justify-between">
-                <div>
-                  <div className="w-14 h-14 sm:w-20 sm:h-20 bg-dark-800 border border-gold-500/20 rounded-2xl flex items-center justify-center mb-6 sm:mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-inner">
-                    {React.cloneElement(pillar.icon, { className: "w-7 h-7 sm:w-10 sm:h-10 text-gold-500" })}
+
+        <Stagger className="grid gap-5 md:grid-cols-3 md:gap-6" stagger={0.15}>
+          {pillars.map(({ id, Icon, title, desc, tags }, idx) => (
+            <StaggerItem key={id} className="h-full">
+              <SpotlightCard
+                tilt
+                onClick={() => (window.location.hash = `#/${id}`)}
+                role="link"
+                aria-label={`Ver mais sobre ${title}`}
+                className="flex h-full cursor-pointer flex-col p-7 transition-colors duration-500 hover:bg-dark-800/80 sm:p-9"
+              >
+                <div className="mb-10 flex items-start justify-between">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-gold-500/20 bg-gold-500/10 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">
+                    <Icon className="h-6 w-6 text-gold-400" aria-hidden="true" />
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-black mb-3 md:mb-4 tracking-tight text-white group-hover:text-gold-400 transition-colors">{pillar.title}</h3>
-                  <p className="text-gray-400 text-base sm:text-lg leading-relaxed group-hover:text-gray-200 transition-colors mb-6 sm:mb-8">{pillar.desc}</p>
+                  <span className="font-black text-5xl leading-none tracking-tighter text-white/[0.06] transition-colors duration-500 group-hover:text-gold-500/20">0{idx + 1}</span>
                 </div>
-                
-                <div className="flex items-center gap-2 text-gold-500 font-bold text-sm sm:text-md group-hover:text-gold-400 transition-colors pt-2">
-                  <span>Saiba mais</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+
+                <h3 className="mb-4 text-2xl font-black tracking-tight text-white sm:text-[1.7rem]">{title}</h3>
+                <p className="mb-8 text-[15px] leading-relaxed text-gray-400 transition-colors group-hover:text-gray-300">{desc}</p>
+
+                <div className="mt-auto">
+                  <ul className="mb-8 flex flex-wrap gap-2">
+                    {tags.map((t) => (
+                      <li key={t} className="rounded-full border border-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                  <span className="flex items-center justify-between border-t border-white/[0.07] pt-5 text-xs font-extrabold uppercase tracking-[0.16em] text-gold-500">
+                    Saiba mais
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full border border-gold-500/30 transition-all duration-500 group-hover:rotate-45 group-hover:bg-gold-500 group-hover:text-dark-900">
+                      <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                  </span>
                 </div>
-              </div>
-            </motion.div>
+              </SpotlightCard>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
     </section>
   );

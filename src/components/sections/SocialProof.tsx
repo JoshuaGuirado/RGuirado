@@ -1,96 +1,161 @@
-import React from "react";
-import { motion } from "motion/react";
-import { Target, TrendingUp } from "lucide-react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { Check } from "lucide-react";
 import { Button } from "../ui/Button";
-import { SectionHeading } from "../ui/SectionHeading";
-import { AnimatedCounter } from "../ui/AnimatedCounter";
+import { SectionLabel } from "../ui/SectionLabel";
+import { RevealText } from "../ui/RevealText";
+import { Reveal, Stagger, StaggerItem } from "../ui/Reveal";
+import { VideoCard } from "../ui/VideoCard";
+import { scrollToForm } from "../../lib/scroll";
 
-export function SocialProof() {
-  const scrollToForm = () => document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+const cases = [
+  {
+    id: "clinisport",
+    company: "Clinisport Prime",
+    segment: "Fisioterapia, nutrição e desempenho humano",
+    person: "Kleber Barbão",
+    role: "CEO da Clinisport Prime",
+    pillar: "Gestão Estratégica",
+    video: "/media/case-clinisport.mp4",
+    poster: "/media/case-clinisport-poster.webp",
+    summary:
+      "Uma operação que já era referência em desempenho humano e precisava de estrutura para crescer sem perder a essência. A R.Guirado entrou para olhar a empresa de dentro para fora — e organizar a forma de decidir, de executar e de liderar.",
+    results: ["Cultura de gestão orientada a processos", "Decisões mais seguras e bem fundamentadas", "Entrega técnica além do que foi acordado", "Método que segue em uso no dia a dia"],
+  },
+  {
+    id: "legendarios",
+    company: "Legendários Maringá",
+    segment: "Workshop de liderança",
+    person: "Weslley Kendrick Silva",
+    role: "Coordenador geral · Legendários Maringá",
+    pillar: "Performance Comportamental",
+    video: "/media/case-legendarios.mp4",
+    poster: "/media/case-legendarios-poster.webp",
+    summary:
+      "Um workshop para 40 líderes de diferentes organizações, construído a partir do perfil e da necessidade de cada gestor — para que cada um desenvolvesse melhor a sua própria liderança.",
+    results: ["40 líderes capacitados em um único workshop", "Leitura do perfil comportamental de cada gestor", "Mais relacionamento e senso de pertencimento", "Liderança aplicada ao trabalho de cada um"],
+  },
+];
 
-  const stats = [
-    { number: "750+", label: "Empresas estruturadas", icon: <Target className="w-8 h-8 text-gold-500" aria-hidden="true" /> },
-    { number: "1500+", label: "Unidades abertas", icon: <TrendingUp className="w-8 h-8 text-gold-500" aria-hidden="true" /> }
-  ];
+const testimonials = [
+  {
+    logo: "gelaboca",
+    quote: "A estruturação de processos e a formatação de franquias da R.Guirado nos deram a segurança necessária para expandir nossa marca nacionalmente.",
+    author: "Diretoria de Expansão",
+    company: "Gela Boca Franquias",
+  },
+  {
+    logo: "lavathru",
+    quote: "Com a consultoria de gestão e processos, organizamos a casa por completo e destravamos um crescimento muito mais previsível.",
+    author: "Sócio-fundador",
+    company: "Lava Thru",
+  },
+  {
+    logo: "platao",
+    quote: "O trabalho comportamental com nossos líderes alinhou nossa cultura corporativa aos objetivos estratégicos de expansão.",
+    author: "Direção de Operações",
+    company: "Colégio Platão",
+  },
+];
 
-  const testimonials = [
-    {
-      quote: "A estruturação de processos e a formatação de franquias da R.Guirado nos deram a segurança necessária para expandir nossa marca nacionalmente.",
-      author: "Diretoria de Expansão",
-      role: "Gela Boca Franquias"
-    },
-    {
-      quote: "Com a consultoria de gestão e processos, organizamos a casa por completo e destravamos um crescimento muito mais previsível.",
-      author: "Sócio-Fundador",
-      role: "Lava Thru"
-    },
-    {
-      quote: "O trabalho comportamental com nossos líderes alinhou nossa cultura corporativa aos objetivos estratégicos de expansão.",
-      author: "Direção de Operações",
-      role: "Colégio Platão"
-    }
-  ];
+function CaseRow({ c, index }: { c: (typeof cases)[number]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center center"] });
+  const flip = index % 2 === 1;
+  // The video swings into place as the row scrolls up to the middle of the screen.
+  const scale = useTransform(scrollYProgress, [0, 1], [0.82, 1]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [flip ? 8 : -8, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [80, 0]);
 
   return (
-    <section id="resultados" className="py-14 md:py-28 bg-dark-900 border-y border-white/5 relative overflow-hidden" aria-labelledby="social-proof-heading">
-      <div className="absolute -left-64 top-1/2 w-[500px] h-[500px] bg-gold-500/10 rounded-full blur-[150px] -translate-y-1/2" aria-hidden="true" />
-      
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div id="social-proof-heading">
-          <SectionHeading subtitle="Autoridade Comprovada" title="Quem já escalou com a gente" />
+    <div ref={ref} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
+      <motion.div style={{ scale, rotate, y }} className={`relative mx-auto w-full max-w-[340px] ${flip ? "lg:order-2" : ""}`}>
+        <div className="absolute -inset-8 -z-10 rounded-full bg-gold-500/10 blur-[70px]" aria-hidden="true" />
+        <VideoCard src={c.video} poster={c.poster} label={`Depoimento de ${c.person}, ${c.company}`}>
+          <p className="text-base font-black text-white">{c.person}</p>
+          <p className="text-[11px] font-semibold text-gray-300">{c.role}</p>
+        </VideoCard>
+      </motion.div>
+
+      <div className={flip ? "lg:order-1" : ""}>
+        <Reveal>
+          <div className="mb-5 flex flex-wrap items-center gap-3">
+            <span className="rounded-full bg-gold-500 px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-dark-900">Case 0{index + 1}</span>
+            <span className="rounded-full border border-gold-500/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gold-400">{c.pillar}</span>
+          </div>
+          <h3 className="mb-2 text-3xl font-black tracking-tight text-white sm:text-4xl">{c.company}</h3>
+          <p className="mb-6 text-sm font-semibold uppercase tracking-[0.14em] text-gray-500">{c.segment}</p>
+          <p className="mb-8 text-base font-light leading-relaxed text-gray-300 sm:text-lg">{c.summary}</p>
+        </Reveal>
+        <Stagger className="grid gap-3 sm:grid-cols-2" stagger={0.08}>
+          {c.results.map((r) => (
+            <StaggerItem key={r} className="flex items-start gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4">
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold-500/15">
+                <Check className="h-3 w-3 text-gold-400" aria-hidden="true" />
+              </span>
+              <span className="text-sm leading-snug text-gray-200">{r}</span>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </div>
+    </div>
+  );
+}
+
+export function SocialProof() {
+  return (
+    <section id="cases" className="relative overflow-hidden bg-dark-950 py-24 md:py-36" aria-labelledby="cases-heading">
+      <div className="pointer-events-none absolute -left-60 top-1/3 h-[600px] w-[600px] rounded-full bg-gold-500/[0.06] blur-[150px]" aria-hidden="true" />
+
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
+        <div className="mx-auto mb-16 max-w-3xl text-center md:mb-24">
+          <SectionLabel center className="mb-6">
+            Cases de sucesso
+          </SectionLabel>
+          <RevealText
+            id="cases-heading"
+            className="mb-6 text-4xl font-black leading-[1.05] tracking-[-0.03em] sm:text-5xl lg:text-6xl"
+            lines={[{ text: "Quem viveu o método" }, { text: "conta como foi.", className: "text-gold-gradient" }]}
+          />
+          <Reveal delay={0.15}>
+            <p className="text-base font-light leading-relaxed text-gray-400 sm:text-lg">Sem roteiro de vendas: empresários e líderes falando, com as próprias palavras, do que mudou depois da R.Guirado.</p>
+          </Reveal>
         </div>
-        
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-24 max-w-4xl mx-auto">
-          {stats.map((stat, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="text-center p-6 sm:p-8 lg:p-12 rounded-[2rem] md:rounded-[2.5rem] bg-gradient-to-b from-dark-800 to-dark-900 border border-white/5 hover:border-gold-500/30 transition-all shadow-xl"
-            >
-              <div className="w-14 h-14 md:w-16 md:h-16 mx-auto bg-gold-500/10 rounded-2xl flex items-center justify-center mb-4 md:mb-6">
-                {stat.icon}
-              </div>
-              <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 mb-2 md:mb-4">
-                <AnimatedCounter value={stat.number} />
-              </h3>
-              <p className="text-lg md:text-xl text-gray-400 font-medium tracking-wide">{stat.label}</p>
-            </motion.div>
+
+        <div className="space-y-24 md:space-y-36">
+          {cases.map((c, i) => (
+            <CaseRow key={c.id} c={c} index={i} />
           ))}
         </div>
 
-        {/* Depoimentos reais dos parceiros */}
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto mb-12 md:mb-20">
-          {testimonials.map((t, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.15, duration: 0.6 }}
-              whileHover={{ y: -5 }}
-              className="bg-dark-800/40 backdrop-blur-md border border-white/5 hover:border-gold-500/20 rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between shadow-xl transition-all"
-            >
-              <div className="space-y-4">
-                <span className="text-4xl font-serif text-gold-500/20 block leading-[0.1] select-none">“</span>
-                <p className="text-gray-300 text-sm leading-relaxed italic">{t.quote}</p>
-              </div>
-              <div className="pt-6 border-t border-white/5 mt-6">
-                <p className="font-bold text-white text-sm">{t.author}</p>
-                <p className="text-xs text-gold-500/80 font-bold uppercase tracking-wider mt-0.5">{t.role}</p>
-              </div>
-            </motion.div>
-          ))}
+        {/* Written testimonials */}
+        <div className="mt-28 md:mt-40">
+          <Reveal className="mb-10 text-center">
+            <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-gray-400">
+              E o que mais dizem <span className="text-gold-500">nossos parceiros</span>
+            </h3>
+          </Reveal>
+          <Stagger className="grid gap-5 md:grid-cols-3" stagger={0.12}>
+            {testimonials.map((t) => (
+              <StaggerItem key={t.company} className="h-full">
+                <figure className="flex h-full flex-col rounded-[1.75rem] border border-white/[0.07] bg-dark-900/70 p-7 transition-colors duration-500 hover:border-gold-500/30 sm:p-8">
+                  <img src={`/logos/${t.logo}.svg`} alt={t.company} loading="lazy" className="mb-6 h-12 w-auto max-w-[140px] self-start object-contain object-left opacity-80" />
+                  <blockquote className="mb-8 text-[15px] leading-relaxed text-gray-300">“{t.quote}”</blockquote>
+                  <figcaption className="mt-auto border-t border-white/[0.07] pt-5">
+                    <p className="text-sm font-bold text-white">{t.author}</p>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-gold-500/80">{t.company}</p>
+                  </figcaption>
+                </figure>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </div>
 
-        <div className="text-center">
-          <Button onClick={scrollToForm} className="text-lg py-5 px-12" aria-label="Ver meus resultados futuros - rolar para contato">
-            Ver meus resultados futuros
+        <Reveal className="mt-16 text-center">
+          <Button onClick={scrollToForm} aria-label="Quero ser o próximo case">
+            Quero ser o próximo case
           </Button>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

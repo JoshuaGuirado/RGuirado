@@ -1,175 +1,184 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "motion/react";
-import { Volume2, VolumeX, ChevronDown } from "lucide-react";
+import React, { useRef } from "react";
+import { motion, useMotionTemplate, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
+import { ChevronDown } from "lucide-react";
 import { Button } from "../ui/Button";
-import { GlassButton } from "../ui/GlassButton";
+import { RevealText } from "../ui/RevealText";
+import { VideoCard } from "../ui/VideoCard";
 import { AnimatedCounter } from "../ui/AnimatedCounter";
+import { scrollToForm, scrollToId } from "../../lib/scroll";
+import { EASE_OUT_EXPO } from "../../lib/constants";
+
+const stats = [
+  { value: "+25 anos", label: "de mercado real" },
+  { value: "+750", label: "empresas estruturadas" },
+  { value: "+1500", label: "unidades abertas" },
+  { value: "+350", label: "projetos estratégicos" },
+];
+
+const fadeUp = (delay: number) => ({
+  initial: { opacity: 0, y: 24, filter: "blur(6px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+  transition: { duration: 1, delay, ease: EASE_OUT_EXPO },
+});
 
 export function Hero() {
-  const scrollToForm = () => document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
-  const videoRef = React.useRef<HTMLVideoElement>(null);
-  const [isMuted, setIsMuted] = useState(true);
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
 
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
-  }, []);
+  // Scroll-out transition: copy drifts up and fades, video card counter-moves.
+  const copyY = useTransform(scrollYProgress, [0, 1], [0, -140]);
+  const copyOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const cardY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const cardRotate = useTransform(scrollYProgress, [0, 1], [-3, 4]);
+  const chipY = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
-  const toggleVolume = () => {
-    if (videoRef.current) {
-      const newMutedState = !videoRef.current.muted;
-      videoRef.current.muted = newMutedState;
-      setIsMuted(newMutedState);
-      
-      if (!newMutedState) {
-        // Restart video softly to hear the core message
-        videoRef.current.currentTime = 0;
-        videoRef.current.play();
-      }
-    }
+  // Gold spotlight that follows the pointer across the hero.
+  const mx = useSpring(useMotionValue(50), { stiffness: 60, damping: 20 });
+  const my = useSpring(useMotionValue(30), { stiffness: 60, damping: 20 });
+  const spotlight = useMotionTemplate`radial-gradient(600px circle at ${mx}% ${my}%, rgb(243 198 17 / 0.10), transparent 60%)`;
+
+  const handleMove = (e: React.PointerEvent) => {
+    if (e.pointerType !== "mouse" || !ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    mx.set(((e.clientX - rect.left) / rect.width) * 100);
+    my.set(((e.clientY - rect.top) / rect.height) * 100);
   };
 
   return (
-    <section className="relative min-h-0 lg:min-h-screen flex flex-col justify-center pt-20 md:pt-32 pb-12 md:pb-20 overflow-hidden bg-dark-900 border-b border-white/5" aria-labelledby="hero-title">
-      {/* Safe Edge-Compatible Background Orbs */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="absolute -top-[20%] -right-[10%] w-[800px] h-[800px] bg-gold-400/5 blur-[120px] rounded-full" />
-        <div className="absolute -bottom-[20%] -left-[10%] w-[600px] h-[600px] bg-blue-500/5 blur-[120px] rounded-full" />
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-dark-900 to-transparent opacity-90" />
+    <section
+      id="inicio"
+      ref={ref}
+      onPointerMove={handleMove}
+      className="relative isolate overflow-hidden bg-dark-950 pb-16 pt-28 sm:pt-36 lg:min-h-[100svh] lg:pb-24"
+      aria-labelledby="hero-title"
+    >
+      {/* Background layers */}
+      <div className="absolute inset-0 -z-10" aria-hidden="true">
+        <div className="bg-grid absolute inset-0" />
+        <motion.div className="absolute inset-0" style={{ background: spotlight }} />
+        <div className="absolute -right-40 -top-40 h-[700px] w-[700px] rounded-full bg-gold-500/[0.07] blur-[140px]" />
+        <div className="absolute -bottom-60 -left-40 h-[600px] w-[600px] rounded-full bg-dark-700/40 blur-[140px]" />
+        <div className="bg-noise absolute inset-0 opacity-[0.035] mix-blend-overlay" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-dark-950" />
       </div>
-      
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10 w-full">
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-2xl"
-        >
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className="inline-flex items-center gap-3 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/5 border border-white/10 mb-6 sm:mb-8 backdrop-blur-sm cursor-default shadow-xl"
-          >
-            <span className="text-[10px] sm:text-xs font-bold text-gold-400 uppercase tracking-widest">
-              Consultoria empresarial desde 2001 · Atuação em todo o Brasil
+
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-14 px-5 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+        <motion.div style={{ y: copyY, opacity: copyOpacity }}>
+          <motion.div {...fadeUp(0.1)} className="mb-7 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] py-2 pl-2 pr-4 backdrop-blur-sm">
+            <span className="flex items-center gap-1.5 rounded-full bg-gold-500/15 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-widest text-gold-400">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold-400 opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold-500" />
+              </span>
+              Desde 2001
             </span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-300 sm:text-[11px]">Consultoria empresarial · Todo o Brasil</span>
           </motion.div>
-          
-          <h1 id="hero-title" className="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.15] mb-6 tracking-tight">
-            Talento funda e constrói. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">Método organiza e escala!</span>
-          </h1>
-          
-          <p className="text-sm sm:text-base text-gray-400 leading-relaxed font-light mb-4">
-            Se o instinto e o esforço trouxeram sua empresa até aqui, o próximo salto pede estrutura, processo e uma direção clara. É exatamente esse caminho que percorremos com você.
-          </p>
-          <p className="text-sm sm:text-base text-gray-400 leading-relaxed font-light mb-8 sm:mb-10">
-            A R.Guirado ajuda empreendedores de pequenas e médias empresas a organizar a casa, estruturar a gestão e escalar com método — via franchising, gestão estratégica e performance comportamental. Sem fórmula pronta. Sem descaracterizar o que você construiu.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-            <Button onClick={scrollToForm} className="text-xs py-4 px-8 border-2 border-blue-500/80 hover:border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]" aria-label="Quero um diagnóstico do meu negócio - rolar para o formulário">
-              Quero um diagnóstico do meu negócio
-            </Button>
-            <GlassButton onClick={() => document.getElementById("pilares")?.scrollIntoView({ behavior: "smooth" })} className="text-xs py-4 px-8" aria-label="Conheça os 3 pilares - rolar para seção pilares">
-              Conheça os 3 pilares
-            </GlassButton>
-          </div>
-        </motion.div>
-        
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-          className="relative lg:h-[700px] flex items-center justify-center p-2 sm:p-4 w-full"
-        >
-          {/* Instagram iframe Container */}
-          <div className="relative w-full max-w-[320px] sm:max-w-[400px] h-[360px] sm:h-[480px] lg:h-[650px] mx-auto group">
-             
-             {/* Dynamic Glow Overlay for Depth */}
-             <div className="absolute inset-0 bg-gold-500/10 blur-[90px] rounded-full pointer-events-none" />
-             
-             {/* Direct Looping Video File */}
-             <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden bg-dark-900 border border-gold-500/20 group bg-black" onClick={toggleVolume} style={{ cursor: 'pointer' }} role="button" aria-label="Alternar som do vídeo">
-               <video 
-                 ref={videoRef}
-                 src="/hero_video.mp4" 
-                 poster="/logo.png"
-                 autoPlay 
-                 loop 
-                 muted 
-                 playsInline 
-                 className="w-full h-full object-cover" 
-                 aria-label="Vídeo demonstrativo na prática"
-               />
-               <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-dark-900/90 to-transparent pointer-events-none" />
-             </div>
 
-             <motion.div 
-              onClick={toggleVolume}
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-4 -left-4 sm:-left-8 max-w-[170px] sm:max-w-[200px] bg-dark-900 p-3 sm:p-5 rounded-2xl border border-gold-500/30 flex items-center gap-3 sm:gap-4 z-30 cursor-pointer shadow-2xl hover:border-gold-500 transition-colors will-change-transform"
-              role="button"
-              aria-label={isMuted ? "Ativar som do vídeo" : "Silenciar vídeo"}
+          <RevealText
+            as="h1"
+            id="hero-title"
+            immediate
+            delay={0.25}
+            className="mb-7 text-[2.6rem] font-black leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-[4rem] xl:text-[4.5rem]"
+            lines={[
+              { text: "Talento funda e constrói." },
+              { text: "Método organiza e escala.", className: "text-gold-gradient animate-gradient-x" },
+            ]}
+          />
+
+          <motion.p {...fadeUp(0.7)} className="mb-4 max-w-xl text-base font-light leading-relaxed text-gray-300 sm:text-lg">
+            Se o instinto e o esforço trouxeram sua empresa até aqui, o próximo salto pede estrutura, processo e uma direção clara.
+          </motion.p>
+          <motion.p {...fadeUp(0.8)} className="mb-10 max-w-xl text-sm font-light leading-relaxed text-gray-400 sm:text-base">
+            A R.Guirado ajuda empreendedores de pequenas e médias empresas a organizar a casa e escalar com método — via franchising, gestão estratégica e performance comportamental. Sem fórmula pronta. Sem descaracterizar o que você construiu.
+          </motion.p>
+
+          <motion.div {...fadeUp(0.95)} className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button onClick={scrollToForm} aria-label="Quero um diagnóstico do meu negócio">
+              Quero um diagnóstico
+            </Button>
+            <Button variant="glass" onClick={() => scrollToId("pilares")} aria-label="Conheça os 3 pilares">
+              Conheça os 3 pilares
+            </Button>
+          </motion.div>
+        </motion.div>
+
+        {/* Video card */}
+        <motion.div
+          initial={{ opacity: 0, y: 60, rotate: -8, scale: 0.92 }}
+          animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
+          transition={{ duration: 1.4, delay: 0.3, ease: EASE_OUT_EXPO }}
+          className="relative mx-auto w-full max-w-[300px] sm:max-w-[340px]"
+        >
+          <motion.div style={{ y: cardY, rotate: cardRotate }}>
+            <div className="absolute -inset-10 -z-10 rounded-full bg-gold-500/15 blur-[80px]" aria-hidden="true" />
+            <VideoCard src="/media/hero.mp4" poster="/media/hero-poster.webp" label="Vídeo: a R.Guirado na prática" mode="ambient" className="ring-1 ring-gold-500/20">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-400">Na prática</p>
+              <p className="text-sm font-bold text-white">Toque para ouvir</p>
+            </VideoCard>
+          </motion.div>
+
+          {/* Floating chips with their own parallax speed */}
+          <motion.div style={{ y: chipY }} className="absolute -left-6 top-16 hidden sm:block lg:-left-20">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.1, duration: 1, ease: EASE_OUT_EXPO }}
+              className="rounded-2xl border border-white/10 bg-dark-900/80 px-5 py-4 shadow-2xl backdrop-blur-xl"
             >
-              <div className="w-8 h-8 sm:w-12 sm:h-12 shrink-0 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full flex items-center justify-center shadow-lg shadow-gold-500/30">
-                {isMuted ? <VolumeX className="w-4 h-4 sm:w-6 sm:h-6 text-dark-900" aria-hidden="true" /> : <Volume2 className="w-4 h-4 sm:w-6 sm:h-6 text-dark-900" aria-hidden="true" />}
-              </div>
-              <div>
-                <p className="text-[9px] sm:text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-tight mb-0.5 sm:mb-1">{isMuted ? "Ativar Som" : "Silenciar"}</p>
-                <p className="font-heading font-black text-xs sm:text-md leading-tight text-white">Na Prática</p>
-              </div>
+              <p className="text-2xl font-black text-gold-gradient">+25 anos</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">de estrada real</p>
             </motion.div>
-          </div>
+          </motion.div>
+          <motion.div style={{ y: chipY }} className="absolute -right-4 bottom-24 hidden sm:block lg:-right-14">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.3, duration: 1, ease: EASE_OUT_EXPO }}
+              className="rounded-2xl border border-gold-500/30 bg-gold-500 px-5 py-3 text-dark-900 shadow-[0_20px_50px_-10px_rgb(243_198_17/0.5)]"
+            >
+              <p className="text-[10px] font-extrabold uppercase tracking-widest">Método</p>
+              <p className="text-lg font-black leading-none">ALTA®</p>
+            </motion.div>
+          </motion.div>
         </motion.div>
       </div>
 
-      {/* Prova Social em Barra (Proof Bar) */}
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-        className="max-w-7xl mx-auto px-6 mt-10 md:mt-32 relative z-10 w-full"
+      {/* Proof bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.1, duration: 1.2, ease: EASE_OUT_EXPO }}
+        className="mx-auto mt-16 w-full max-w-7xl px-5 sm:px-6 lg:mt-24"
       >
-        <div className="bg-dark-800/40 backdrop-blur-md border border-gold-500/10 rounded-[1.8rem] md:rounded-[2.5rem] p-4 sm:p-8 md:p-10 shadow-2xl relative overflow-hidden">
-          {/* Subtle Glow inside the container */}
-          <div className="absolute top-0 left-[20%] w-[300px] h-[100px] bg-gold-500/5 blur-[50px] rounded-full pointer-events-none" />
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-            {[
-              { value: "+25 anos", label: "de mercado real" },
-              { value: "+750", label: "empresas estruturadas" },
-              { value: "+1500", label: "unidades abertas" },
-              { value: "+350", label: "projetos estratégicos conduzidos" }
-            ].map((item, idx) => (
-              <motion.div 
-                key={idx} 
-                whileHover={{ y: -5, scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-2 p-4 sm:p-6 rounded-2xl bg-dark-900/30 border border-white/5 hover:border-gold-500/20 hover:bg-dark-900/50 transition-all duration-300 flex flex-col justify-center min-h-[90px] sm:min-h-[120px]"
-              >
-                <p className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 tracking-tight leading-none">
-                  <AnimatedCounter value={item.value} />
-                </p>
-                <p className="text-[9px] sm:text-[10px] text-gray-400 font-extrabold uppercase tracking-widest leading-normal">{item.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        <dl className="grid grid-cols-2 overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-md lg:grid-cols-4">
+          {stats.map((s, i) => (
+            <div
+              key={s.label}
+              className={`group relative flex flex-col p-5 transition-colors duration-500 hover:bg-white/[0.03] sm:p-8 ${i % 2 === 0 ? "border-r border-white/[0.08]" : ""} ${i < 2 ? "border-b border-white/[0.08] lg:border-b-0" : ""} ${i === 1 ? "lg:border-r" : ""}`}
+            >
+              <dt className="order-2 mt-2 text-[10px] font-bold uppercase leading-snug tracking-[0.18em] text-gray-400 sm:text-[11px]">{s.label}</dt>
+              <dd className="whitespace-nowrap text-[1.7rem] font-black tracking-tight text-gold-gradient sm:text-4xl lg:text-5xl">
+                <AnimatedCounter value={s.value} />
+              </dd>
+              <span className="absolute bottom-0 left-0 h-px w-0 bg-gold-500 transition-all duration-700 group-hover:w-full" aria-hidden="true" />
+            </div>
+          ))}
+        </dl>
       </motion.div>
 
-      {/* Scroll Down Indicator */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 cursor-pointer pointer-events-auto hidden sm:flex" onClick={() => document.getElementById("pilares")?.scrollIntoView({ behavior: "smooth" })} role="button" aria-label="Rolar para baixo">
-        <span className="text-[9px] uppercase font-bold text-gray-500 tracking-[0.2em] leading-none">Descubra mais</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown className="w-4 h-4 text-gold-500/80" />
-        </motion.div>
-      </div>
+      <button
+        type="button"
+        onClick={() => scrollToId("parceiros")}
+        className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 cursor-pointer flex-col items-center gap-1 text-gray-500 transition-colors hover:text-gold-400 lg:flex"
+        aria-label="Rolar para baixo"
+      >
+        <span className="text-[9px] font-bold uppercase tracking-[0.3em]">Role</span>
+        <motion.span animate={{ y: [0, 6, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}>
+          <ChevronDown className="h-4 w-4" />
+        </motion.span>
+      </button>
     </section>
   );
 }

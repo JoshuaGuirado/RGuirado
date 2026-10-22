@@ -1,152 +1,144 @@
-import React from "react";
-import { motion } from "motion/react";
+import React, { useRef, useState } from "react";
+import { motion, useMotionValueEvent, useScroll, useSpring } from "motion/react";
 import { Button } from "../ui/Button";
+import { SectionLabel } from "../ui/SectionLabel";
+import { RevealText } from "../ui/RevealText";
+import { Reveal } from "../ui/Reveal";
+import { scrollToForm } from "../../lib/scroll";
+import { EASE_OUT_EXPO } from "../../lib/constants";
+
+const steps = [
+  {
+    letter: "A",
+    title: "Análise",
+    subtitle: "Antes de propor, entender.",
+    desc: "Conversamos com você, abrimos os números, ouvimos o time e observamos a operação por dentro. Mapeamos processos, gargalos, margem e cultura de verdade — não o que está no organograma.",
+    deliverable: "Um retrato honesto da sua empresa — inclusive as verdades que ninguém teve coragem de te dizer.",
+  },
+  {
+    letter: "L",
+    title: "Linha de ação",
+    subtitle: "O plano é seu. Construído com você.",
+    desc: "Definimos juntos o caminho: qual pilar entra em jogo — franchising, gestão ou comportamento. Cada projeto nasce com escopo, prazo, responsáveis e entregas definidos antes de começar.",
+    deliverable: "Plano de ação claro com prioridades ordenadas, sem adivinhações.",
+  },
+  {
+    letter: "T",
+    title: "Transformação",
+    subtitle: "Aqui a gente fica na execução.",
+    desc: "Plano no papel não muda empresa. Execução muda. Estamos ao seu lado rodando os rituais de gestão, treinando o time, acompanhando indicadores, corrigindo rotas e mudando comportamentos.",
+    deliverable: "Processos rodando, equipe engajada e resultados aparecendo no caixa.",
+  },
+  {
+    letter: "A",
+    title: "Autonomia",
+    subtitle: "O sucesso mede-se pela nossa ausência.",
+    desc: "O único jeito de medir se a consultoria funcionou: a empresa continuar performando depois que saímos. Deixamos métodos, indicadores e líderes formados, tirando o dono da operação.",
+    deliverable: "Uma empresa que roda sozinha. E um dono livre para voltar a ser dono.",
+  },
+];
+
+function StepCard({ step, index, active }: { step: (typeof steps)[number]; index: number; active: boolean }) {
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -15% 0px" }}
+      transition={{ duration: 1, ease: EASE_OUT_EXPO }}
+      className={`relative rounded-[1.75rem] border p-7 transition-all duration-700 sm:p-10 ${
+        active ? "border-gold-500/40 bg-dark-800 shadow-[0_30px_80px_-30px_rgb(243_198_17/0.25)]" : "border-white/[0.07] bg-dark-900/60 lg:opacity-50"
+      }`}
+    >
+      <span
+        aria-hidden="true"
+        className={`pointer-events-none absolute -right-2 -top-8 select-none font-black text-[9rem] leading-none transition-colors duration-700 ${active ? "text-gold-500/10" : "text-white/[0.03]"}`}
+      >
+        {step.letter}
+      </span>
+      <div className="relative">
+        <div className="mb-6 flex items-center gap-4">
+          <span className={`flex h-11 w-11 items-center justify-center rounded-xl text-lg font-black transition-colors duration-700 ${active ? "bg-gold-500 text-dark-900" : "border border-gold-500/30 text-gold-500"}`}>
+            {step.letter}
+          </span>
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">Etapa 0{index + 1}</p>
+            <h3 className="text-2xl font-black uppercase tracking-tight text-white">{step.title}</h3>
+          </div>
+        </div>
+        <p className="mb-3 text-lg font-bold text-gray-200">{step.subtitle}</p>
+        <p className="mb-8 text-[15px] leading-relaxed text-gray-400">{step.desc}</p>
+        <div className="rounded-2xl border border-white/[0.06] bg-dark-950/50 p-5">
+          <p className="mb-1 text-[10px] font-extrabold uppercase tracking-[0.2em] text-gold-500">Você sai com</p>
+          <p className="text-sm leading-relaxed text-gray-300">{step.deliverable}</p>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
 
 export function Solution() {
-  const scrollToForm = () => document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+  const [active, setActive] = useState(0);
+  const stepsRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: stepsRef, offset: ["start 60%", "end 60%"] });
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
 
-  const steps = [
-    {
-      letter: "A",
-      title: "ANÁLISE",
-      subtitle: "Antes de propor, entender.",
-      desc: "Conversamos com você, abrimos os números, ouvimos o time e observamos a operação por dentro. Mapeamos processos, gargalos, margem e cultura de verdade — não o que está no organograma.",
-      deliverable: "retrato honesto da sua empresa — inclusive as verdades que ninguém teve coragem de te dizer."
-    },
-    {
-      letter: "L",
-      title: "LINHA DE AÇÃO",
-      subtitle: "O plano é seu. Construído com você.",
-      desc: "Definimos juntos o caminho: qual pilar entra em jogo — franchising, gestão ou comportamento. Cada projeto nasce com escopo, prazo, responsáveis e entregas definidos antes de começar.",
-      deliverable: "plano de ação claro com prioridades ordenadas, sem adivinhações."
-    },
-    {
-      letter: "T",
-      title: "TRANSFORMAÇÃO",
-      subtitle: "Aqui a gente fica na execução.",
-      desc: "Plano no papel não muda empresa. Execução muda. Estamos ao seu lado rodando os rituais de gestão, treinando o time, acompanhando indicadores, corrigindo rotas e mudando comportamentos.",
-      deliverable: "processos rodando, equipe engajada e resultados aparecendo no caixa."
-    },
-    {
-      letter: "A",
-      title: "AUTONOMIA",
-      subtitle: "O sucesso mede-se pela nossa ausência.",
-      desc: "O único jeito de medir se a consultoria funcionou: a empresa continuar performando depois que saímos. Deixamos métodos, indicadores e líderes formados, tirando o dono da operação.",
-      deliverable: "uma empresa que roda sozinha. E um dono livre para voltar a ser dono."
-    }
-  ];
+  // The active step follows how far the rail has been scrolled through.
+  useMotionValueEvent(scrollYProgress, "change", (p) => {
+    setActive(Math.min(steps.length - 1, Math.max(0, Math.floor(p * steps.length))));
+  });
 
   return (
-    <section id="metodo" className="py-14 md:py-24 relative overflow-hidden bg-dark-800 border-t border-white/5" aria-labelledby="solution-heading">
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="absolute top-[20%] right-[5%] w-[500px] h-[500px] bg-gold-500/5 blur-[120px] rounded-full" />
-      </div>
+    <section id="metodo" className="relative bg-dark-950 py-24 md:py-36" aria-labelledby="solution-heading">
+      <div className="pointer-events-none absolute right-0 top-[10%] h-[500px] w-[500px] rounded-full bg-gold-500/[0.05] blur-[140px]" aria-hidden="true" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
-        {/* Row 1: Header (Intro & Slogans) */}
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-12 lg:mb-16">
-          {/* Left Side: Concept & Quote */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="space-y-4">
-              <span className="text-xs font-bold text-gold-500 uppercase tracking-widest block">Nosso Método</span>
-              <h2 id="solution-heading" className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
-                Um método - <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">ALTA</span>
-              </h2>
-            </div>
-
-            <p className="text-base sm:text-lg text-gray-400 leading-relaxed font-light">
-              Consultoria séria não é sobre entregar diagnóstico bonito. É sobre fazer a empresa andar — e continuar andando depois que a gente sai. Por isso todo projeto da R.Guirado percorre quatro etapas. Elas se chamam ALTA.
+      <div className="relative mx-auto grid max-w-7xl gap-14 px-5 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        {/* Sticky narrative column */}
+        <div className="lg:sticky lg:top-28 lg:h-fit">
+          <SectionLabel className="mb-6">Nosso método</SectionLabel>
+          <RevealText
+            id="solution-heading"
+            className="mb-6 text-4xl font-black leading-[1.05] tracking-[-0.03em] sm:text-5xl"
+            lines={[{ text: "Toda consultoria quer ficar." }, { text: "A gente quer te dar alta.", className: "text-gold-gradient" }]}
+          />
+          <Reveal delay={0.1}>
+            <p className="mb-10 max-w-lg text-base font-light leading-relaxed text-gray-400 sm:text-lg">
+              Consultoria séria não é sobre entregar diagnóstico bonito. É sobre fazer a empresa andar — e continuar andando depois que a gente sai. Por isso todo projeto percorre quatro etapas.
             </p>
+          </Reveal>
 
-            {/* Frase Yves Doz Integrada */}
-            <div className="border-l-2 border-gold-500 pl-4 sm:pl-6 italic text-gray-300 text-base sm:text-lg leading-relaxed">
-              "As empresas morrem hoje não por fazer as coisas erradas, mas por fazerem bem as mesmas coisas durante tempo demais."
-              <span className="block text-xs sm:text-sm font-black uppercase tracking-widest text-gold-500 mt-2 not-italic">— Yves Doz</span>
-            </div>
+          {/* A · L · T · A indicator, lit by the step in view */}
+          <div className="mb-10 hidden items-end gap-3 lg:flex" aria-hidden="true">
+            {steps.map((s, i) => (
+              <div key={i} className="flex flex-col items-center gap-3">
+                <motion.span
+                  animate={{ color: i <= active ? "#f3c611" : "rgba(255,255,255,0.08)", scale: i === active ? 1.08 : 1 }}
+                  transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
+                  className="text-[5.5rem] font-black leading-none tracking-tighter"
+                >
+                  {s.letter}
+                </motion.span>
+                <motion.span animate={{ scaleX: i === active ? 1 : 0 }} className="h-1 w-10 origin-left rounded-full bg-gold-500" transition={{ duration: 0.5 }} />
+              </div>
+            ))}
           </div>
 
-          {/* Right Side: Slogan highlight & CTA */}
-          <div className="lg:col-span-5 space-y-6">
-            {/* Fundo Escuro Destaque Slogan */}
-            <div className="p-6 rounded-3xl bg-dark-900 border border-gold-500/10 text-center relative overflow-hidden">
-              <div className="absolute -top-12 -left-12 w-24 h-24 bg-gold-500/5 rounded-full blur-[20px]" />
-              <p className="text-md text-gray-400 font-light leading-relaxed">
-                Toda consultoria quer ficar.
-              </p>
-              <p className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600 tracking-tight mt-1">
-                A gente quer te dar alta.
-              </p>
-            </div>
+          <Reveal delay={0.2} className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
+            <Button onClick={scrollToForm}>Começar pela análise</Button>
+            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-500">Método ALTA®</span>
+          </Reveal>
+        </div>
 
-            <div className="space-y-4">
-              <h4 className="text-lg font-black tracking-tight text-white">Da dependência à alta.</h4>
-              <p className="text-sm text-gray-400 leading-relaxed">
-                ALTA é a distância entre a empresa que só funciona quando você está presente e a empresa que cresce mesmo quando você não está. É esse percurso que percorremos com você.
-              </p>
-            </div>
-
-            <div className="pt-2 flex flex-col sm:flex-row items-center gap-4 justify-between">
-              <Button onClick={scrollToForm} className="w-full sm:w-auto text-xs py-3.5 px-6" aria-label="Começar pela Análise">
-                Começar pela Análise
-              </Button>
-              <span className="text-xs font-bold text-gray-500 uppercase tracking-widest block">
-                Método ALTA®
-              </span>
-            </div>
+        {/* Steps with a progress rail */}
+        <div ref={stepsRef} className="relative pl-6 sm:pl-10">
+          <div className="absolute bottom-0 left-0 top-0 w-px bg-white/[0.08]" aria-hidden="true">
+            <motion.div className="h-full w-full origin-top bg-gradient-to-b from-gold-400 to-gold-600" style={{ scaleY: progress }} />
+          </div>
+          <div className="space-y-6 lg:space-y-[18vh] lg:py-[8vh]">
+            {steps.map((step, i) => (
+              <StepCard key={i} step={step} index={i} active={i === active} />
+            ))}
           </div>
         </div>
-
-        {/* Row 2: The 4 Steps (Side by Side in 4-Column Grid) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((step, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.6 }}
-              whileHover={{ y: -5 }}
-              className="group bg-dark-900 border border-gold-500/10 hover:border-gold-500/30 rounded-[1.8rem] md:rounded-[2rem] p-6 md:p-8 shadow-xl transition-all relative overflow-hidden flex flex-col justify-between min-h-0 md:min-h-[380px]"
-            >
-              {/* Decorative Background Letter */}
-              <div className="absolute -top-6 -right-4 font-heading font-black text-[7rem] text-white/2 select-none group-hover:text-gold-500/5 transition-colors duration-500">
-                {step.letter}
-              </div>
-
-              <div className="relative z-10 space-y-4 flex-grow flex flex-col justify-between">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-lg bg-gold-500/10 border border-gold-500/20 flex items-center justify-center font-heading font-black text-gold-500 text-sm">
-                      {step.letter}
-                    </span>
-                    <h3 className="text-lg font-black tracking-tight text-white group-hover:text-gold-400 transition-colors">
-                      {step.title}
-                    </h3>
-                  </div>
-
-                  <h5 className="text-xs font-bold text-gray-300 leading-snug">
-                    {step.subtitle}
-                  </h5>
-
-                  <p className="text-gray-400 text-xs leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-white/5 space-y-1 mt-4">
-                  <span className="text-[10px] font-bold text-gold-500 uppercase tracking-wider block">
-                    Você sai com:
-                  </span>
-                  <span className="text-[10px] font-medium text-gray-300 block leading-relaxed">
-                    {step.deliverable}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
       </div>
     </section>
   );

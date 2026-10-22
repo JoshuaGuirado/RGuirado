@@ -1,123 +1,126 @@
-import React from "react";
-import { motion } from "motion/react";
+import React, { useRef } from "react";
+import { motion, useAnimationFrame, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, useVelocity } from "motion/react";
+import { Reveal } from "../ui/Reveal";
 
-interface PartnerItem {
+interface Partner {
   id: string;
   name: string;
-  imageSrc: string;
+  /** width / height of the SVG artwork, used to balance optical size. */
+  ratio: number;
 }
 
-const partners: PartnerItem[] = [
-  {
-    id: "gelaboca",
-    name: "Gela Boca Sorvetes",
-    imageSrc: "/logos/gelaboca-v2.png"
-  },
-  {
-    id: "bless",
-    name: "Bless Internet",
-    imageSrc: "/logos/bless-v2.png"
-  },
-  {
-    id: "marques",
-    name: "Marques Adm. Judiciais",
-    imageSrc: "/logos/marques-v2.png"
-  },
-  {
-    id: "triangulo",
-    name: "Consórcio Triângulo",
-    imageSrc: "/logos/triangulo-v2.png"
-  },
-  {
-    id: "titanium",
-    name: "Grupo Titanium",
-    imageSrc: "/logos/titanium-v2.png"
-  },
-  {
-    id: "dompizza",
-    name: "Dom Pizza 18",
-    imageSrc: "/logos/dompizza-v2.png"
-  },
-  {
-    id: "lavathru",
-    name: "Lava Thru",
-    imageSrc: "/logos/lavathru-v2.png"
-  },
-  {
-    id: "clzo",
-    name: "CLZO Alvos Premium",
-    imageSrc: "/logos/clzo-v2.png"
-  },
-  {
-    id: "rolls",
-    name: "Rolls Food",
-    imageSrc: "/logos/rolls-v2.png"
-  },
-  {
-    id: "etzme",
-    name: "ETZME",
-    imageSrc: "/logos/etzme-v2.png"
-  },
-  {
-    id: "mundodofutsal",
-    name: "Mundo do Futsal",
-    imageSrc: "/logos/mundodofutsal-v2.png"
-  },
-  {
-    id: "armazem",
-    name: "Armazém da Limpeza",
-    imageSrc: "/logos/armazem-v2.png"
-  },
-  {
-    id: "culturasteam",
-    name: "Cultura Steam",
-    imageSrc: "/logos/culturasteam-v2.png"
-  },
-  {
-    id: "facilitapass",
-    name: "Facilita Pass",
-    imageSrc: "/logos/facilitapass-v2.png"
-  },
-  {
-    id: "platao",
-    name: "Colégio Platão",
-    imageSrc: "/logos/platao-v2.png"
-  }
+export const partners: Partner[] = [
+  { id: "gelaboca", name: "Gela Boca Sorvetes", ratio: 1.89 },
+  { id: "bless", name: "Bless Internet", ratio: 1.28 },
+  { id: "marques", name: "Marques Administrações Judiciais", ratio: 0.71 },
+  { id: "triangulo", name: "Consórcio Triângulo", ratio: 3.2 },
+  { id: "titanium", name: "Grupo Titanium", ratio: 3.57 },
+  { id: "dompizza", name: "Dom Pizza 18", ratio: 1.69 },
+  { id: "lavathru", name: "Lava Thru", ratio: 1 },
+  { id: "clzo", name: "CLZO Alvos Premium", ratio: 3.84 },
+  { id: "rolls", name: "Rolls Food", ratio: 1.9 },
+  { id: "etzme", name: "ETZME Inteligência Integrativa", ratio: 3.14 },
+  { id: "mundodofutsal", name: "Mundo do Futsal", ratio: 2.44 },
+  { id: "armazem", name: "Armazém da Limpeza", ratio: 1.75 },
+  { id: "culturasteam", name: "Cultura Steam", ratio: 2.62 },
+  { id: "facilitapass", name: "Facilita Pass", ratio: 6.07 },
+  { id: "platao", name: "Colégio Platão", ratio: 1 },
 ];
 
-export function PartnersMarquee() {
+/** Gives every logo roughly the same visual area, so wide wordmarks don't dominate square marks. */
+function logoSize(ratio: number, base: number) {
+  const height = Math.round(Math.min(base * 1.15, Math.max(base * 0.45, base / Math.pow(ratio, 0.5))));
+  return { height, width: Math.round(height * ratio) };
+}
+
+const wrap = (min: number, max: number, v: number) => {
+  const range = max - min;
+  return ((((v - min) % range) + range) % range) + min;
+};
+
+function LogoItem({ partner, base }: { partner: Partner; base: number }) {
+  const size = logoSize(partner.ratio, base);
   return (
-    <section className="py-16 sm:py-24 bg-dark-900 border-y border-white/5 overflow-hidden flex flex-col items-center" aria-label="Nossos parceiros">
-      <p className="text-gold-500/70 font-bold text-xs sm:text-sm tracking-[0.25em] uppercase mb-12 sm:mb-16 text-center px-4">
-        Empresas parceiras que já aceleramos
-      </p>
-      
-      <div className="relative w-full flex overflow-hidden">
-        {/* Subtle Fade Edges */}
-        <div className="absolute inset-y-0 left-0 w-24 sm:w-48 bg-gradient-to-r from-dark-900 to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-24 sm:w-48 bg-gradient-to-l from-dark-900 to-transparent z-10 pointer-events-none" />
-        
-        <motion.div 
-          animate={{ x: ["0%", "-33.333333333333%"] }} 
-          transition={{ ease: "linear", duration: 55, repeat: Infinity }}
-          className="flex whitespace-nowrap items-center w-max"
-          aria-hidden="true"
-        >
-          {[...partners, ...partners, ...partners].map((partner, idx) => (
-            <motion.div 
-              key={`${partner.id}-${idx}`}
-              whileHover={{ scale: 1.1 }}
-              className="mx-8 sm:mx-12 md:mx-16 flex items-center justify-center shrink-0 min-w-[160px] sm:min-w-[220px] cursor-default select-none transition-all duration-300"
-            >
-              <img 
-                src={partner.imageSrc} 
-                alt={partner.name}
-                className="h-12 sm:h-16 md:h-20 w-auto object-contain opacity-85 hover:opacity-100 transition-all duration-300 filter drop-shadow-[0_0_12px_rgba(255,255,255,0.18)]"
-              />
-            </motion.div>
+    <div className="flex h-24 shrink-0 items-center justify-center px-6 sm:h-28 sm:px-12" title={partner.name}>
+      <img
+        src={`/logos/${partner.id}.svg`}
+        alt={partner.name}
+        width={size.width}
+        height={size.height}
+        loading="lazy"
+        decoding="async"
+        draggable={false}
+        className="select-none opacity-60 transition-[opacity,transform] duration-500 hover:scale-110 hover:opacity-100"
+        style={{ width: size.width, height: size.height }}
+      />
+    </div>
+  );
+}
+
+/**
+ * Endless logo strip whose speed reacts to scroll velocity,
+ * and which flips direction when the user scrolls back up.
+ */
+function VelocityRow({ items, baseVelocity }: { items: Partner[]; baseVelocity: number }) {
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const velocity = useSpring(useVelocity(scrollY), { damping: 50, stiffness: 400 });
+  const velocityFactor = useTransform(velocity, [0, 1000], [0, 4], { clamp: false });
+  const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
+  const direction = useRef(1);
+  const paused = useRef(false);
+
+  useAnimationFrame((_, delta) => {
+    if (paused.current) return;
+    const factor = velocityFactor.get();
+    if (factor < 0) direction.current = -1;
+    else if (factor > 0) direction.current = 1;
+    let moveBy = direction.current * baseVelocity * (delta / 1000);
+    moveBy += direction.current * moveBy * factor;
+    baseX.set(baseX.get() + moveBy);
+  });
+
+  return (
+    <div className="mask-fade-x overflow-hidden" aria-hidden="true" onPointerEnter={() => (paused.current = true)} onPointerLeave={() => (paused.current = false)}>
+      <motion.div className="flex w-max" style={{ x }}>
+        {[...items, ...items].map((p, i) => (
+          <LogoItem key={`${p.id}-${i}`} partner={p} base={64} />
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+export function PartnersMarquee() {
+  const reduceMotion = useReducedMotion();
+  const half = Math.ceil(partners.length / 2);
+  // Each row is repeated so a half-width loop always has logos filling the screen.
+  const rowA = [...partners.slice(0, half), ...partners.slice(0, half)];
+  const rowB = [...partners.slice(half), ...partners.slice(half)];
+
+  return (
+    <section id="parceiros" className="relative overflow-hidden border-y border-white/[0.06] bg-dark-950 py-16 sm:py-20" aria-labelledby="partners-heading">
+      <Reveal className="mx-auto mb-10 max-w-7xl px-5 text-center sm:mb-12">
+        <h2 id="partners-heading" className="text-[11px] font-bold uppercase tracking-[0.3em] text-gray-400">
+          Empresas que já <span className="text-gold-500">aceleramos</span>
+        </h2>
+      </Reveal>
+
+      {reduceMotion ? (
+        <ul className="mx-auto flex max-w-6xl flex-wrap items-center justify-center px-5">
+          {partners.map((p) => (
+            <li key={p.id}>
+              <LogoItem partner={p} base={48} />
+            </li>
           ))}
-        </motion.div>
-      </div>
+        </ul>
+      ) : (
+        <div className="space-y-2">
+          <p className="sr-only">{partners.map((p) => p.name).join(", ")}</p>
+          <VelocityRow items={rowA} baseVelocity={-2.2} />
+          <VelocityRow items={rowB} baseVelocity={2.2} />
+        </div>
+      )}
     </section>
   );
 }

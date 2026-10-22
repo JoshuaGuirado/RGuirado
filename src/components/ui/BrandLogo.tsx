@@ -10,7 +10,7 @@ export function LogoSymbol({ className = "w-8 h-8", color = "text-[#f3c611]" }: 
         x="50" 
         y="64" 
         fill="currentColor" 
-        fontFamily="Montserrat, sans-serif" 
+        fontFamily="Montserrat Variable, Montserrat, sans-serif" 
         fontWeight="900" 
         fontSize="44" 
         textAnchor="middle"

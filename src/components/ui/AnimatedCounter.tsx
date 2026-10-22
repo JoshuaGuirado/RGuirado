@@ -1,64 +1,35 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { animate, useInView } from "motion/react";
 
 interface AnimatedCounterProps {
   value: string;
   className?: string;
 }
 
+/** Counts up to the first number in `value` (keeping any prefix/suffix) once visible. */
 export function AnimatedCounter({ value, className }: AnimatedCounterProps) {
-  const [displayValue, setDisplayValue] = useState(value);
-  const elementRef = useRef<HTMLSpanElement>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
+  const match = value.match(/\d+/);
 
   useEffect(() => {
-    const numberMatch = value.match(/\d+/);
-    if (!numberMatch) {
-      setDisplayValue(value);
-      return;
-    }
-
-    const targetNumber = parseInt(numberMatch[0], 10);
-    const prefix = value.substring(0, numberMatch.index);
-    const suffix = value.substring(numberMatch.index! + numberMatch[0].length);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          let start = 0;
-          const end = targetNumber;
-          const duration = 2000;
-          const totalFrames = Math.round(duration / 16);
-          let frame = 0;
-
-          const counter = setInterval(() => {
-            frame++;
-            const progress = frame / totalFrames;
-            const easeProgress = progress * (2 - progress);
-            const currentCount = Math.round(easeProgress * end);
-
-            setDisplayValue(`${prefix}${currentCount}${suffix}`);
-
-            if (frame === totalFrames) {
-              clearInterval(counter);
-              setDisplayValue(value);
-            }
-          }, 16);
-        }
+    const el = ref.current;
+    if (!el || !match || !inView) return;
+    const prefix = value.slice(0, match.index);
+    const suffix = value.slice(match.index! + match[0].length);
+    const controls = animate(0, parseInt(match[0], 10), {
+      duration: 2.2,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (n) => {
+        el.textContent = `${prefix}${Math.round(n).toLocaleString("pt-BR")}${suffix}`;
       },
-      { threshold: 0.1 }
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [value, hasAnimated]);
+    });
+    return () => controls.stop();
+  }, [inView, value]);
 
   return (
-    <span ref={elementRef} className={className}>
-      {displayValue}
+    <span ref={ref} className={`tabular-nums ${className ?? ""}`}>
+      {value}
     </span>
   );
 }

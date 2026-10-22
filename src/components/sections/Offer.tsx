@@ -1,99 +1,50 @@
 import React from "react";
-import { motion } from "motion/react";
-import { Milestone, Sliders, Cpu, Layers, Target, TrendingUp } from "lucide-react";
-import { AnimatedCounter } from "../ui/AnimatedCounter";
+import { Milestone, Sliders, Cpu, Layers } from "lucide-react";
+import { SectionLabel } from "../ui/SectionLabel";
+import { RevealText } from "../ui/RevealText";
+import { Reveal, Stagger, StaggerItem } from "../ui/Reveal";
+import { SpotlightCard } from "../ui/SpotlightCard";
+
+const differentiators = [
+  { Icon: Milestone, title: "25 anos de estrada real", desc: "Desde 2001 no campo, com problemas de verdade e resultados verificáveis." },
+  { Icon: Sliders, title: "Personalização máxima", desc: "Temos método, não template. Preservamos sua cultura, identidade e valores." },
+  { Icon: Cpu, title: "IA de forma prática", desc: "Tecnologia que reduz retrabalho, automatiza processos e apoia decisões." },
+  { Icon: Layers, title: "Negócio + gente", desc: "Unimos estratégia, expansão e comportamento. Na prática, andam juntos." },
+];
 
 export function Offer() {
-  const differentiators = [
-    {
-      icon: <Milestone className="w-5 h-5 text-gold-500" />,
-      title: "25 anos de estrada real",
-      desc: "Desde 2001 no campo, com problemas de verdade e resultados verificáveis."
-    },
-    {
-      icon: <Sliders className="w-5 h-5 text-gold-500" />,
-      title: "Personalização máxima",
-      desc: "Temos método, não template. Preservamos sua cultura, identidade e valores."
-    },
-    {
-      icon: <Cpu className="w-5 h-5 text-gold-500" />,
-      title: "IA de forma prática",
-      desc: "Tecnologia que reduz retrabalho, automatiza processos e apoia decisões."
-    },
-    {
-      icon: <Layers className="w-5 h-5 text-gold-500" />,
-      title: "Visão: negócio + gente",
-      desc: "Unimos estratégia, expansão e comportamento. Na prática, andam juntos."
-    }
-  ];
-
   return (
-    <section id="diferenciais" className="py-14 md:py-24 relative bg-dark-900 overflow-hidden border-t border-white/5" aria-labelledby="offer-heading">
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="absolute top-[30%] right-[10%] w-[400px] h-[400px] bg-gold-500/5 blur-[120px] rounded-full" />
-      </div>
+    <section id="diferenciais" className="relative overflow-hidden bg-dark-900 py-24 md:py-36" aria-labelledby="offer-heading">
+      <div className="pointer-events-none absolute right-[10%] top-[30%] h-[500px] w-[500px] rounded-full bg-gold-500/[0.05] blur-[140px]" aria-hidden="true" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-          
-          {/* Left Column: Title & Key Stats */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-4">
-              <span className="text-xs font-bold text-gold-500 uppercase tracking-widest block">Diferenciais</span>
-              <h2 id="offer-heading" className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
-                Por que escolher a <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-gold-600">R.Guirado?</span>
-              </h2>
-            </div>
-            
-            <p className="text-base sm:text-lg text-gray-400 font-light leading-relaxed">
-              Falamos a língua de quem tem folha para pagar no dia 5 e sonho grande na cabeça. Unimos experiência real com tecnologia avançada.
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div>
+          <SectionLabel className="mb-6">Diferenciais</SectionLabel>
+          <RevealText
+            id="offer-heading"
+            className="mb-8 text-4xl font-black leading-[1.05] tracking-[-0.03em] sm:text-5xl"
+            lines={[{ text: "Por que escolher a" }, { text: "R.Guirado?", className: "text-gold-gradient" }]}
+          />
+          <Reveal delay={0.1}>
+            <p className="text-base font-light leading-relaxed text-gray-400 sm:text-lg">
+              Falamos a língua de quem tem folha para pagar no dia 5 e sonho grande na cabeça. Unimos experiência real com tecnologia aplicada.
             </p>
-
-            {/* Consolidating SocialProof Statistics here */}
-            <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-gold-500">
-                  <Target className="w-5 h-5" />
-                  <span className="text-2xl sm:text-3xl font-black text-white">
-                    <AnimatedCounter value="750+" />
-                  </span>
-                </div>
-                <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">Empresas estruturadas</p>
-              </div>
-
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-gold-500">
-                  <TrendingUp className="w-5 h-5" />
-                  <span className="text-2xl sm:text-3xl font-black text-white">
-                    <AnimatedCounter value="1500+" />
-                  </span>
-                </div>
-                <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">Unidades abertas</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: 2x2 Grid of Differentiators */}
-          <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
-            {differentiators.map((diff, idx) => (
-              <motion.div 
-                key={idx}
-                whileHover={{ y: -5 }}
-                className="p-6 rounded-2xl bg-dark-800 border border-white/5 hover:border-gold-500/20 transition-all shadow-lg flex flex-col justify-between"
-              >
-                <div className="space-y-4">
-                  <div className="w-10 h-10 bg-dark-900 border border-gold-500/10 rounded-xl flex items-center justify-center shadow-inner">
-                    {diff.icon}
-                  </div>
-                  <h3 className="text-lg font-bold text-white tracking-tight">{diff.title}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">{diff.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
+          </Reveal>
         </div>
+
+        <Stagger className="grid gap-4 sm:grid-cols-2 sm:gap-5" stagger={0.1}>
+          {differentiators.map(({ Icon, title, desc }, i) => (
+            <StaggerItem key={title} className={`h-full ${i % 2 === 1 ? "sm:translate-y-10" : ""}`}>
+              <SpotlightCard className="h-full p-7 sm:p-8">
+                <span className="mb-8 flex h-12 w-12 items-center justify-center rounded-2xl border border-gold-500/20 bg-gold-500/10 transition-transform duration-500 group-hover:scale-110">
+                  <Icon className="h-5 w-5 text-gold-400" aria-hidden="true" />
+                </span>
+                <h3 className="mb-3 text-xl font-black tracking-tight text-white">{title}</h3>
+                <p className="text-sm leading-relaxed text-gray-400">{desc}</p>
+              </SpotlightCard>
+            </StaggerItem>
+          ))}
+        </Stagger>
       </div>
     </section>
   );

@@ -1,20 +1,21 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# R.Guirado Consultoria — site
 
-# Run and deploy your AI Studio app
+Landing page da R.Guirado (rguirado.com.br): React 19 + Vite + Tailwind CSS v4, animações com Motion (Framer Motion) e rolagem suave com Lenis.
 
-This contains everything you need to run your app locally.
+## Rodar localmente
 
-View your app in AI Studio: https://ai.studio/apps/a35093ac-e88d-4192-9707-966148550ed1
+```bash
+npm install
+npm run dev     # http://localhost:3000
+npm run lint    # checagem de tipos
+npm run build   # build de produção em dist/
+```
 
-## Run Locally
+## Estrutura
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- `src/components/sections/` — seções da página (Hero, Pilares, Método ALTA, Cases, Quem Somos, FAQ, Formulário…)
+- `src/components/ui/` — peças reutilizáveis (Reveal, RevealText, SpotlightCard, VideoCard, Button…)
+- `src/lib/` — rolagem suave (`scroll.ts`) e constantes (WhatsApp, redes)
+- `public/logos/` — logos dos parceiros em SVG (vetorizados, brancos)
+- `public/media/` — vídeos comprimidos (H.264, faststart) e capas em WebP
+- `public/team/` — fotos do time em WebP

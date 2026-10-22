@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import { motion } from "motion/react";
-import { ArrowLeft, CheckCircle2, Star, Zap, Users, BarChart3, Settings2, Volume2, VolumeX } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Star, Users, BarChart3, Settings2 } from "lucide-react";
 import { Button } from "../ui/Button";
 import { LogoFranchising, LogoGestao, LogoPerformance } from "../ui/BrandLogo";
+import { VideoCard } from "../ui/VideoCard";
+import { queueScrollTo } from "../../lib/scroll";
 
 interface PillarPageProps {
   pillarId: "franchising" | "gestao" | "performance";
@@ -60,35 +62,17 @@ const pillarDetails = {
 
 export function PillarPage({ pillarId }: PillarPageProps) {
   const detail = pillarDetails[pillarId];
-  const [isMuted, setIsMuted] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const toggleVolume = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(videoRef.current.muted);
-    }
-  };
-
-  // Scroll to top on mount
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }, [pillarId]);
-
   const handleBack = () => {
     window.location.hash = "";
   };
 
   const handleCTA = () => {
+    queueScrollTo("contato");
     window.location.hash = "";
-    // Wait briefly for page transition, then scroll
-    setTimeout(() => {
-      document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
-    }, 200);
   };
 
   return (
-    <div className="min-h-screen bg-dark-900 text-white relative overflow-hidden pb-24">
+    <div className="min-h-screen bg-dark-950 text-white relative overflow-hidden pb-24">
       {/* Background Glows */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div className={`absolute top-[-10%] right-[-10%] w-[600px] h-[600px] ${detail.glowColor} blur-[120px] rounded-full`} />
@@ -96,7 +80,7 @@ export function PillarPage({ pillarId }: PillarPageProps) {
       </div>
 
       {/* Floating Back Button & Logo Header */}
-      <header className="max-w-7xl mx-auto px-6 pt-12 flex justify-between items-center relative z-20">
+      <header className="max-w-7xl mx-auto px-5 sm:px-6 pt-8 sm:pt-12 flex justify-between items-center relative z-20">
         <button 
           onClick={handleBack}
           className="flex items-center gap-3 px-5 py-3 rounded-full bg-white/5 border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/10 text-gray-300 hover:text-white transition-all shadow-xl group cursor-pointer"
@@ -112,8 +96,8 @@ export function PillarPage({ pillarId }: PillarPageProps) {
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-6 pt-20 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-16 items-center">
+      <main className="max-w-7xl mx-auto px-5 sm:px-6 pt-14 sm:pt-20 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Heading and Tagline */}
           <div className="lg:col-span-6 space-y-8">
@@ -126,7 +110,7 @@ export function PillarPage({ pillarId }: PillarPageProps) {
               <span className={`inline-block text-sm font-bold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r ${detail.color}`}>
                 {detail.subtitle}
               </span>
-              <h1 className="text-5xl sm:text-6xl font-black tracking-tight leading-none">
+              <h1 className="text-5xl sm:text-6xl font-black tracking-[-0.03em] leading-none">
                 {detail.title}
               </h1>
             </motion.div>
@@ -135,7 +119,7 @@ export function PillarPage({ pillarId }: PillarPageProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-2xl font-light text-gray-300 leading-relaxed border-l-2 border-gold-500/30 pl-6"
+              className="text-xl sm:text-2xl font-light text-gray-300 leading-relaxed border-l-2 border-gold-500/30 pl-6"
             >
               {detail.tagline}
             </motion.p>
@@ -159,7 +143,7 @@ export function PillarPage({ pillarId }: PillarPageProps) {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="pt-4"
             >
-              <Button onClick={handleCTA} className="w-full sm:w-auto text-lg py-5 px-10 shadow-2xl shadow-gold-500/20">
+              <Button onClick={handleCTA} className="w-full sm:w-auto py-5 px-8">
                 {detail.ctaText}
               </Button>
             </motion.div>
@@ -172,35 +156,14 @@ export function PillarPage({ pillarId }: PillarPageProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="relative w-full max-w-[420px] h-[600px] lg:h-[650px] mx-auto group"
+                className="relative mx-auto w-full max-w-[360px]"
               >
                 <div className="absolute inset-0 bg-gold-500/10 blur-[80px] rounded-full pointer-events-none" />
                 
-                <div 
-                  className="relative z-10 w-full h-full rounded-2xl overflow-hidden bg-dark-900 border border-gold-500/20 group bg-black cursor-pointer" 
-                  onClick={toggleVolume}
-                  role="button" 
-                  aria-label="Alternar som do vídeo de franchising"
-                >
-                  <video 
-                    ref={videoRef}
-                    src="/reel.mp4" 
-                    className="w-full h-full object-cover aspect-[9/16]"
-                    loop
-                    muted={isMuted}
-                    playsInline
-                    autoPlay
-                  />
-                  
-                  {/* Mute Overlay Control */}
-                  <div className="absolute bottom-4 right-4 z-20 bg-dark-950/80 backdrop-blur-md border border-white/10 p-3 rounded-full text-white hover:bg-gold-500 hover:text-dark-900 transition-all duration-300">
-                    {isMuted ? (
-                      <VolumeX className="w-5 h-5" aria-hidden="true" />
-                    ) : (
-                      <Volume2 className="w-5 h-5" aria-hidden="true" />
-                    )}
-                  </div>
-                </div>
+                <VideoCard src="/media/reel.mp4" poster="/media/reel-poster.webp" label="Vídeo sobre franchising" mode="ambient" className="relative z-10">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-400">Franchising na prática</p>
+                  <p className="text-sm font-bold text-white">Toque para ouvir</p>
+                </VideoCard>
               </motion.div>
             ) : (
               <div className="w-full space-y-8">
@@ -208,7 +171,7 @@ export function PillarPage({ pillarId }: PillarPageProps) {
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="bg-gradient-to-br from-dark-800 to-dark-900 border border-white/5 rounded-[2.5rem] p-10 md:p-12 shadow-2xl relative overflow-hidden w-full"
+                  className="bg-gradient-to-br from-dark-800 to-dark-900 border border-white/5 rounded-[2rem] p-7 sm:p-10 md:p-12 shadow-2xl relative overflow-hidden w-full"
                 >
                   {/* Decorative Subtle Corner Gradient */}
                   <div className="absolute top-0 right-0 w-64 h-64 bg-gold-500/5 rounded-full blur-[40px] pointer-events-none" />

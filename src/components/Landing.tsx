@@ -1,51 +1,39 @@
-import React, { Suspense } from "react";
+import React, { useEffect } from "react";
 import { Navbar } from "./sections/Navbar";
 import { Hero } from "./sections/Hero";
-import { WhatsAppButton } from "./ui/WhatsAppButton";
+import { PartnersMarquee } from "./sections/PartnersMarquee";
+import { Services } from "./sections/Services";
+import { Solution } from "./sections/Solution";
+import { Quote } from "./sections/Quote";
+import { SocialProof } from "./sections/SocialProof";
+import { About } from "./sections/About";
+import { Offer } from "./sections/Offer";
+import { FAQ } from "./sections/FAQ";
+import { LeadForm } from "./sections/LeadForm";
+import { Footer } from "./sections/Footer";
+import { consumeQueuedScroll } from "../lib/scroll";
 
-// Lazy loading the components that are below the fold
-const Services = React.lazy(() => import("./sections/Services").then(module => ({ default: module.Services })));
-const PartnersMarquee = React.lazy(() => import("./sections/PartnersMarquee").then(module => ({ default: module.PartnersMarquee })));
-const About = React.lazy(() => import("./sections/About").then(module => ({ default: module.About })));
-const Solution = React.lazy(() => import("./sections/Solution").then(module => ({ default: module.Solution })));
-const Offer = React.lazy(() => import("./sections/Offer").then(module => ({ default: module.Offer })));
-const SocialProof = React.lazy(() => import("./sections/SocialProof").then(module => ({ default: module.SocialProof })));
-const Quote = React.lazy(() => import("./sections/Quote").then(module => ({ default: module.Quote })));
-const FAQ = React.lazy(() => import("./sections/FAQ").then(module => ({ default: module.FAQ })));
-const LeadForm = React.lazy(() => import("./sections/LeadForm").then(module => ({ default: module.LeadForm })));
-const Footer = React.lazy(() => import("./sections/Footer").then(module => ({ default: module.Footer })));
-
+// Sections are small, so they ship in one chunk: this keeps in-page navigation
+// (navbar links, CTAs) reliable because every target exists on first paint.
 export default function Landing() {
+  useEffect(consumeQueuedScroll, []);
+
   return (
-    <div className="min-h-screen bg-dark-900 text-white font-sans selection:bg-gold-500/30">
+    <>
       <Navbar />
-      
       <main>
-        {/* Above the fold - loaded synchronously for fast LCP */}
         <Hero />
-        
-        {/* Below the fold - loaded lazily to improve performance */}
-        <Suspense fallback={<div className="h-32 bg-dark-900 animate-pulse" />}>
-          <Services />
-          <PartnersMarquee />
-        </Suspense>
-        
-        <Suspense fallback={<div className="h-96 bg-dark-900 animate-pulse" />}>
-          <About />
-          <Solution />
-          <Offer />
-          <SocialProof />
-          <Quote />
-          <FAQ />
-          <LeadForm />
-        </Suspense>
+        <PartnersMarquee />
+        <Services />
+        <Solution />
+        <Quote />
+        <SocialProof />
+        <About />
+        <Offer />
+        <FAQ />
+        <LeadForm />
       </main>
-
-      <Suspense fallback={<div className="h-64 bg-dark-900" />}>
-        <Footer />
-      </Suspense>
-
-      <WhatsAppButton />
-    </div>
+      <Footer />
+    </>
   );
 }
